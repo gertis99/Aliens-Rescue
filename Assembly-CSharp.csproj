@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D1FEAEA3-8411-2ACE-82FD-67C3D4D07259}</ProjectGuid>
+    <ProjectGuid>{2D4A32DB-365E-77EC-1029-D043F4336B3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,11 +53,14 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="D:\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Grid.cs" />
-    <Compile Include="Assets\Scripts\CameraPosition.cs" />
-    <Compile Include="Assets\Scripts\SwapManager.cs" />
     <Compile Include="Assets\Scripts\ElementManager.cs" />
+    <Compile Include="Assets\Scripts\SwapManager.cs" />
+    <Compile Include="Assets\Scripts\CameraPosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
