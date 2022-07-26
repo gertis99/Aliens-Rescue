@@ -53,16 +53,15 @@
     <UnityVersion>2020.3.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\LevelManager.cs" />
-    <Compile Include="Assets\Scripts\ElementManager.cs" />
-    <Compile Include="Assets\Scripts\SwapManager.cs" />
-    <Compile Include="Assets\Scripts\CameraPosition.cs" />
+    <Compile Include="Assets\Scripts\Controller\LoseController.cs" />
     <Compile Include="Assets\Scripts\Model\Element.cs" />
+    <Compile Include="Assets\Scripts\View\InputController.cs" />
+    <Compile Include="Assets\Scripts\Controller\WinController.cs" />
+    <Compile Include="Assets\Scripts\Controller\LevelController.cs" />
+    <Compile Include="Assets\Scripts\View\GridView.cs" />
+    <Compile Include="Assets\Scripts\View\PointsView.cs" />
     <Compile Include="Assets\Scripts\Model\Grid.cs" />
     <Compile Include="Assets\Scripts\Controller\SwapsController.cs" />
-    <Compile Include="Assets\Scripts\Controller\LevelController.cs" />
-    <Compile Include="Assets\Scripts\View\InputController.cs" />
-    <Compile Include="Assets\Scripts\View\GridView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

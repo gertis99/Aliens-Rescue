@@ -17,10 +17,14 @@ public class LevelController : MonoBehaviour
     private Element[,] gridLevel;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         gridObject = new Grid(width, height, colorTypes);
         gridLevel = gridObject.GetGridLevel();
+    }
+
+    private void Start()
+    {
         OnGridCreated(gridLevel);
     }
 

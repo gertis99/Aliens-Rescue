@@ -9,10 +9,15 @@ using UnityEngine;
 public class SwapsController : MonoBehaviour
 {
     public delegate void SwapDone(Element[,] grid);
-    public static event SwapDone OnSwapDone;
+    public delegate void CheckedMatch(Element element);
+    public delegate void MoveDone();
+    public static event SwapDone OnSwapDone = Grid => { };
+    public static event CheckedMatch OnCheckedMatch;
+    public static event MoveDone OnMoveDone;
 
     private Element elementSelected;
     private Element[,] gridLevel;
+    private bool gridCreated = false, isPossibleSwap = true;
 
     private void Start()
     {
@@ -21,6 +26,9 @@ public class SwapsController : MonoBehaviour
 
         InputController.OnElementSelected += SetElementSelected;
         InputController.OnElementMoved += CheckTryToMove;
+
+        WinController.OnWinChecked += IsPossibleToSwap;
+        LoseController.OnLoseChecked += IsPossibleToSwap;
     }
 
     private void OnDisable()
@@ -30,6 +38,14 @@ public class SwapsController : MonoBehaviour
 
         InputController.OnElementSelected -= SetElementSelected;
         InputController.OnElementMoved -= CheckTryToMove;
+
+        WinController.OnWinChecked -= IsPossibleToSwap;
+        LoseController.OnLoseChecked -= IsPossibleToSwap;
+    }
+
+    private void IsPossibleToSwap()
+    {
+        isPossibleSwap = false;
     }
 
     private void SetGrid(Element[,] grid)
@@ -46,59 +62,68 @@ public class SwapsController : MonoBehaviour
                 }
             }
         }
+
+        if(gridCreated == false)
+        {
+            gridCreated = true;
+        }
     }
 
     private void SetElementSelected(GameObject element)
     {
+        // Send positions
         if (gridLevel != null)
             elementSelected = gridLevel[(int)element.transform.position.x, (int)element.transform.position.y];
     }
 
     private void CheckTryToMove(Vector2 pos)
     {
-        if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
+        if (isPossibleSwap)
         {
-            //Debug.Log("Derecha");
-            if (IsOnLevel((int)pos.x + 1, (int)pos.y))
+            if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {
-                StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x + 1, (int)pos.y));
+                //Debug.Log("Derecha");
+                if (IsOnLevel((int)pos.x + 1, (int)pos.y))
+                {
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x + 1, (int)pos.y));
+
+                }
+                elementSelected = null;
 
             }
-            elementSelected = null;
-
-        }
-        else if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= 0.5)  // Izquierda
-        {
-            //Debug.Log("Izquierda");
-            if (IsOnLevel((int)pos.x - 1, (int)pos.y))
+            else if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= 0.5)  // Izquierda
             {
-                StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x - 1, (int)pos.y));
+                //Debug.Log("Izquierda");
+                if (IsOnLevel((int)pos.x - 1, (int)pos.y))
+                {
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x - 1, (int)pos.y));
+
+                }
+                elementSelected = null;
 
             }
-            elementSelected = null;
-
-        }
-        else if (pos.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y <= -0.5) // Arriba
-        {
-            //Debug.Log("Arriba");
-            if (IsOnLevel((int)pos.x, (int)pos.y + 1))
+            else if (pos.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y <= -0.5) // Arriba
             {
-                StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y + 1));
+                //Debug.Log("Arriba");
+                if (IsOnLevel((int)pos.x, (int)pos.y + 1))
+                {
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y + 1));
+
+                }
+                elementSelected = null;
 
             }
-            elementSelected = null;
-
-        }
-        else if (pos.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y >= 0.5)  // Abajo
-        {
-            //Debug.Log("Abajo");
-            if (IsOnLevel((int)pos.x, (int)pos.y - 1))
+            else if (pos.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y >= 0.5)  // Abajo
             {
-                StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y - 1));
+                //Debug.Log("Abajo");
+                if (IsOnLevel((int)pos.x, (int)pos.y - 1))
+                {
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y - 1));
+
+                }
+                elementSelected = null;
 
             }
-            elementSelected = null;
-
         }
     }
 
@@ -118,6 +143,10 @@ public class SwapsController : MonoBehaviour
             CheckMatch(gridLevel[row1, col1], row1, col1);
             yield return new WaitForSeconds(0);
             CheckMatch(gridLevel[row2, col2], row2, col2);
+            if (gridCreated)
+            {
+                OnMoveDone();
+            }
         }
     }
 
@@ -349,11 +378,19 @@ public class SwapsController : MonoBehaviour
         {
             for (int i = sameColorHorizontal.Count - 1; i >= 0; i--)
             {
+                if (gridCreated)
+                {
+                    OnCheckedMatch(sameColorHorizontal[i]);
+                }
                 gridLevel[(int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY()] = null;
             }
 
             for (int i = sameColorVertical.Count - 1; i > 0; i--)
             {
+                if (gridCreated)
+                {
+                    OnCheckedMatch(sameColorVertical[i]);
+                }
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
 
@@ -365,6 +402,10 @@ public class SwapsController : MonoBehaviour
             Debug.Log("Horizontal de " + sameColorHorizontal.Count);
             for (int i = sameColorHorizontal.Count - 1; i >= 0; i--)
             {
+                if (gridCreated)
+                {
+                    OnCheckedMatch(sameColorHorizontal[i]);
+                }
                 gridLevel[(int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY()] = null;
             }
 
@@ -376,6 +417,10 @@ public class SwapsController : MonoBehaviour
             Debug.Log("Vertical de " + sameColorVertical.Count);
             for (int i = sameColorVertical.Count - 1; i >= 0; i--)
             {
+                if (gridCreated)
+                {
+                    OnCheckedMatch(sameColorVertical[i]);
+                }
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
 
