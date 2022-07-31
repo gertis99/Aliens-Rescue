@@ -63,6 +63,11 @@ public class SwapsController : MonoBehaviour
             }
         }
 
+        if (!CheckPossibleMatch())
+        {
+            Debug.Log("No hay match posible");
+        }
+
         if(gridCreated == false)
         {
             gridCreated = true;
@@ -74,6 +79,41 @@ public class SwapsController : MonoBehaviour
         // Send positions
         if (gridLevel != null)
             elementSelected = gridLevel[(int)element.transform.position.x, (int)element.transform.position.y];
+    }
+
+    private bool CheckPossibleMatch()
+    {
+        for (int i = 0; i < gridLevel.GetLength(0); i++)
+        {
+            for (int j = 0; j < gridLevel.GetLength(1); j++)
+            {
+                if(IsOnLevel(i + 1, j))
+                {
+                    if (IsAMatch(gridLevel[i, j], i + 1, j))
+                        return true;
+                }
+
+                if (IsOnLevel(i - 1, j))
+                {
+                    if (IsAMatch(gridLevel[i, j], i - 1, j))
+                        return true;
+                }
+
+                if (IsOnLevel(i, j + 1))
+                {
+                    if (IsAMatch(gridLevel[i, j], i, j + 1))
+                        return true;
+                }
+
+                if (IsOnLevel(i, j - 1))
+                {
+                    if (IsAMatch(gridLevel[i, j], i, j - 1))
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void CheckTryToMove(Vector2 pos)

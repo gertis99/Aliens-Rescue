@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Controller\LevelController.cs" />
     <Compile Include="Assets\Scripts\View\GridView.cs" />
     <Compile Include="Assets\Scripts\View\PointsView.cs" />
+    <Compile Include="Assets\Scripts\Cheats.cs" />
     <Compile Include="Assets\Scripts\Model\Grid.cs" />
     <Compile Include="Assets\Scripts\Controller\SwapsController.cs" />
   </ItemGroup>
