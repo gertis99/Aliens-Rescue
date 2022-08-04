@@ -12,12 +12,12 @@ public class LoseController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SwapsController.OnMoveDone += MoveDone;
+        LevelController.OnMoveDone += MoveDone;
     }
 
     private void OnDisable()
     {
-        SwapsController.OnMoveDone -= MoveDone;
+        LevelController.OnMoveDone -= MoveDone;
     }
 
     private void MoveDone()

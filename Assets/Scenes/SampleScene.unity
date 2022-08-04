@@ -466,6 +466,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b97dc1f3edf9d48b0567763e69bfeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 9
+  height: 9
+  colorTypes: 6
   levelElemnts:
   - {fileID: 5900566915427002099, guid: a003828f93ba5704b8e31f56365ae60b, type: 3}
   - {fileID: 5316441609721128398, guid: 2438261799ee9a14da6cf1c2c8c7403a, type: 3}
@@ -507,7 +510,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -523,18 +525,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
---- !u!114 &519420030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e20ccc1861147544bdad9a968dbe6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1637,8 +1627,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745555483}
-  - component: {fileID: 1745555484}
-  - component: {fileID: 1745555482}
   - component: {fileID: 1745555485}
   - component: {fileID: 1745555486}
   - component: {fileID: 1745555487}
@@ -1649,18 +1637,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1745555482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745555481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34007183cd94d10479384fe6c0f5a0cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1745555483
 Transform:
   m_ObjectHideFlags: 0
@@ -1676,21 +1652,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1745555484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1745555481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fe7f5c39b4f5ba45ab62002a9622f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 9
-  height: 9
-  colorTypes: 6
 --- !u!114 &1745555485
 MonoBehaviour:
   m_ObjectHideFlags: 0
