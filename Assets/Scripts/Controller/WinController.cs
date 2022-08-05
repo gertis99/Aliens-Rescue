@@ -16,12 +16,12 @@ public class WinController : MonoBehaviour
 
     private void Awake()
     {
-        SwapsController.OnCheckedMatch += AddPoints;
+        LevelController.OnCheckedMatch += AddPoints;
     }
 
     private void OnDisable()
     {
-        SwapsController.OnCheckedMatch -= AddPoints;
+        LevelController.OnCheckedMatch -= AddPoints;
     }
 
     private void AddPoints(Element element)
