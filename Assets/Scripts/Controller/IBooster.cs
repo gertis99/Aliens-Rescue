@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IBooster
 {
+    
     void Execute(Vector2 pos, ref Element[,] gridLevel);
 }

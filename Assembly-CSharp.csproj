@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Controller\LevelController.cs" />
     <Compile Include="Assets\Scripts\View\GridView.cs" />
     <Compile Include="Assets\Scripts\View\PointsView.cs" />
+    <Compile Include="Assets\Scripts\View\ActiveBoosterColorBombView.cs" />
     <Compile Include="Assets\Scripts\Controller\ActiveBoosterController.cs" />
     <Compile Include="Assets\Scripts\View\ActiveBoosterView.cs" />
     <Compile Include="Assets\Scripts\Cheats.cs" />
@@ -72,9 +73,8 @@
     <Compile Include="Assets\Scripts\View\ActiveBoosterBombView.cs" />
     <Compile Include="Assets\Scripts\Controller\SwapController.cs" />
     <Compile Include="Assets\Scripts\View\ActiveBoosterCrossLineView.cs" />
-    <Compile Include="Assets\Scripts\Controller\BoosterBomb.cs" />
     <Compile Include="Assets\Scripts\Controller\ColorBombBooster.cs" />
-    <Compile Include="Assets\Scripts\View\ActiveBoosterColorBombView.cs" />
+    <Compile Include="Assets\Scripts\Controller\BoosterBomb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
