@@ -14,7 +14,7 @@ public class LevelController
 
     public int width = 9, height = 9, colorTypes = 6;
     private Grid gridModel;
-    private Element[,] gridLevel;
+    private static Element[,] gridLevel;
 
     public delegate void SwapDone(Element[,] grid);
     public delegate void CheckedMatch(Element element);
@@ -35,12 +35,20 @@ public class LevelController
 
         WinController.OnWinChecked += IsPossibleToSwap;
         LoseController.OnLoseChecked += IsPossibleToSwap;
+
+        ActiveBoosterController.OnBoosterActived += FireBooster;
     }
 
     public void CreateGrid()
     {
         OnGridCreated(gridLevel);
         GridChanged();
+    }
+
+    public void FireBooster(IBooster booster, Vector2 pos)
+    {
+        booster.Execute(pos, ref gridLevel);
+        MoveDownPieces();
     }
 
 
@@ -73,6 +81,7 @@ public class LevelController
         GridChanged();
     }
 
+    // Fill all the places where the cell is null
     private void FillBlanks()
     {
         for (int x = 0; x < width; x++)
@@ -91,6 +100,7 @@ public class LevelController
     }
 
     /************************************************************************************************************/
+    // Check all the grid to check all the matches existing
     private void GridChanged()
     {
 
@@ -124,6 +134,7 @@ public class LevelController
             elementSelected = gridLevel[(int)element.transform.position.x, (int)element.transform.position.y];
     }
 
+    // Return true if it is possible for the player make a match
     private bool CheckPossibleMatch()
     {
         for (int i = 0; i < gridLevel.GetLength(0); i++)
@@ -159,6 +170,7 @@ public class LevelController
         return false;
     }
 
+    // Check if the movement done by the player is resolving a match
     public void CheckTryToMove(Vector2 pos)
     {
         if (isPossibleSwap)
@@ -231,7 +243,7 @@ public class LevelController
         }
     }
 
-    // Check if there is a match
+    // Check if there is a match with the element in the position row col
     public bool IsAMatch(Element element, int row, int col)
     {
         bool res = false;
@@ -515,7 +527,7 @@ public class LevelController
         return res;
     }
 
-    public bool IsOnLevel(int row, int col)
+    public static bool IsOnLevel(int row, int col)
     {
         if (row < gridLevel.GetLength(0) && col < gridLevel.GetLength(1) && row >= 0 && col >= 0)
         {
