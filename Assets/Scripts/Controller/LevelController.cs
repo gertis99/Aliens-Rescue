@@ -90,7 +90,7 @@ public class LevelController
             {
                 if (gridLevel[x, y] == null)
                 {
-                    gridLevel[x, y] = new Element(x, y, UnityEngine.Random.Range(0, colorTypes-1));
+                    gridLevel[x, y] = new Element(x, y, UnityEngine.Random.Range(0, colorTypes));
                 }
             }
         }

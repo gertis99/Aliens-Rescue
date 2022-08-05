@@ -33,7 +33,7 @@ public class Grid
         {
             for (int j = 0; j < gridLevel.GetLength(1); j++)
             {
-                gridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes-1));
+                gridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
             }
         }
     }
