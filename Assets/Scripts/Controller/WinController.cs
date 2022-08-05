@@ -12,7 +12,7 @@ public class WinController : MonoBehaviour
 
 
     public int condition = 20;
-    private int[] colorPoints = new int[6];
+    private static int[] colorPoints = new int[6];
 
     private void Awake()
     {
@@ -24,10 +24,19 @@ public class WinController : MonoBehaviour
         LevelController.OnCheckedMatch -= AddPoints;
     }
 
-    private void AddPoints(Element element)
+    public static void AddPoints(Element element)
     {
         colorPoints[element.GetColorType()]++;
         OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
+    }
+
+    public static void AddPoints(List<Element> elements)
+    {
+        for(int i = 0; i < elements.Count; i++)
+        {
+            colorPoints[elements[i].GetColorType()]++;
+            OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
+        }
     }
 
     private void CheckWin()
