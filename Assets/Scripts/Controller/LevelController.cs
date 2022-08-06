@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -157,6 +158,7 @@ public class LevelController
         if (!CheckPossibleMatch())
         {
             Debug.Log("No hay match posible");
+            ReGenerateGrid();
         }
 
         if (gridCreated == false)
@@ -167,6 +169,19 @@ public class LevelController
         
     }
 
+    private void ReGenerateGrid()
+    {
+        for(int i = 0; i < gridLevel.GetLength(0); i++)
+        {
+            for (int j = 0; j < gridLevel.GetLength(1); j++)
+            {
+                if (gridLevel[i, j].GetColorType() < colorTypes - 1)
+                    gridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
+            }
+        }
+
+        OnGridChanged(gridLevel);
+    }
 
     public void SetElementSelected(GameObject element)
     {
