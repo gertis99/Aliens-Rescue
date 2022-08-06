@@ -97,12 +97,16 @@ public class GridView : MonoBehaviour
             {
                 if(grid[i,j] == null)
                 {
-                    gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity);
-                    gridLevel[i, j].transform.SetParent(this.transform, true);
+                    gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
                 }
                 else
                 {
-                    gridLevel[i, j].GetComponent<SpriteRenderer>().sprite = sprites[grid[i,j].GetColorType()];
+                    /*if(grid[i, j].GetColorType() < 5)
+                        gridLevel[i, j].GetComponent<SpriteRenderer>().sprite = sprites[grid[i,j].GetColorType()];
+                    else
+                        gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);*/
+                    Destroy(gridLevel[i, j]);
+                    gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
                 }
             }
         }

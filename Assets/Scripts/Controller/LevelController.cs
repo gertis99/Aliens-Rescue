@@ -25,7 +25,7 @@ public class LevelController
 
     private Element elementSelected;
     private bool gridCreated = false, isPossibleSwap = true;
-
+    private IBooster actualBooster;
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
@@ -99,6 +99,45 @@ public class LevelController
         OnGridChanged(gridLevel);
     }
 
+    private void CreateLineBooster(int row, int col)
+    {
+        gridLevel[row, col] = new Element(row, col, 6);
+    }
+
+    private void CreateBombBooster(int row, int col)
+    {
+        gridLevel[row, col] = new Element(row, col, 7);
+    }
+
+    private void CreateColorBombBooster(int row, int col)
+    {
+        gridLevel[row, col] = new Element(row, col, 8);
+    }
+
+    private void FireLineBooster(Vector2 pos)
+    {
+        actualBooster = new CrossLineBooster();
+        actualBooster.Execute(pos, ref gridLevel);
+        actualBooster = null;
+        MoveDownPieces();
+    }
+
+    private void FireBombBooster(Vector2 pos)
+    {
+        actualBooster = new BombBooster();
+        actualBooster.Execute(pos, ref gridLevel);
+        actualBooster = null;
+        MoveDownPieces();
+    }
+
+    private void FireColorBombBooster(Vector2 pos)
+    {
+        actualBooster = new ColorBombBooster();
+        actualBooster.Execute(pos, ref gridLevel);
+        actualBooster = null;
+        MoveDownPieces();
+    }
+
     /************************************************************************************************************/
     // Check all the grid to check all the matches existing
     private void GridChanged()
@@ -124,6 +163,8 @@ public class LevelController
         {
             gridCreated = true;
         }
+
+        
     }
 
 
@@ -132,6 +173,20 @@ public class LevelController
         // Send positions
         if (gridLevel != null)
             elementSelected = gridLevel[(int)element.transform.position.x, (int)element.transform.position.y];
+        else
+            return;
+
+        if(elementSelected.GetColorType() == 6)
+        {
+            FireLineBooster(element.transform.position);
+            return;
+        }
+
+        if (elementSelected.GetColorType() == 7)
+        {
+            FireBombBooster(element.transform.position);
+            return;
+        }
     }
 
     // Return true if it is possible for the player make a match
@@ -225,6 +280,22 @@ public class LevelController
     // Swap the elements
     public void SwapPositions(int row1, int col1, int row2, int col2)
     {
+        if (gridLevel[row1,col1].GetColorType() == 8)
+        {
+            FireColorBombBooster(new Vector2(row2, col2));
+            gridLevel[row1, col1] = null;
+            MoveDownPieces();
+            return;
+        }
+
+        if (gridLevel[row2, col2].GetColorType() == 8)
+        {
+            FireColorBombBooster(new Vector2(row1, col1));
+            gridLevel[row2, col2] = null;
+            MoveDownPieces();
+            return;
+        }
+
         if (IsAMatch(gridLevel[row1, col1], row2, col2) || IsAMatch(gridLevel[row2, col2], row1, col1))
         {
             Element aux = gridLevel[row1, col1];
@@ -487,6 +558,9 @@ public class LevelController
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
 
+            if(gridCreated)
+                CreateBombBooster(row, col);
+
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
             MoveDownPieces();
@@ -503,6 +577,16 @@ public class LevelController
                 gridLevel[(int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY()] = null;
             }
 
+            if (gridCreated)
+            {
+                if (sameColorHorizontal.Count == 4)
+                    CreateLineBooster(row, col);
+
+                if (sameColorHorizontal.Count >= 5)
+                    CreateColorBombBooster(row, col);
+            }
+            
+
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
             MoveDownPieces();
@@ -518,6 +602,16 @@ public class LevelController
                 }
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
+
+            if (gridCreated)
+            {
+                if (sameColorVertical.Count == 4)
+                    CreateLineBooster(row, col);
+
+                if (sameColorVertical.Count >= 5)
+                    CreateColorBombBooster(row, col);
+            }
+            
 
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
