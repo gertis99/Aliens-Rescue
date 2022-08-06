@@ -26,16 +26,24 @@ public class WinController : MonoBehaviour
 
     public static void AddPoints(Element element)
     {
-        colorPoints[element.GetColorType()]++;
-        OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
+        if(element.GetColorType() < colorPoints.Length)
+        {
+            colorPoints[element.GetColorType()]++;
+            OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
+        }
+        
     }
 
     public static void AddPoints(List<Element> elements)
     {
         for(int i = 0; i < elements.Count; i++)
         {
-            colorPoints[elements[i].GetColorType()]++;
-            OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
+            if (elements[i].GetColorType() < colorPoints.Length)
+            {
+                colorPoints[elements[i].GetColorType()]++;
+                OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
+            }
+                
         }
     }
 
