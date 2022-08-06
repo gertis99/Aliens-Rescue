@@ -196,6 +196,10 @@ public class LevelController
         {
             for (int j = 0; j < gridLevel.GetLength(1); j++)
             {
+                // Check if it is a booster
+                if (gridLevel[i, j].GetColorType() > 5)
+                    return true;
+
                 if (IsOnLevel(i + 1, j))
                 {
                     if (IsAMatch(gridLevel[i, j], i + 1, j))
