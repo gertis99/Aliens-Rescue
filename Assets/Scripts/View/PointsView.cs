@@ -21,7 +21,7 @@ public class PointsView : MonoBehaviour
 
         WinController.OnPointsChanged += AddPoint;
         WinController.OnWinChecked += ActiveWin;
-        SwapController.OnMoveDone += MoveDone;
+        SwapsController.OnMoveDone += MoveDone;
         LoseController.OnLoseChecked += ActiveLose;
     }
 
@@ -29,7 +29,7 @@ public class PointsView : MonoBehaviour
     {
         WinController.OnPointsChanged -= AddPoint;
         WinController.OnWinChecked -= ActiveWin;
-        SwapController.OnMoveDone -= MoveDone;
+        SwapsController.OnMoveDone -= MoveDone;
         LoseController.OnLoseChecked -= ActiveLose;
     }
 

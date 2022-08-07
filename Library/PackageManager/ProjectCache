@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637948160422405863
-    m_Hash: 292662270
+      ticks: 637944546980683642
+    m_Hash: 4291140474
   m_LockFileStatus:
     m_FilePath: D:/USUARIO/UNIVERSIDAD/Bootcamp/Aliens-Rescue-Github/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637948160422415836
-    m_Hash: 3362298275
+      ticks: 637944547514961962
+    m_Hash: 3381508029
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -3475,7 +3475,6 @@ m_ResolvedPackages:
     - 2.0.2
     - 2.1.0
     - 2.1.1
-    - 2.1.2
     - 3.0.0
     - 3.0.1
     - 4.0.0
@@ -3483,8 +3482,6 @@ m_ResolvedPackages:
     - 4.0.2
     - 4.0.3
     - 4.0.4
-    - 4.1.0
-    - 4.2.0
     - 5.0.0-pre.1
     - 5.0.0-pre.2
     - 5.0.0
@@ -3497,9 +3494,6 @@ m_ResolvedPackages:
     - 6.0.3
     - 7.0.0-pre.3
     - 7.0.0-pre.4
-    - 7.0.0
-    - 8.0.0-pre.1
-    - 8.0.0-pre.2
     compatible:
     - 6.0.3
     verified: 6.0.3
@@ -3540,7 +3534,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637817447740000000
+  datePublishedTicks: 0
   documentationUrl: 
   hasRepository: 1
   repository:
@@ -3610,7 +3604,7 @@ m_ResolvedPackages:
     capabilities: 7
   hideInEditor: 1
   isAssetStorePackage: 0
-  datePublishedTicks: 637817447940000000
+  datePublishedTicks: 0
   documentationUrl: 
   hasRepository: 1
   repository:
