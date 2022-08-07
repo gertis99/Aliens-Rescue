@@ -30,6 +30,10 @@ public class LevelController
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
+        this.width = width;
+        this.height = height;
+        this.colorTypes = colorTypes;
+
         gridModel = new Grid(width, height, colorTypes);
         gridLevel = gridModel.GetGridLevel();
         
@@ -100,9 +104,14 @@ public class LevelController
         OnGridChanged(gridLevel);
     }
 
-    private void CreateLineBooster(int row, int col)
+    private void CreateVerticalLineBooster(int row, int col)
     {
         gridLevel[row, col] = new Element(row, col, 6);
+    }
+
+    private void CreateHorizontalLineBooster(int row, int col)
+    {
+        gridLevel[row, col] = new Element(row, col, 9);
     }
 
     private void CreateBombBooster(int row, int col)
@@ -115,9 +124,17 @@ public class LevelController
         gridLevel[row, col] = new Element(row, col, 8);
     }
 
-    private void FireLineBooster(Vector2 pos)
+    private void FireVerticalLineBooster(Vector2 pos)
     {
-        actualBooster = new CrossLineBooster();
+        actualBooster = new VerticalLineBooster();
+        actualBooster.Execute(pos, ref gridLevel);
+        actualBooster = null;
+        MoveDownPieces();
+    }
+
+    private void FireHorizontalLineBooster(Vector2 pos)
+    {
+        actualBooster = new HorizontalLineBooster();
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
         MoveDownPieces();
@@ -201,13 +218,19 @@ public class LevelController
 
         if(elementSelected.GetColorType() == 6)
         {
-            FireLineBooster(element.transform.position);
+            FireVerticalLineBooster(element.transform.position);
             return;
         }
 
         if (elementSelected.GetColorType() == 7)
         {
             FireBombBooster(element.transform.position);
+            return;
+        }
+
+        if (elementSelected.GetColorType() == 9)
+        {
+            FireHorizontalLineBooster(element.transform.position);
             return;
         }
     }
@@ -607,7 +630,7 @@ public class LevelController
             if (gridCreated)
             {
                 if (sameColorHorizontal.Count == 4)
-                    CreateLineBooster(row, col);
+                    CreateHorizontalLineBooster(row, col);
 
                 if (sameColorHorizontal.Count >= 5)
                     CreateColorBombBooster(row, col);
@@ -633,7 +656,7 @@ public class LevelController
             if (gridCreated)
             {
                 if (sameColorVertical.Count == 4)
-                    CreateLineBooster(row, col);
+                    CreateVerticalLineBooster(row, col);
 
                 if (sameColorVertical.Count >= 5)
                     CreateColorBombBooster(row, col);

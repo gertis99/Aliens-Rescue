@@ -11,7 +11,7 @@ public class Element
 
     [SerializeField]
     private int posX, posY;
-    private int colorType; // 0 red 1 blue 2 green 3 orange 4 purple 5 yellow 6 line booster 7 bomb 8 bomb booster
+    private int colorType; // 0 red 1 blue 2 green 3 orange 4 purple 5 yellow 6 vertical line booster 7 bomb 8 bomb booster 9 horizontal line booster
 
     // Contructor
     public Element(int x, int y, int type)
