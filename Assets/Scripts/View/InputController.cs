@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    /*public delegate void ElementSelected(GameObject element);
+    public delegate void ElementSelected(GameObject element);
     public delegate void ElementMoved(Vector2 pos);
     public static event ElementSelected OnElementSelected;
     public static event ElementMoved OnElementMoved;
@@ -65,5 +65,5 @@ public class InputController : MonoBehaviour
         {
             elementSelected = null;
         }
-    }*/
+    }
 }

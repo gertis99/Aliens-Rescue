@@ -12,31 +12,22 @@ public class WinController : MonoBehaviour
 
 
     public int condition = 20;
-    private static int[] colorPoints = new int[6];
+    private int[] colorPoints = new int[6];
 
     private void Awake()
     {
-        LevelController.OnCheckedMatch += AddPoints;
+        SwapsController.OnCheckedMatch += AddPoints;
     }
 
     private void OnDisable()
     {
-        LevelController.OnCheckedMatch -= AddPoints;
+        SwapsController.OnCheckedMatch -= AddPoints;
     }
 
-    public static void AddPoints(Element element)
+    private void AddPoints(Element element)
     {
         colorPoints[element.GetColorType()]++;
         OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
-    }
-
-    public static void AddPoints(List<Element> elements)
-    {
-        for(int i = 0; i < elements.Count; i++)
-        {
-            colorPoints[elements[i].GetColorType()]++;
-            OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
-        }
     }
 
     private void CheckWin()
