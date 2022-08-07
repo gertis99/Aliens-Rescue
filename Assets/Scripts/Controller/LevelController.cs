@@ -7,15 +7,15 @@ using UnityEngine;
  * Manage the movement of the elements in the level
  * */
 
-public class LevelController : MonoBehaviour
+public class LevelController
 {
     public delegate void GridCreated(Element[,] grid);
     public static event GridCreated OnGridCreated;
     public static event GridCreated OnGridChanged;
 
     public int width = 9, height = 9, colorTypes = 6;
-    private Grid gridObject;
-    private Element[,] gridLevel;
+    private Grid gridModel;
+    private static Element[,] gridLevel;
 
     public delegate void SwapDone(Element[,] grid);
     public delegate void CheckedMatch(Element element);
@@ -30,34 +30,32 @@ public class LevelController : MonoBehaviour
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
-        gridObject = new Grid(width, height, colorTypes);
-        gridLevel = gridObject.GetGridLevel();
+        gridModel = new Grid(width, height, colorTypes);
+        gridLevel = gridModel.GetGridLevel();
+        
+
+        WinController.OnWinChecked += IsPossibleToSwap;
+        LoseController.OnLoseChecked += IsPossibleToSwap;
+
+        ActiveBoosterController.OnBoosterActived += FireBooster;
     }
 
-    private void Start()
+    public void CreateGrid()
     {
         OnGridCreated(gridLevel);
+        GridChanged();
     }
 
-    private void OnEnable()
+    public void FireBooster(IBooster booster, Vector2 pos)
     {
-        SwapsController.OnSwapDone += MoveDownPieces;
+        booster.Execute(pos, ref gridLevel);
+        MoveDownPieces();
     }
 
-    private void OnDisable()
-    {
-        SwapsController.OnSwapDone -= MoveDownPieces;
-    }
-
-    public void OnLevelChange()
-    {
-
-    }
 
     // Move all the pieces down if it is possible
-    private void MoveDownPieces(Element[,] grid)
+    private void MoveDownPieces()
     {
-        gridLevel = grid;
 
         for (int x = 0; x < width; x++)
         {
@@ -79,10 +77,12 @@ public class LevelController : MonoBehaviour
             }
         }
 
-        gridObject.SetGridLevel(gridLevel);
+        gridModel.SetGridLevel(gridLevel);
         FillBlanks();
+        GridChanged();
     }
 
+    // Fill all the places where the cell is null
     private void FillBlanks()
     {
         for (int x = 0; x < width; x++)
@@ -96,7 +96,7 @@ public class LevelController : MonoBehaviour
             }
         }
 
-        gridObject.SetGridLevel(gridLevel);
+        gridModel.SetGridLevel(gridLevel);
         OnGridChanged(gridLevel);
     }
 
