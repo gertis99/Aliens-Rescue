@@ -43,7 +43,7 @@ public class GridView : MonoBehaviour
 
     private void CheckInputs()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (elementSelected == null)
             {
@@ -54,33 +54,35 @@ public class GridView : MonoBehaviour
                     levelController.SetElementSelected(elementSelected);
                 }
             }
-            else
+        }
+        
+
+        if (elementSelected != null && Input.GetMouseButton(0))
+        {
+            if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {
-                if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
-                {
-                    //Debug.Log("Derecha");
-                    levelController.CheckTryToMove(elementSelected.transform.position);
-                    //OnElementMoved(elementSelected.transform.position);
-                    elementSelected = null;
-                }
-                else if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= 0.5)  // Izquierda
-                {
-                    //Debug.Log("Izquierda");
-                    levelController.CheckTryToMove(elementSelected.transform.position);
-                    elementSelected = null;
-                }
-                else if (elementSelected.transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y <= -0.5) // Arriba
-                {
-                    //Debug.Log("Arriba");
-                    levelController.CheckTryToMove(elementSelected.transform.position);
-                    elementSelected = null;
-                }
-                else if (elementSelected.transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y >= 0.5)  // Abajo
-                {
-                    //Debug.Log("Abajo");
-                    levelController.CheckTryToMove(elementSelected.transform.position);
-                    elementSelected = null;
-                }
+                //Debug.Log("Derecha");
+                levelController.CheckTryToMove(elementSelected.transform.position);
+                //OnElementMoved(elementSelected.transform.position);
+                elementSelected = null;
+            }
+            else if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x >= 0.5)  // Izquierda
+            {
+                //Debug.Log("Izquierda");
+                levelController.CheckTryToMove(elementSelected.transform.position);
+                elementSelected = null;
+            }
+            else if (elementSelected.transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y <= -0.5) // Arriba
+            {
+                //Debug.Log("Arriba");
+                levelController.CheckTryToMove(elementSelected.transform.position);
+                elementSelected = null;
+            }
+            else if (elementSelected.transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y >= 0.5)  // Abajo
+            {
+                //Debug.Log("Abajo");
+                levelController.CheckTryToMove(elementSelected.transform.position);
+                elementSelected = null;
             }
         }
         else
