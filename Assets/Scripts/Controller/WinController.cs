@@ -12,19 +12,19 @@ public class WinController : MonoBehaviour
 
 
     public int condition = 20;
-    private static int[] colorPoints = new int[6];
+    private int[] colorPoints = new int[6];
 
     private void Awake()
     {
-        LevelController.OnCheckedMatch += AddPoints;
+        SwapsController.OnCheckedMatch += AddPoints;
     }
 
     private void OnDisable()
     {
-        LevelController.OnCheckedMatch -= AddPoints;
+        SwapsController.OnCheckedMatch -= AddPoints;
     }
 
-    public static void AddPoints(Element element)
+    private void AddPoints(Element element)
     {
         if(element.GetColorType() < colorPoints.Length)
         {

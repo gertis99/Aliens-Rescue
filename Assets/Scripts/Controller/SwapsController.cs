@@ -3,19 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
- * Manage the movement of the elements in the level
- * */
+ * This class controll the swap mechanic
+ **/
 
-public class LevelController : MonoBehaviour
+public class SwapsController : MonoBehaviour
 {
-    public delegate void GridCreated(Element[,] grid);
-    public static event GridCreated OnGridCreated;
-    public static event GridCreated OnGridChanged;
-
-    public int width = 9, height = 9, colorTypes = 6;
-    private Grid gridObject;
-    private Element[,] gridLevel;
-
     public delegate void SwapDone(Element[,] grid);
     public delegate void CheckedMatch(Element element);
     public delegate void MoveDone();
@@ -24,124 +16,41 @@ public class LevelController : MonoBehaviour
     public static event MoveDone OnMoveDone;
 
     private Element elementSelected;
+    private Element[,] gridLevel;
     private bool gridCreated = false, isPossibleSwap = true;
-    private IBooster actualBooster;
-
-    public LevelController(int width = 9, int height = 9, int colorTypes = 6)
-    {
-        gridObject = new Grid(width, height, colorTypes);
-        gridLevel = gridObject.GetGridLevel();
-    }
 
     private void Start()
     {
-        OnGridCreated(gridLevel);
-    }
+        LevelController.OnGridCreated += SetGrid;
+        LevelController.OnGridChanged += SetGrid;
 
-    private void OnEnable()
-    {
-        SwapsController.OnSwapDone += MoveDownPieces;
+        InputController.OnElementSelected += SetElementSelected;
+        InputController.OnElementMoved += CheckTryToMove;
+
+        WinController.OnWinChecked += IsPossibleToSwap;
+        LoseController.OnLoseChecked += IsPossibleToSwap;
     }
 
     private void OnDisable()
     {
-        SwapsController.OnSwapDone -= MoveDownPieces;
+        LevelController.OnGridCreated -= SetGrid;
+        LevelController.OnGridChanged -= SetGrid;
+
+        InputController.OnElementSelected -= SetElementSelected;
+        InputController.OnElementMoved -= CheckTryToMove;
+
+        WinController.OnWinChecked -= IsPossibleToSwap;
+        LoseController.OnLoseChecked -= IsPossibleToSwap;
     }
 
-    public void OnLevelChange()
+    private void IsPossibleToSwap()
     {
-
+        isPossibleSwap = false;
     }
 
-    // Move all the pieces down if it is possible
-    private void MoveDownPieces(Element[,] grid)
+    private void SetGrid(Element[,] grid)
     {
         gridLevel = grid;
-
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (gridLevel[x, y] == null)
-                {
-                    for (int yAux = y + 1; yAux < height; yAux++)
-                    {
-                        if (gridLevel[x, yAux] != null)
-                        {
-                            gridLevel[x, y] = gridLevel[x, yAux];
-                            gridLevel[x, yAux] = null;
-                            gridLevel[x, y].SetPos(x,y);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        gridObject.SetGridLevel(gridLevel);
-        FillBlanks();
-    }
-
-    private void FillBlanks()
-    {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                if (gridLevel[x, y] == null)
-                {
-                    gridLevel[x, y] = new Element(x, y, UnityEngine.Random.Range(0, colorTypes));
-                }
-            }
-        }
-
-        gridObject.SetGridLevel(gridLevel);
-        OnGridChanged(gridLevel);
-    }
-
-    private void CreateLineBooster(int row, int col)
-    {
-        gridLevel[row, col] = new Element(row, col, 6);
-    }
-
-    private void CreateBombBooster(int row, int col)
-    {
-        gridLevel[row, col] = new Element(row, col, 7);
-    }
-
-    private void CreateColorBombBooster(int row, int col)
-    {
-        gridLevel[row, col] = new Element(row, col, 8);
-    }
-
-    private void FireLineBooster(Vector2 pos)
-    {
-        actualBooster = new CrossLineBooster();
-        actualBooster.Execute(pos, ref gridLevel);
-        actualBooster = null;
-        MoveDownPieces();
-    }
-
-    private void FireBombBooster(Vector2 pos)
-    {
-        actualBooster = new BombBooster();
-        actualBooster.Execute(pos, ref gridLevel);
-        actualBooster = null;
-        MoveDownPieces();
-    }
-
-    private void FireColorBombBooster(Vector2 pos)
-    {
-        actualBooster = new ColorBombBooster();
-        actualBooster.Execute(pos, ref gridLevel);
-        actualBooster = null;
-        MoveDownPieces();
-    }
-
-    /************************************************************************************************************/
-    // Check all the grid to check all the matches existing
-    private void GridChanged()
-    {
 
         for (int i = 0; i < gridLevel.GetLength(0); i++)
         {
@@ -154,79 +63,20 @@ public class LevelController : MonoBehaviour
             }
         }
 
-        if (!CheckPossibleMatch())
-        {
-            Debug.Log("No hay match posible");
-        }
-
-        if (gridCreated == false)
+        if(gridCreated == false)
         {
             gridCreated = true;
         }
-
-        
     }
 
-
-    public void SetElementSelected(GameObject element)
+    private void SetElementSelected(GameObject element)
     {
         // Send positions
         if (gridLevel != null)
             elementSelected = gridLevel[(int)element.transform.position.x, (int)element.transform.position.y];
-        else
-            return;
-
-        if(elementSelected.GetColorType() == 6)
-        {
-            FireLineBooster(element.transform.position);
-            return;
-        }
-
-        if (elementSelected.GetColorType() == 7)
-        {
-            FireBombBooster(element.transform.position);
-            return;
-        }
     }
 
-    // Return true if it is possible for the player make a match
-    private bool CheckPossibleMatch()
-    {
-        for (int i = 0; i < gridLevel.GetLength(0); i++)
-        {
-            for (int j = 0; j < gridLevel.GetLength(1); j++)
-            {
-                if (IsOnLevel(i + 1, j))
-                {
-                    if (IsAMatch(gridLevel[i, j], i + 1, j))
-                        return true;
-                }
-
-                if (IsOnLevel(i - 1, j))
-                {
-                    if (IsAMatch(gridLevel[i, j], i - 1, j))
-                        return true;
-                }
-
-                if (IsOnLevel(i, j + 1))
-                {
-                    if (IsAMatch(gridLevel[i, j], i, j + 1))
-                        return true;
-                }
-
-                if (IsOnLevel(i, j - 1))
-                {
-                    if (IsAMatch(gridLevel[i, j], i, j - 1))
-                        return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    // Check if the movement done by the player is resolving a match
-    public void CheckTryToMove(Vector2 pos)
+    private void CheckTryToMove(Vector2 pos)
     {
         if (isPossibleSwap)
         {
@@ -235,7 +85,7 @@ public class LevelController : MonoBehaviour
                 //Debug.Log("Derecha");
                 if (IsOnLevel((int)pos.x + 1, (int)pos.y))
                 {
-                    SwapPositions((int)pos.x, (int)pos.y, (int)pos.x + 1, (int)pos.y);
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x + 1, (int)pos.y));
 
                 }
                 elementSelected = null;
@@ -246,7 +96,7 @@ public class LevelController : MonoBehaviour
                 //Debug.Log("Izquierda");
                 if (IsOnLevel((int)pos.x - 1, (int)pos.y))
                 {
-                    SwapPositions((int)pos.x, (int)pos.y, (int)pos.x - 1, (int)pos.y);
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x - 1, (int)pos.y));
 
                 }
                 elementSelected = null;
@@ -257,7 +107,7 @@ public class LevelController : MonoBehaviour
                 //Debug.Log("Arriba");
                 if (IsOnLevel((int)pos.x, (int)pos.y + 1))
                 {
-                    SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y + 1);
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y + 1));
 
                 }
                 elementSelected = null;
@@ -268,7 +118,7 @@ public class LevelController : MonoBehaviour
                 //Debug.Log("Abajo");
                 if (IsOnLevel((int)pos.x, (int)pos.y - 1))
                 {
-                    SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y - 1);
+                    StartCoroutine(SwapPositions((int)pos.x, (int)pos.y, (int)pos.x, (int)pos.y - 1));
 
                 }
                 elementSelected = null;
@@ -278,24 +128,8 @@ public class LevelController : MonoBehaviour
     }
 
     // Swap the elements
-    public void SwapPositions(int row1, int col1, int row2, int col2)
+    public IEnumerator SwapPositions(int row1, int col1, int row2, int col2)
     {
-        if (gridLevel[row1,col1].GetColorType() == 8)
-        {
-            FireColorBombBooster(new Vector2(row2, col2));
-            gridLevel[row1, col1] = null;
-            MoveDownPieces();
-            return;
-        }
-
-        if (gridLevel[row2, col2].GetColorType() == 8)
-        {
-            FireColorBombBooster(new Vector2(row1, col1));
-            gridLevel[row2, col2] = null;
-            MoveDownPieces();
-            return;
-        }
-
         if (IsAMatch(gridLevel[row1, col1], row2, col2) || IsAMatch(gridLevel[row2, col2], row1, col1))
         {
             Element aux = gridLevel[row1, col1];
@@ -305,7 +139,9 @@ public class LevelController : MonoBehaviour
             gridLevel[row1, col1].SetPos(row1, col1);
             gridLevel[row2, col2].SetPos(row2, col2);
 
+            yield return new WaitForSeconds(0);
             CheckMatch(gridLevel[row1, col1], row1, col1);
+            yield return new WaitForSeconds(0);
             CheckMatch(gridLevel[row2, col2], row2, col2);
             if (gridCreated)
             {
@@ -314,7 +150,7 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    // Check if there is a match with the element in the position row col
+    // Check if there is a match
     public bool IsAMatch(Element element, int row, int col)
     {
         bool res = false;
@@ -558,12 +394,8 @@ public class LevelController : MonoBehaviour
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
 
-            if(gridCreated)
-                CreateBombBooster(row, col);
-
             res = true;
-            //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
+            OnSwapDone?.Invoke(gridLevel);
         }
         else if (sameColorHorizontal.Count >= 3)
         {
@@ -577,19 +409,8 @@ public class LevelController : MonoBehaviour
                 gridLevel[(int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY()] = null;
             }
 
-            if (gridCreated)
-            {
-                if (sameColorHorizontal.Count == 4)
-                    CreateLineBooster(row, col);
-
-                if (sameColorHorizontal.Count >= 5)
-                    CreateColorBombBooster(row, col);
-            }
-            
-
             res = true;
-            //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
+            OnSwapDone?.Invoke(gridLevel);
         }
         else if (sameColorVertical.Count >= 3)
         {
@@ -603,25 +424,14 @@ public class LevelController : MonoBehaviour
                 gridLevel[(int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY()] = null;
             }
 
-            if (gridCreated)
-            {
-                if (sameColorVertical.Count == 4)
-                    CreateLineBooster(row, col);
-
-                if (sameColorVertical.Count >= 5)
-                    CreateColorBombBooster(row, col);
-            }
-            
-
             res = true;
-            //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
+            OnSwapDone?.Invoke(gridLevel);
         }
 
         return res;
     }
 
-    public static bool IsOnLevel(int row, int col)
+    public bool IsOnLevel(int row, int col)
     {
         if (row < gridLevel.GetLength(0) && col < gridLevel.GetLength(1) && row >= 0 && col >= 0)
         {
@@ -631,10 +441,5 @@ public class LevelController : MonoBehaviour
         {
             return false;
         }
-    }
-
-    private void IsPossibleToSwap()
-    {
-        isPossibleSwap = false;
     }
 }
