@@ -139,6 +139,14 @@ public class LevelController
         MoveDownPieces();
     }
 
+    public static void DestroyCell(int row, int col)
+    {
+        if(gridLevel[row, col].GetColorType() == 6)
+        {
+            //FireLineBooster(new Vector2(row, col));
+        }
+    }
+
     /************************************************************************************************************/
     // Check all the grid to check all the matches existing
     private void GridChanged()
