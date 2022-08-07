@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -138,6 +139,14 @@ public class LevelController
         MoveDownPieces();
     }
 
+    public static void DestroyCell(int row, int col)
+    {
+        if(gridLevel[row, col].GetColorType() == 6)
+        {
+            //FireLineBooster(new Vector2(row, col));
+        }
+    }
+
     /************************************************************************************************************/
     // Check all the grid to check all the matches existing
     private void GridChanged()
@@ -157,6 +166,7 @@ public class LevelController
         if (!CheckPossibleMatch())
         {
             Debug.Log("No hay match posible");
+            ReGenerateGrid();
         }
 
         if (gridCreated == false)
@@ -167,6 +177,19 @@ public class LevelController
         
     }
 
+    private void ReGenerateGrid()
+    {
+        for(int i = 0; i < gridLevel.GetLength(0); i++)
+        {
+            for (int j = 0; j < gridLevel.GetLength(1); j++)
+            {
+                if (gridLevel[i, j].GetColorType() < colorTypes - 1)
+                    gridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
+            }
+        }
+
+        OnGridChanged(gridLevel);
+    }
 
     public void SetElementSelected(GameObject element)
     {
@@ -196,6 +219,10 @@ public class LevelController
         {
             for (int j = 0; j < gridLevel.GetLength(1); j++)
             {
+                // Check if it is a booster
+                if (gridLevel[i, j].GetColorType() > 5)
+                    return true;
+
                 if (IsOnLevel(i + 1, j))
                 {
                     if (IsAMatch(gridLevel[i, j], i + 1, j))
