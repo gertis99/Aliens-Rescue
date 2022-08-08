@@ -9,7 +9,7 @@ public class VerticalLineBooster : IBooster
     {
         List<Element> elements = new List<Element>();
 
-        for (int i = 1; i < gridLevel.GetLength(1); i++)
+        for (int i = 0; i < gridLevel.GetLength(1); i++)
         {
             if (gridLevel[(int)pos.x, i] != null)
             {

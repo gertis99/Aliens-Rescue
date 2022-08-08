@@ -8,7 +8,7 @@ public class HorizontalLineBooster : IBooster
     {
         List<Element> elements = new List<Element>();
 
-        for (int i = 1; i < gridLevel.GetLength(0); i++)
+        for (int i = 0; i < gridLevel.GetLength(0); i++)
         {
             if (gridLevel[i, (int)pos.y] != null)
             {
