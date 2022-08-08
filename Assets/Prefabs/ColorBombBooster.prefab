@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4385792758333584250}
   - component: {fileID: 4385792758333584249}
   - component: {fileID: -3041447063966417852}
+  - component: {fileID: -4084512846095193696}
   m_Layer: 0
   m_Name: ColorBombBooster
   m_TagString: Untagged
@@ -111,3 +112,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5, y: 5}
   m_EdgeRadius: 0
+--- !u!114 &-4084512846095193696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4385792758333584248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14be4ad59ff87ba419acd53a56d8d0fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
+  colorType: 0

@@ -16,13 +16,18 @@ public class GridView : MonoBehaviour
     private GameObject[,] gridLevel;
     private LevelController levelController;
     private GameObject elementSelected = null;
+    private List<IAnimation> animations = new List<IAnimation>();
+    private bool IsAnimating => animations.Count > 0;
 
     private void Awake()
     {
         
         levelController = new LevelController(width, height, colorTypes);
         LevelController.OnGridCreated += CreateLevel;
-        LevelController.OnGridChanged += UpdateLevel;
+        //LevelController.OnGridChanged += UpdateLevel;
+        levelController.OnCellCreated += CreateCellView;
+        levelController.OnCellMoved += MoveCellView;
+        levelController.OnCellDestroyed += DestroyCellView;
     }
 
     private void Start()
@@ -33,12 +38,53 @@ public class GridView : MonoBehaviour
     private void OnDisable()
     {
         LevelController.OnGridCreated -= CreateLevel;
-        LevelController.OnGridChanged -= UpdateLevel;
+        //LevelController.OnGridChanged -= UpdateLevel;
+        levelController.OnCellCreated -= CreateCellView;
+        levelController.OnCellMoved -= MoveCellView;
+        levelController.OnCellDestroyed -= DestroyCellView;
     }
 
     private void Update()
     {
+        if (IsAnimating)
+            return;
+
         CheckInputs();
+    }
+
+    private void DestroyCellView(Element el)
+    {
+        if(el != null)
+            Destroy(gridLevel[el.GetPosX(), el.GetPosY()]);
+    }
+
+    private void MoveCellView(Element el, Vector2Int pos)
+    {
+        animations.Add(new MoveCellAnimation(new Vector2Int(el.GetPosX(), el.GetPosY()), gridLevel[el.GetPosX(), el.GetPosY()]));
+        if (animations.Count == 1)
+        {
+            StartCoroutine(ProcessAnimations());
+        }
+        gridLevel[pos.x, pos.y] = gridLevel[el.GetPosX(), el.GetPosY()];
+    }
+
+    private void CreateCellView(Element el)
+    {
+        gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)), Quaternion.identity, this.transform);
+        animations.Add(new CreateCellAnimation(new Vector2Int(el.GetPosX(), el.GetPosY()), gridLevel[el.GetPosX(), el.GetPosY()]));
+        if (animations.Count == 1)
+        {
+            StartCoroutine(ProcessAnimations());
+        }
+    }
+
+    private IEnumerator ProcessAnimations()
+    {
+        while (IsAnimating)
+        {
+            yield return animations[0].PlayAnimation(this);
+            animations.RemoveAt(0);
+        }
     }
 
     private void CheckInputs()
@@ -91,7 +137,7 @@ public class GridView : MonoBehaviour
         }
     }
 
-    private void UpdateLevel(Element[,] grid)
+    /*private void UpdateLevel(Element[,] grid)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
         {
@@ -99,7 +145,7 @@ public class GridView : MonoBehaviour
             {
                 if(grid[i,j] == null)
                 {
-                    gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
+                    //gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
                 }
                 else
                 {
@@ -107,12 +153,13 @@ public class GridView : MonoBehaviour
                         gridLevel[i, j].GetComponent<SpriteRenderer>().sprite = sprites[grid[i,j].GetColorType()];
                     else
                         gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);*/
-                    Destroy(gridLevel[i, j]);
+                    /*Destroy(gridLevel[i, j]);
                     gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
+                    gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), grid[i, j].GetColorType());
                 }
             }
         }
-    }
+    }*/
 
     
 
@@ -124,8 +171,8 @@ public class GridView : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
-                gridLevel[i,j] = Instantiate(levelElemnts[grid[i,j].GetColorType()], new Vector2(i, j), Quaternion.identity);
-                gridLevel[i, j].transform.SetParent(this.transform, true);
+                gridLevel[i,j] = Instantiate(levelElemnts[grid[i,j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
+                gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), grid[i, j].GetColorType());
             }
         }
     }

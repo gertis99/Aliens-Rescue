@@ -30,6 +30,10 @@ public class LevelController
 
     public static LevelController levelControllerInstance;
 
+    public event Action<Element> OnCellCreated = delegate (Element element) { };
+    public event Action<Element> OnCellDestroyed = delegate (Element element) { };
+    public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
+
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
         this.width = width;
@@ -49,7 +53,6 @@ public class LevelController
 
     public void CreateGrid()
     {
-        OnGridCreated(gridLevel);
         GridChanged();
     }
 
@@ -74,6 +77,11 @@ public class LevelController
                     {
                         if (gridLevel[x, yAux] != null)
                         {
+                            if (gridCreated)
+                            {
+                                OnCellMoved(gridLevel[x, yAux], new Vector2Int(x, y));
+                            }
+                            
                             gridLevel[x, y] = gridLevel[x, yAux];
                             gridLevel[x, yAux] = null;
                             gridLevel[x, y].SetPos(x,y);
@@ -99,12 +107,20 @@ public class LevelController
                 if (gridLevel[x, y] == null)
                 {
                     gridLevel[x, y] = new Element(x, y, UnityEngine.Random.Range(0, colorTypes));
+                    if (gridCreated)
+                    {
+                        OnCellCreated(gridLevel[x, y]);
+                    }
                 }
             }
         }
 
         gridModel.SetGridLevel(gridLevel);
-        OnGridChanged(gridLevel);
+
+        if (gridCreated)
+        {
+            //OnGridChanged(gridLevel);
+        }
     }
 
     private void CreateVerticalLineBooster(int row, int col)
@@ -169,6 +185,8 @@ public class LevelController
         {
             if (gridLevel[row, col].GetColorType() == 6)
             {
+                if(gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
                 FireVerticalLineBooster(new Vector2(row, col));
                 gridLevel[row, col] = null;
                 return;
@@ -176,6 +194,7 @@ public class LevelController
 
             if (gridLevel[row, col].GetColorType() == 7)
             {
+                OnCellDestroyed(gridLevel[row, col]);
                 FireBombBooster(new Vector2(row, col));
                 gridLevel[row, col] = null;
                 return;
@@ -183,6 +202,8 @@ public class LevelController
 
             if (gridLevel[row, col].GetColorType() == 8)
             {
+                if (gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
                 if (IsOnLevel(row + 1, col))
                     FireColorBombBooster(new Vector2(row + 1, col));
                 else if (IsOnLevel(row, col + 1))
@@ -198,11 +219,14 @@ public class LevelController
 
             if (gridLevel[row, col].GetColorType() == 9)
             {
+                if (gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
                 FireHorizontalLineBooster(new Vector2(row, col));
                 gridLevel[row, col] = null;
                 return;
             }
-
+            if (gridCreated)
+                OnCellDestroyed(gridLevel[row, col]);
             gridLevel[row, col] = null;
         }
     }
@@ -231,6 +255,7 @@ public class LevelController
 
         if (gridCreated == false)
         {
+            OnGridCreated(gridLevel);
             gridCreated = true;
         }
 
