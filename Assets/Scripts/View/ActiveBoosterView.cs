@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ActiveBoosterView : MonoBehaviour
@@ -11,6 +12,11 @@ public class ActiveBoosterView : MonoBehaviour
     private void Awake()
     {
         controller = new ActiveBoosterController();
+    }
+
+    private void Start()
+    {
+        GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();   
     }
 
     public void ActivateBooster()

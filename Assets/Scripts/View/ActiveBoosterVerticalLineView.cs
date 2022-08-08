@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class ActiveBoosterCrossLineView : ActiveBoosterView
+public class ActiveBoosterVerticalLineView : ActiveBoosterView
 {
     private void Update()
     {
@@ -13,8 +14,9 @@ public class ActiveBoosterCrossLineView : ActiveBoosterView
                 RaycastHit2D hitData = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0);
                 if (hitData)
                 {
-                    controller.ActiveBoosterLineCross(hitData.collider.gameObject.transform.position);
+                    controller.ActiveBoosterLineVertical(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
+                    GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
                 }
             }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ActiveBoosterBombView : ActiveBoosterView
@@ -15,6 +16,7 @@ public class ActiveBoosterBombView : ActiveBoosterView
                 {
                     controller.ActiveBoosterBomb(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
+                    GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
                 }
             }

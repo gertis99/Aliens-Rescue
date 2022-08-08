@@ -8,9 +8,16 @@ public class ActiveBoosterController
     public static event ActiveBooster OnBoosterActived;
     private IBooster actualBooster;
 
-    public void ActiveBoosterLineCross(Vector2 pos)
+    public void ActiveBoosterLineVertical(Vector2 pos)
     {
-        actualBooster = new CrossLineBooster();
+        actualBooster = new VerticalLineBooster();
+        OnBoosterActived(actualBooster, pos);
+        actualBooster = null;
+    }
+
+    public void ActiveBoosterLineHorizontal(Vector2 pos)
+    {
+        actualBooster = new HorizontalLineBooster();
         OnBoosterActived(actualBooster, pos);
         actualBooster = null;
     }

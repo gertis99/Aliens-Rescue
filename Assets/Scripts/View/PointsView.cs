@@ -17,7 +17,7 @@ public class PointsView : MonoBehaviour
             pointsText[i].text = 0 + "/" + winCondition;
         }
 
-        movementsText.text = "Movements: " + movements + "/" + maxMovements; 
+        movementsText.text = movements.ToString(); 
 
         WinController.OnPointsChanged += AddPoint;
         WinController.OnWinChecked += ActiveWin;
@@ -46,7 +46,7 @@ public class PointsView : MonoBehaviour
     private void MoveDone()
     {
         movements--;
-        movementsText.text = "Movements: " + movements + "/" + maxMovements;
+        movementsText.text = movements.ToString();
     }
 
     private void ActiveLose()

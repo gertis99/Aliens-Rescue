@@ -10,16 +10,16 @@ public class BombBooster : IBooster
 
 
         elements.Add(gridLevel[(int)pos.x, (int)pos.y]);
-        gridLevel[(int)pos.x, (int)pos.y] = null;
+        //LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y);
 
-        if (LevelController.IsOnLevel((int)pos.x + 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y]); gridLevel[(int)pos.x + 1, (int)pos.y] = null; }
-        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y]); gridLevel[(int)pos.x - 1, (int)pos.y] = null; }
-        if (LevelController.IsOnLevel((int)pos.x + 1, (int)pos.y + 1)){ elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y + 1]); gridLevel[(int)pos.x + 1, (int)pos.y + 1] = null; }
-        if (LevelController.IsOnLevel((int) pos.x + 1, (int) pos.y - 1)) { elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y - 1]); gridLevel[(int)pos.x + 1, (int)pos.y - 1] = null; }
-        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y + 1)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y + 1]); gridLevel[(int)pos.x-1, (int)pos.y+1] = null; }
-        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y - 1)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y - 1]); gridLevel[(int)pos.x-1, (int)pos.y-1] = null; }
-        if (LevelController.IsOnLevel((int)pos.x, (int)pos.y + 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y + 1]); gridLevel[(int)pos.x, (int)pos.y+1] = null; }
-        if (LevelController.IsOnLevel((int)pos.x, (int)pos.y - 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y - 1]); gridLevel[(int)pos.x, (int)pos.y-1] = null; }
+        if (LevelController.IsOnLevel((int)pos.x + 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y]); LevelController.levelControllerInstance.DestroyCell((int)pos.x + 1, (int)pos.y); }
+        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y]); LevelController.levelControllerInstance.DestroyCell((int)pos.x - 1, (int)pos.y); }
+        if (LevelController.IsOnLevel((int)pos.x + 1, (int)pos.y + 1)){ elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y + 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x + 1, (int)pos.y + 1); }
+        if (LevelController.IsOnLevel((int) pos.x + 1, (int) pos.y - 1)) { elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y - 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x + 1, (int)pos.y - 1); }
+        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y + 1)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y + 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x - 1, (int)pos.y + 1); }
+        if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y - 1)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y - 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x - 1, (int)pos.y - 1); }
+        if (LevelController.IsOnLevel((int)pos.x, (int)pos.y + 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y + 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y + 1); }
+        if (LevelController.IsOnLevel((int)pos.x, (int)pos.y - 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y - 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y - 1); }
 
         WinController.AddPoints(elements);
     }

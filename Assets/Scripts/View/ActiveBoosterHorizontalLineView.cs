@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ActiveBoosterColorBombView : ActiveBoosterView
+public class ActiveBoosterHorizontalLineView : ActiveBoosterView
 {
     private void Update()
     {
@@ -14,7 +14,7 @@ public class ActiveBoosterColorBombView : ActiveBoosterView
                 RaycastHit2D hitData = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 0);
                 if (hitData)
                 {
-                    controller.ActiveBoosterColorBomb(hitData.collider.gameObject.transform.position);
+                    controller.ActiveBoosterLineHorizontal(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
                     GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
