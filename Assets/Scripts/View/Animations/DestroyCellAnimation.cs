@@ -1,16 +1,14 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class MoveCellAnimation : IAnimation
+public class DestroyCellAnimation : IAnimation
 {
-    private Vector2Int position;
     private GameObject objectAnimated;
 
-    public MoveCellAnimation(Vector2Int pos, GameObject obj)
+    public DestroyCellAnimation(GameObject obj)
     {
-        position = pos;
         objectAnimated = obj;
     }
 
@@ -21,7 +19,7 @@ public class MoveCellAnimation : IAnimation
 
     private IEnumerator AnimationCoroutine(GridView board)
     {
-        objectAnimated.transform.DOMove(new Vector3(position.x, position.y, 0), 0.5f).SetEase(Ease.InOutQuad);
+        DOTween.Sequence(objectAnimated.transform.DOScale(0f, 0.5f)).OnComplete(() => board.DestroyCell(objectAnimated));
         yield return new WaitForSeconds(0.5f);
     }
 }

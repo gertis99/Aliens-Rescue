@@ -33,6 +33,7 @@ public class LevelController
     public event Action<Element> OnCellCreated = delegate (Element element) { };
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
+    public event Action<Element, Element> OnCellsSwapped = delegate (Element el1, Element el2) { };
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
@@ -77,13 +78,14 @@ public class LevelController
                     {
                         if (gridLevel[x, yAux] != null)
                         {
-                            if (gridCreated)
-                            {
-                                OnCellMoved(gridLevel[x, yAux], new Vector2Int(x, y));
-                            }
-                            
                             gridLevel[x, y] = gridLevel[x, yAux];
                             gridLevel[x, yAux] = null;
+
+                            if (gridCreated)
+                            {
+                                OnCellMoved(gridLevel[x, y], new Vector2Int(x, y));
+                            }
+                            
                             gridLevel[x, y].SetPos(x,y);
                             break;
                         }
@@ -419,6 +421,8 @@ public class LevelController
 
         if (IsAMatch(gridLevel[row1, col1], row2, col2) || IsAMatch(gridLevel[row2, col2], row1, col1))
         {
+            OnCellsSwapped(gridLevel[row1, col1], gridLevel[row2, col2]);
+
             Element aux = gridLevel[row1, col1];
             gridLevel[row1, col1] = gridLevel[row2, col2];
             gridLevel[row2, col2] = aux;

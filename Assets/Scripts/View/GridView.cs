@@ -28,6 +28,7 @@ public class GridView : MonoBehaviour
         levelController.OnCellCreated += CreateCellView;
         levelController.OnCellMoved += MoveCellView;
         levelController.OnCellDestroyed += DestroyCellView;
+        levelController.OnCellsSwapped += SwapCellsView;
     }
 
     private void Start()
@@ -42,6 +43,7 @@ public class GridView : MonoBehaviour
         levelController.OnCellCreated -= CreateCellView;
         levelController.OnCellMoved -= MoveCellView;
         levelController.OnCellDestroyed -= DestroyCellView;
+        levelController.OnCellsSwapped -= SwapCellsView;
     }
 
     private void Update()
@@ -54,23 +56,56 @@ public class GridView : MonoBehaviour
 
     private void DestroyCellView(Element el)
     {
-        if(el != null)
-            Destroy(gridLevel[el.GetPosX(), el.GetPosY()]);
+        if (gridLevel[el.GetPosX(), el.GetPosY()] != null)
+        {
+            animations.Add(new DestroyCellAnimation(gridLevel[el.GetPosX(), el.GetPosY()]));
+            if (animations.Count == 1)
+            {
+                StartCoroutine(ProcessAnimations());
+            }
+        }
+    }
+
+    public void DestroyCell(GameObject obj)
+    {
+        Destroy(obj);
     }
 
     private void MoveCellView(Element el, Vector2Int pos)
     {
-        animations.Add(new MoveCellAnimation(new Vector2Int(el.GetPosX(), el.GetPosY()), gridLevel[el.GetPosX(), el.GetPosY()]));
+        if(gridLevel[el.GetPosX(), el.GetPosY()] != null)
+        {
+            animations.Add(new MoveCellAnimation(new Vector2Int(pos.x, pos.y), gridLevel[el.GetPosX(), el.GetPosY()]));
+            if (animations.Count == 1)
+            {
+                StartCoroutine(ProcessAnimations());
+            }
+            gridLevel[pos.x, pos.y] = gridLevel[el.GetPosX(), el.GetPosY()];
+        }
+        
+    }
+
+    private void SwapCellsView(Element el1, Element el2)
+    {
+        animations.Add(new MoveCellAnimation(new Vector2Int(el2.GetPosX(), el2.GetPosY()), gridLevel[el1.GetPosX(), el1.GetPosY()]));
         if (animations.Count == 1)
         {
             StartCoroutine(ProcessAnimations());
         }
-        gridLevel[pos.x, pos.y] = gridLevel[el.GetPosX(), el.GetPosY()];
+        animations.Add(new MoveCellAnimation(new Vector2Int(el1.GetPosX(), el1.GetPosY()), gridLevel[el2.GetPosX(), el2.GetPosY()]));
+        if (animations.Count == 1)
+        {
+            StartCoroutine(ProcessAnimations());
+        }
+
+        GameObject aux = gridLevel[el1.GetPosX(), el1.GetPosY()];
+        gridLevel[el1.GetPosX(), el1.GetPosY()] = gridLevel[el2.GetPosX(), el2.GetPosY()];
+        gridLevel[el2.GetPosX(), el2.GetPosY()] = aux;
     }
 
     private void CreateCellView(Element el)
     {
-        gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)), Quaternion.identity, this.transform);
+        gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
         animations.Add(new CreateCellAnimation(new Vector2Int(el.GetPosX(), el.GetPosY()), gridLevel[el.GetPosX(), el.GetPosY()]));
         if (animations.Count == 1)
         {
