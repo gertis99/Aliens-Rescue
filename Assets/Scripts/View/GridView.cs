@@ -87,17 +87,12 @@ public class GridView : MonoBehaviour
 
     private void SwapCellsView(Element el1, Element el2)
     {
-        animations.Add(new MoveCellAnimation(new Vector2Int(el2.GetPosX(), el2.GetPosY()), gridLevel[el1.GetPosX(), el1.GetPosY()]));
+        animations.Add(new SwapCellsAnimation(gridLevel[el1.GetPosX(), el1.GetPosY()], gridLevel[el2.GetPosX(), el2.GetPosY()]));
         if (animations.Count == 1)
         {
             StartCoroutine(ProcessAnimations());
         }
-        animations.Add(new MoveCellAnimation(new Vector2Int(el1.GetPosX(), el1.GetPosY()), gridLevel[el2.GetPosX(), el2.GetPosY()]));
-        if (animations.Count == 1)
-        {
-            StartCoroutine(ProcessAnimations());
-        }
-
+        
         GameObject aux = gridLevel[el1.GetPosX(), el1.GetPosY()];
         gridLevel[el1.GetPosX(), el1.GetPosY()] = gridLevel[el2.GetPosX(), el2.GetPosY()];
         gridLevel[el2.GetPosX(), el2.GetPosY()] = aux;
@@ -138,7 +133,7 @@ public class GridView : MonoBehaviour
         }
         
 
-        if (elementSelected != null && Input.GetMouseButton(0))
+        if (elementSelected != null && Input.GetMouseButton(0) && !IsAnimating)
         {
             if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {
