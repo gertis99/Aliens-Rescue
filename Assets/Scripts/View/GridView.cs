@@ -100,7 +100,14 @@ public class GridView : MonoBehaviour
 
     private void CreateCellView(Element el)
     {
-        gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
+        if(el.GetColorType() < 6)
+            gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
+        else
+            gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), el.GetPosY()), Quaternion.identity, this.transform);
+
+        gridLevel[el.GetPosX(), el.GetPosY()].SetActive(false);
+
+
         animations.Add(new CreateCellAnimation(new Vector2Int(el.GetPosX(), el.GetPosY()), gridLevel[el.GetPosX(), el.GetPosY()]));
         if (animations.Count == 1)
         {

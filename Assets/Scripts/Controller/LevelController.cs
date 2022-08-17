@@ -683,8 +683,11 @@ public class LevelController
                 DestroyCell((int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY());
             }
 
-            if(gridCreated)
+            if (gridCreated)
+            {
                 CreateBombBooster(row, col);
+                OnCellCreated(gridLevel[row, col]);
+            }
 
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
@@ -705,10 +708,17 @@ public class LevelController
             if (gridCreated)
             {
                 if (sameColorHorizontal.Count == 4)
+                {
                     CreateHorizontalLineBooster(row, col);
+                    OnCellCreated(gridLevel[row, col]);
+                }
+                    
 
                 if (sameColorHorizontal.Count >= 5)
+                {
                     CreateColorBombBooster(row, col);
+                    OnCellCreated(gridLevel[row, col]);
+                }
             }
             
 
@@ -731,10 +741,16 @@ public class LevelController
             if (gridCreated)
             {
                 if (sameColorVertical.Count == 4)
+                {
                     CreateVerticalLineBooster(row, col);
+                    OnCellCreated(gridLevel[row, col]);
+                }
 
                 if (sameColorVertical.Count >= 5)
+                {
                     CreateColorBombBooster(row, col);
+                    OnCellCreated(gridLevel[row, col]);
+                }
             }
             
 
