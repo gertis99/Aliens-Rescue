@@ -10,7 +10,7 @@ public class BombBooster : IBooster
 
 
         elements.Add(gridLevel[(int)pos.x, (int)pos.y]);
-        //LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y);
+        LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y);
 
         if (LevelController.IsOnLevel((int)pos.x + 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x + 1, (int)pos.y]); LevelController.levelControllerInstance.DestroyCell((int)pos.x + 1, (int)pos.y); }
         if (LevelController.IsOnLevel((int)pos.x - 1, (int)pos.y)) { elements.Add(gridLevel[(int)pos.x - 1, (int)pos.y]); LevelController.levelControllerInstance.DestroyCell((int)pos.x - 1, (int)pos.y); }

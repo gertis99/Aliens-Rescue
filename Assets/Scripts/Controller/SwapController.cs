@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class SwapController
 {
-    public delegate void SwapDone(Element[,] grid);
+    /*public delegate void SwapDone(Element[,] grid);
     public delegate void CheckedMatch(Element element);
     public delegate void MoveDone();
     public static event SwapDone OnSwapDone = Grid => { };
@@ -24,7 +24,7 @@ public class SwapController
     public SwapController()
     {
         gridLevel = gridModel.GetGridLevel();
-    }
+    }*/
     /*
     private void Start()
     {
