@@ -148,6 +148,7 @@ public class LevelController
     private  void FireVerticalLineBooster(Vector2 pos)
     {
         actualBooster = new VerticalLineBooster();
+        OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
@@ -157,6 +158,7 @@ public class LevelController
     private void FireHorizontalLineBooster(Vector2 pos)
     {
         actualBooster = new HorizontalLineBooster();
+        OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
@@ -166,6 +168,7 @@ public class LevelController
     private void FireBombBooster(Vector2 pos)
     {
         actualBooster = new BombBooster();
+        OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
@@ -175,6 +178,7 @@ public class LevelController
     private void FireColorBombBooster(Vector2 pos)
     {
         actualBooster = new ColorBombBooster();
+        OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
@@ -245,6 +249,7 @@ public class LevelController
                 while (IsAMatch(gridLevel[i, j], i, j))
                 {
                     CheckMatch(gridLevel[i, j], i, j);
+                    MoveDownPieces();
                 }
             }
         }
@@ -432,6 +437,7 @@ public class LevelController
 
             CheckMatch(gridLevel[row1, col1], row1, col1);
             CheckMatch(gridLevel[row2, col2], row2, col2);
+            MoveDownPieces();
             if (gridCreated)
             {
                 OnMoveDone();
@@ -680,7 +686,7 @@ public class LevelController
                 {
                     OnCheckedMatch(sameColorVertical[i]);
                 }
-                DestroyCell((int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY());
+                DestroyCell((int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY());
             }
 
             if (gridCreated)
@@ -691,7 +697,6 @@ public class LevelController
 
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
         }
         else if (sameColorHorizontal.Count >= 3)
         {
@@ -724,7 +729,6 @@ public class LevelController
 
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
         }
         else if (sameColorVertical.Count >= 3)
         {
@@ -756,7 +760,6 @@ public class LevelController
 
             res = true;
             //OnSwapDone?.Invoke(gridLevel);
-            MoveDownPieces();
         }
 
         return res;
