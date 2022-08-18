@@ -241,18 +241,22 @@ public class LevelController
     // Check all the grid to check all the matches existing
     private void GridChanged()
     {
+        bool existMatch = false;
 
         for (int i = 0; i < gridLevel.GetLength(0); i++)
         {
             for (int j = 0; j < gridLevel.GetLength(1); j++)
             {
-                while (IsAMatch(gridLevel[i, j], i, j))
+                while (gridLevel[i, j] != null &&  IsAMatch(gridLevel[i, j], i, j))
                 {
                     CheckMatch(gridLevel[i, j], i, j);
-                    MoveDownPieces();
+                    existMatch = true;
                 }
             }
         }
+
+        if (existMatch)
+            MoveDownPieces();
 
         if (!CheckPossibleMatch())
         {
