@@ -428,6 +428,7 @@ public class LevelController
             return;
         }
 
+
         if (IsAMatch(gridLevel[row1, col1], row2, col2) || IsAMatch(gridLevel[row2, col2], row1, col1))
         {
             OnCellsSwapped(gridLevel[row1, col1], gridLevel[row2, col2]);
@@ -447,6 +448,7 @@ public class LevelController
                 OnMoveDone();
             }
         }
+        
     }
 
     // Check if there is a match with the element in the position row col
@@ -461,7 +463,7 @@ public class LevelController
         // Check horizontal
         while (sameColor)
         {
-            if (IsOnLevel(row - pos, col))
+            if (IsOnLevel(row - pos, col) && row - pos != element.GetPosX())
             {
                 if (elementColor == gridLevel[row - pos, col].GetColorType())
                 {
@@ -488,7 +490,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (IsOnLevel(row + pos, col))
+            if (IsOnLevel(row + pos, col) && row + pos != element.GetPosX())
             {
                 if (elementColor == gridLevel[row + pos, col].GetColorType())
                 {
@@ -516,7 +518,7 @@ public class LevelController
         // Check vertical
         while (sameColor)
         {
-            if (IsOnLevel(row, col - pos))
+            if (IsOnLevel(row, col - pos) && col - pos != element.GetPosY())
             {
                 if (elementColor == gridLevel[row, col - pos].GetColorType())
                 {
@@ -542,7 +544,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (IsOnLevel(row, col + pos))
+            if (IsOnLevel(row, col + pos) && col + pos != element.GetPosY())
             {
                 if (elementColor == gridLevel[row, col + pos].GetColorType())
                 {
