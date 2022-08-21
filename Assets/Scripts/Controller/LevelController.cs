@@ -176,12 +176,12 @@ public class LevelController
         MoveDownPieces();
     }
 
-    private void FireColorBombBooster(Vector2 pos)
+    private void FireColorBombBooster(Element booster, Vector2 posElement)
     {
         actualBooster = new ColorBombBooster();
-        OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
-        gridLevel[(int)pos.x, (int)pos.y] = null;
-        actualBooster.Execute(pos, ref gridLevel);
+        OnCellDestroyed(booster);
+        gridLevel[booster.GetPosX(), booster.GetPosY()] = null;
+        actualBooster.Execute(posElement, ref gridLevel);
         actualBooster = null;
         MoveDownPieces();
     }
@@ -212,13 +212,13 @@ public class LevelController
                 if (gridCreated)
                     OnCellDestroyed(gridLevel[row, col]);
                 if (IsOnLevel(row + 1, col))
-                    FireColorBombBooster(new Vector2(row + 1, col));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row + 1, col));
                 else if (IsOnLevel(row, col + 1))
-                    FireColorBombBooster(new Vector2(row, col + 1));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col + 1));
                 else if (IsOnLevel(row, col - 1))
-                    FireColorBombBooster(new Vector2(row, col - 1));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col - 1));
                 else if (IsOnLevel(row - 1, col))
-                    FireColorBombBooster(new Vector2(row - 1, col));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row - 1, col));
 
                 gridLevel[row, col] = null;
                 return;
@@ -415,7 +415,7 @@ public class LevelController
     {
         if (gridLevel[row1,col1].GetColorType() == 8)
         {
-            FireColorBombBooster(new Vector2(row2, col2));
+            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row2, col2));
             gridLevel[row1, col1] = null;
             MoveDownPieces();
             return;
@@ -423,11 +423,12 @@ public class LevelController
 
         if (gridLevel[row2, col2].GetColorType() == 8)
         {
-            FireColorBombBooster(new Vector2(row1, col1));
+            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row1, col1));
             gridLevel[row2, col2] = null;
             MoveDownPieces();
             return;
         }
+
 
         if (IsAMatch(gridLevel[row1, col1], row2, col2) || IsAMatch(gridLevel[row2, col2], row1, col1))
         {
@@ -448,6 +449,7 @@ public class LevelController
                 OnMoveDone();
             }
         }
+        
     }
 
     // Check if there is a match with the element in the position row col
@@ -462,7 +464,7 @@ public class LevelController
         // Check horizontal
         while (sameColor)
         {
-            if (IsOnLevel(row - pos, col))
+            if (IsOnLevel(row - pos, col) && row - pos != element.GetPosX())
             {
                 if (elementColor == gridLevel[row - pos, col].GetColorType())
                 {
@@ -489,7 +491,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (IsOnLevel(row + pos, col))
+            if (IsOnLevel(row + pos, col) && row + pos != element.GetPosX())
             {
                 if (elementColor == gridLevel[row + pos, col].GetColorType())
                 {
@@ -517,7 +519,7 @@ public class LevelController
         // Check vertical
         while (sameColor)
         {
-            if (IsOnLevel(row, col - pos))
+            if (IsOnLevel(row, col - pos) && col - pos != element.GetPosY())
             {
                 if (elementColor == gridLevel[row, col - pos].GetColorType())
                 {
@@ -543,7 +545,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (IsOnLevel(row, col + pos))
+            if (IsOnLevel(row, col + pos) && col + pos != element.GetPosY())
             {
                 if (elementColor == gridLevel[row, col + pos].GetColorType())
                 {
