@@ -50,6 +50,7 @@ public class LevelController
         LoseController.OnLoseChecked += IsPossibleToSwap;
 
         ActiveBoosterController.OnBoosterActived += FireBooster;
+
     }
 
     public void CreateGrid()
