@@ -12,6 +12,7 @@ public class LoadScene : MonoBehaviour
 
     private void Start()
     {
+        SaveLoadGame.LoadGame();
         LoadThisScene(1);
         ButtonLoadScene.OnLoadButtonClicked += LoadThisScene;
     }
@@ -19,6 +20,11 @@ public class LoadScene : MonoBehaviour
     private void OnDisable()
     {
         ButtonLoadScene.OnLoadButtonClicked -= LoadThisScene;
+    }
+
+    private void OnDestroy()
+    {
+        SaveLoadGame.SaveGame();
     }
 
     public void LoadThisScene(int sceneIndex)
