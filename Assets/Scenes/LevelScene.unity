@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba376760a215c174dba9486662020f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostersLeft: 5
+  boostersLeft: 0
 --- !u!1 &793566136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b62bf0ddf5afa4482be9ebaafabbd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostersLeft: 5
+  boostersLeft: 0
 --- !u!1 &1026779066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,7 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5f41ac2d880d734aae3fda5521ef214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostersLeft: 5
+  boostersLeft: 0
 --- !u!1 &1096394260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1795,6 +1795,7 @@ GameObject:
   - component: {fileID: 1096394262}
   - component: {fileID: 1096394261}
   - component: {fileID: 1096394265}
+  - component: {fileID: 1096394266}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1922,6 +1923,22 @@ MonoBehaviour:
   winCondition: 20
   movements: 15
   maxMovements: 15
+--- !u!114 &1096394266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096394260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e13d16484df3743b5cfbabaf84fd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizotntalBooster: {fileID: 1074110306}
+  verticalBooster: {fileID: 1661448206}
+  bombBooster: {fileID: 772852667}
+  colorBombBooster: {fileID: 932181892}
 --- !u!1 &1143962127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2894,7 +2911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a8245a16396354598dd8f9c77412fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostersLeft: 5
+  boostersLeft: 0
 --- !u!1 &1719594455
 GameObject:
   m_ObjectHideFlags: 0
