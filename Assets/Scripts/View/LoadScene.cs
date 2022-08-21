@@ -76,7 +76,7 @@ public class LoadScene : MonoBehaviour
         }
 
         canvas.gameObject.SetActive(false);
-
+        StopAllCoroutines();
         
     }
 }
