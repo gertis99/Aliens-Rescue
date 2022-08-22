@@ -19,7 +19,7 @@ public class ColorBombBooster : IBooster
                 if (gridLevel[i, j].GetColorType() == elementColor)
                 {
                     elements.Add(gridLevel[i, j]);
-                    LevelController.levelControllerInstance.DestroyCell(i, j);
+                    LevelController.levelControllerInstance.DestroyCell(i, j, false);
                 }
             }
         }

@@ -14,7 +14,7 @@ public class VerticalLineBooster : IBooster
             if (gridLevel[(int)pos.x, i] != null)
             {
                 elements.Add(gridLevel[(int)pos.x, i]);
-                LevelController.levelControllerInstance.DestroyCell((int)pos.x, i);
+                LevelController.levelControllerInstance.DestroyCell((int)pos.x, i, false);
             }
         }
 

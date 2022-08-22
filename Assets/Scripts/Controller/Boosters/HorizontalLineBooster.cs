@@ -13,7 +13,7 @@ public class HorizontalLineBooster : IBooster
             if (gridLevel[i, (int)pos.y] != null)
             {
                 elements.Add(gridLevel[i, (int)pos.y]);
-                LevelController.levelControllerInstance.DestroyCell(i, (int)pos.y);
+                LevelController.levelControllerInstance.DestroyCell(i, (int)pos.y, false);
             }
         }
 

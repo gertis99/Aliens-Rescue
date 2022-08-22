@@ -3137,7 +3137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aabd8678d26fb24e95e945865f2c4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: 1
+  condition: 20
   level: 1
   colorPoints: 000000000000000000000000000000000000000000000000
 --- !u!114 &1745555486

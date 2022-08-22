@@ -157,44 +157,100 @@ public class LevelController
         gridLevel[row, col] = new Element(row, col, 8);
     }
 
-    private  void FireVerticalLineBooster(Vector2 pos)
+    private  void FireVerticalLineBooster(Vector2 pos, bool moveBooster)
     {
         actualBooster = new VerticalLineBooster();
         OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
-        MoveDownPieces();
+        if (moveBooster)
+            MoveDownPieces();
     }
 
-    private void FireHorizontalLineBooster(Vector2 pos)
+    private void FireHorizontalLineBooster(Vector2 pos, bool moveBooster)
     {
         actualBooster = new HorizontalLineBooster();
         OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
-        MoveDownPieces();
+        if (moveBooster)
+            MoveDownPieces();
     }
 
-    private void FireBombBooster(Vector2 pos)
+    private void FireBombBooster(Vector2 pos, bool moveBooster)
     {
         actualBooster = new BombBooster();
         OnCellDestroyed(gridLevel[(int)pos.x, (int)pos.y]);
         gridLevel[(int)pos.x, (int)pos.y] = null;
         actualBooster.Execute(pos, ref gridLevel);
         actualBooster = null;
-        MoveDownPieces();
+        if (moveBooster)
+            MoveDownPieces();
     }
 
-    private void FireColorBombBooster(Element booster, Vector2 posElement)
+    private void FireColorBombBooster(Element booster, Vector2 posElement, bool moveBooster)
     {
         actualBooster = new ColorBombBooster();
         OnCellDestroyed(booster);
         gridLevel[booster.GetPosX(), booster.GetPosY()] = null;
         actualBooster.Execute(posElement, ref gridLevel);
         actualBooster = null;
-        MoveDownPieces();
+        if(moveBooster)
+            MoveDownPieces();
+    }
+
+    public void DestroyCell(int row, int col, bool moveBooster)
+    {
+        if (gridLevel[row, col] != null)
+        {
+            if (gridLevel[row, col].GetColorType() == 6)
+            {
+                if (gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
+                FireVerticalLineBooster(new Vector2(row, col), moveBooster);
+                gridLevel[row, col] = null;
+                return;
+            }
+
+            if (gridLevel[row, col].GetColorType() == 7)
+            {
+                OnCellDestroyed(gridLevel[row, col]);
+                FireBombBooster(new Vector2(row, col), moveBooster);
+                gridLevel[row, col] = null;
+                return;
+            }
+
+            if (gridLevel[row, col].GetColorType() == 8)
+            {
+                if (gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
+                if (IsOnLevel(row + 1, col))
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row + 1, col), moveBooster);
+                else if (IsOnLevel(row, col + 1))
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col + 1), moveBooster);
+                else if (IsOnLevel(row, col - 1))
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col - 1), moveBooster);
+                else if (IsOnLevel(row - 1, col))
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row - 1, col), moveBooster);
+
+                gridLevel[row, col] = null;
+                return;
+            }
+
+            if (gridLevel[row, col].GetColorType() == 9)
+            {
+                if (gridCreated)
+                    OnCellDestroyed(gridLevel[row, col]);
+                FireHorizontalLineBooster(new Vector2(row, col), moveBooster);
+                gridLevel[row, col] = null;
+                return;
+            }
+            if (gridCreated)
+                OnCellDestroyed(gridLevel[row, col]);
+            gridLevel[row, col] = null;
+        }
     }
 
     public void DestroyCell(int row, int col)
@@ -205,7 +261,7 @@ public class LevelController
             {
                 if(gridCreated)
                     OnCellDestroyed(gridLevel[row, col]);
-                FireVerticalLineBooster(new Vector2(row, col));
+                FireVerticalLineBooster(new Vector2(row, col), true);
                 gridLevel[row, col] = null;
                 return;
             }
@@ -213,7 +269,7 @@ public class LevelController
             if (gridLevel[row, col].GetColorType() == 7)
             {
                 OnCellDestroyed(gridLevel[row, col]);
-                FireBombBooster(new Vector2(row, col));
+                FireBombBooster(new Vector2(row, col), true);
                 gridLevel[row, col] = null;
                 return;
             }
@@ -223,13 +279,13 @@ public class LevelController
                 if (gridCreated)
                     OnCellDestroyed(gridLevel[row, col]);
                 if (IsOnLevel(row + 1, col))
-                    FireColorBombBooster(gridLevel[row, col], new Vector2(row + 1, col));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row + 1, col), true);
                 else if (IsOnLevel(row, col + 1))
-                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col + 1));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col + 1), true);
                 else if (IsOnLevel(row, col - 1))
-                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col - 1));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row, col - 1), true);
                 else if (IsOnLevel(row - 1, col))
-                    FireColorBombBooster(gridLevel[row, col], new Vector2(row - 1, col));
+                    FireColorBombBooster(gridLevel[row, col], new Vector2(row - 1, col), true);
 
                 gridLevel[row, col] = null;
                 return;
@@ -239,7 +295,7 @@ public class LevelController
             {
                 if (gridCreated)
                     OnCellDestroyed(gridLevel[row, col]);
-                FireHorizontalLineBooster(new Vector2(row, col));
+                FireHorizontalLineBooster(new Vector2(row, col), true);
                 gridLevel[row, col] = null;
                 return;
             }
@@ -311,7 +367,7 @@ public class LevelController
         {
             if (elementSelected.GetColorType() == 6)
             {
-                FireVerticalLineBooster(element.transform.position);
+                FireVerticalLineBooster(element.transform.position, true);
                 if (gridCreated)
                 {
                     OnMoveDone();
@@ -321,7 +377,7 @@ public class LevelController
 
             if (elementSelected.GetColorType() == 7)
             {
-                FireBombBooster(element.transform.position);
+                FireBombBooster(element.transform.position, true);
                 if (gridCreated)
                 {
                     OnMoveDone();
@@ -331,7 +387,7 @@ public class LevelController
 
             if (elementSelected.GetColorType() == 9)
             {
-                FireHorizontalLineBooster(element.transform.position);
+                FireHorizontalLineBooster(element.transform.position, true);
                 if (gridCreated)
                 {
                     OnMoveDone();
@@ -438,7 +494,7 @@ public class LevelController
     {
         if (gridLevel[row1,col1].GetColorType() == 8)
         {
-            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row2, col2));
+            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row2, col2), true);
             if (gridCreated)
             {
                 OnMoveDone();
@@ -450,7 +506,7 @@ public class LevelController
 
         if (gridLevel[row2, col2].GetColorType() == 8)
         {
-            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row1, col1));
+            FireColorBombBooster(gridLevel[row1, col1], new Vector2(row1, col1), true);
             if (gridCreated)
             {
                 OnMoveDone();
