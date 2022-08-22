@@ -53,13 +53,18 @@ public class WinController : MonoBehaviour
 
     private void CheckWin()
     {
+        int coinsGained = 0;
+
         for(int i=0; i<colorPoints.Length; i++)
         {
             if (colorPoints[i] < condition)
                 return;
+            else
+                coinsGained += colorPoints[i] - condition;
         }
         OnWinChecked();
         if (PlayerInfo.ActualLevel == level)
             PlayerInfo.ActualLevel++;
+        PlayerInfo.Coins += coinsGained;
     }
 }
