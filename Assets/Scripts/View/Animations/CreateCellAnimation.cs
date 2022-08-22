@@ -22,7 +22,7 @@ public class CreateCellAnimation : IAnimation
     private IEnumerator AnimationCoroutine(GridView board)
     {
         objectAnimated.SetActive(true);
-        objectAnimated.transform.DOMove(new Vector3(position.x, position.y, 0), 0.5f).SetEase(Ease.InOutQuad);
-        yield return new WaitForSeconds(0.5f);
+        objectAnimated.transform.DOMove(new Vector3(position.x, position.y, 0), 0.05f).SetEase(Ease.InOutQuad);
+        yield return new WaitForSeconds(0.05f);
     }
 }

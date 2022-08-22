@@ -17,6 +17,6 @@ public class HorizontalLineBooster : IBooster
             }
         }
 
-        WinController.AddPoints(elements);
+        LevelController.levelControllerInstance.AddPoints(elements);
     }
 }

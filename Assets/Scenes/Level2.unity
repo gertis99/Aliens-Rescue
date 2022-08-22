@@ -1920,7 +1920,7 @@ MonoBehaviour:
   win: {fileID: 1063793802}
   lose: {fileID: 348819471}
   movementsText: {fileID: 2113690171}
-  winCondition: 20
+  winCondition: 25
   movements: 15
   maxMovements: 15
 --- !u!114 &1096394266
@@ -3137,7 +3137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aabd8678d26fb24e95e945865f2c4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: 200
+  condition: 20
+  level: 2
+  colorPoints: 000000000000000000000000000000000000000000000000
 --- !u!114 &1745555486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3150,7 +3152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78370f0f1057b4f4d8ee1c5c64b38424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nMovements: 150
+  nMovements: 15
 --- !u!114 &1745555487
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,6 +24,6 @@ public class ColorBombBooster : IBooster
             }
         }
 
-        WinController.AddPoints(elements);
+        LevelController.levelControllerInstance.AddPoints(elements);
     }
 }

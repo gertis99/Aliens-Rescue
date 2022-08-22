@@ -43,7 +43,7 @@ public static class SaveLoadGame
             PlayerInfo.VerticalBoosters = 5;
             PlayerInfo.BombBoosters = 5;
             PlayerInfo.ColorBombBoosters = 5;
-            PlayerInfo.ActualLevel = 0;
+            PlayerInfo.ActualLevel = 1;
         }
     }
 }

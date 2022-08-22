@@ -18,6 +18,6 @@ public class VerticalLineBooster : IBooster
             }
         }
 
-        WinController.AddPoints(elements);
+        LevelController.levelControllerInstance.AddPoints(elements);
     }
 }

@@ -21,6 +21,6 @@ public class BombBooster : IBooster
         if (LevelController.IsOnLevel((int)pos.x, (int)pos.y + 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y + 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y + 1); }
         if (LevelController.IsOnLevel((int)pos.x, (int)pos.y - 1)) { elements.Add(gridLevel[(int)pos.x, (int)pos.y - 1]); LevelController.levelControllerInstance.DestroyCell((int)pos.x, (int)pos.y - 1); }
 
-        WinController.AddPoints(elements);
+        LevelController.levelControllerInstance.AddPoints(elements);
     }
 }

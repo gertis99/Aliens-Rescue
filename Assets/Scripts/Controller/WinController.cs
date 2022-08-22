@@ -11,8 +11,9 @@ public class WinController : MonoBehaviour
     public static event PointsChanged OnPointsChanged;
 
 
-    public int condition = 20;
-    private static int[] colorPoints = new int[6];
+    public int condition;
+    public int level;   
+    public int[] colorPoints = new int[6];
 
     private void Awake()
     {
@@ -24,17 +25,18 @@ public class WinController : MonoBehaviour
         LevelController.OnCheckedMatch -= AddPoints;
     }
 
-    public static void AddPoints(Element element)
+    public void AddPoints(Element element)
     {
         if(element.GetColorType() < colorPoints.Length)
         {
             colorPoints[element.GetColorType()]++;
             OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
+            CheckWin();
         }
         
     }
 
-    public static void AddPoints(List<Element> elements)
+    public void AddPoints(List<Element> elements)
     {
         for(int i = 0; i < elements.Count; i++)
         {
@@ -45,6 +47,8 @@ public class WinController : MonoBehaviour
             }
                 
         }
+
+        CheckWin();
     }
 
     private void CheckWin()
@@ -55,5 +59,7 @@ public class WinController : MonoBehaviour
                 return;
         }
         OnWinChecked();
+        if (PlayerInfo.ActualLevel == level)
+            PlayerInfo.ActualLevel++;
     }
 }

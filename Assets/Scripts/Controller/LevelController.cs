@@ -64,6 +64,17 @@ public class LevelController
         MoveDownPieces();
     }
 
+    public void AddPoints(Element el)
+    {
+        OnCheckedMatch(el);
+    }
+
+    public void AddPoints(List<Element> els)
+    {
+        foreach(Element el in els)
+            OnCheckedMatch(el);
+    }
+
 
     // Move all the pieces down if it is possible
     private void MoveDownPieces()
@@ -301,18 +312,30 @@ public class LevelController
             if (elementSelected.GetColorType() == 6)
             {
                 FireVerticalLineBooster(element.transform.position);
+                if (gridCreated)
+                {
+                    OnMoveDone();
+                }
                 return;
             }
 
             if (elementSelected.GetColorType() == 7)
             {
                 FireBombBooster(element.transform.position);
+                if (gridCreated)
+                {
+                    OnMoveDone();
+                }
                 return;
             }
 
             if (elementSelected.GetColorType() == 9)
             {
                 FireHorizontalLineBooster(element.transform.position);
+                if (gridCreated)
+                {
+                    OnMoveDone();
+                }
                 return;
             }
         }
@@ -416,6 +439,10 @@ public class LevelController
         if (gridLevel[row1,col1].GetColorType() == 8)
         {
             FireColorBombBooster(gridLevel[row1, col1], new Vector2(row2, col2));
+            if (gridCreated)
+            {
+                OnMoveDone();
+            }
             gridLevel[row1, col1] = null;
             MoveDownPieces();
             return;
@@ -424,6 +451,10 @@ public class LevelController
         if (gridLevel[row2, col2].GetColorType() == 8)
         {
             FireColorBombBooster(gridLevel[row1, col1], new Vector2(row1, col1));
+            if (gridCreated)
+            {
+                OnMoveDone();
+            }
             gridLevel[row2, col2] = null;
             MoveDownPieces();
             return;
