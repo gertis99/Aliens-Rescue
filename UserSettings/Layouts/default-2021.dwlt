@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 7}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,7 +43,7 @@ MonoBehaviour:
     x: 1442
     y: 0
     width: 1184
-    height: 927
+    height: 1058
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
 =======
@@ -84,6 +84,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
+<<<<<<< HEAD
   controlID: 56
 =======
     width: 2560
@@ -93,6 +94,9 @@ MonoBehaviour:
   vertical: 0
   controlID: 91
 >>>>>>> German
+=======
+  controlID: 17
+>>>>>>> Tom
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -113,6 +117,7 @@ MonoBehaviour:
     y: 0
     width: 814
     height: 1299
+<<<<<<< HEAD
 =======
     x: 1955
     y: 0
@@ -121,6 +126,10 @@ MonoBehaviour:
 >>>>>>> German
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
+=======
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> Tom
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -144,6 +153,7 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 649
     height: 927
   m_MinSize: {x: 200, y: 200}
@@ -154,6 +164,12 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
 >>>>>>> German
+=======
+    width: 463
+    height: 1058
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> Tom
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -176,6 +192,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 927
     width: 2626
     height: 372
@@ -184,6 +201,11 @@ MonoBehaviour:
     width: 1955
     height: 317
 >>>>>>> German
+=======
+    y: 1058
+    width: 2626
+    height: 241
+>>>>>>> Tom
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 13}
@@ -302,6 +324,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
+<<<<<<< HEAD
   controlID: 2219
 =======
     width: 1955
@@ -311,6 +334,9 @@ MonoBehaviour:
   vertical: 1
   controlID: 109
 >>>>>>> German
+=======
+  controlID: 96
+>>>>>>> Tom
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -333,10 +359,11 @@ MonoBehaviour:
     y: 0
 <<<<<<< HEAD
     width: 2626
-    height: 927
+    height: 1058
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
+<<<<<<< HEAD
   controlID: 2220
 =======
     width: 1955
@@ -346,6 +373,9 @@ MonoBehaviour:
   vertical: 0
   controlID: 110
 >>>>>>> German
+=======
+  controlID: 97
+>>>>>>> Tom
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -362,10 +392,14 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 649
+=======
+    x: 463
+>>>>>>> Tom
     y: 0
-    width: 793
-    height: 927
+    width: 979
+    height: 1058
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
 =======
@@ -403,6 +437,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 1000
     width: 2625
     height: 351
@@ -411,6 +446,11 @@ MonoBehaviour:
     width: 1954
     height: 296
 >>>>>>> German
+=======
+    y: 1131
+    width: 2625
+    height: 220
+>>>>>>> Tom
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -429,22 +469,31 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Sounds
 =======
     - Assets/Scripts/Controller
 >>>>>>> German
+=======
+    - Assets/Scenes
+>>>>>>> Tom
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - Assets/Sounds
+=======
+  - Assets/Scenes
+>>>>>>> Tom
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Alien Rescue\Aliens-Rescue
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: a05b0000
     m_LastClickedID: 23456
@@ -461,22 +510,28 @@ MonoBehaviour:
     m_LastClickedID: 21344
     m_ExpandedIDs: 000000005a5300005c5300005e530000605300006253000064530000
 >>>>>>> German
+=======
+    scrollPos: {x: 0, y: 60}
+    m_SelectedIDs: 9e550000
+    m_LastClickedID: 21918
+    m_ExpandedIDs: 000000008a55000000ca9a3b
+>>>>>>> Tom
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Scripts
+      m_OriginalName: Scripts
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 21920
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 6}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -489,10 +544,14 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000be540000
 =======
     m_ExpandedIDs: 000000005a5300005c5300005e530000605300006253000064530000
 >>>>>>> German
+=======
+    m_ExpandedIDs: 000000008a550000
+>>>>>>> Tom
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -520,7 +579,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_ExpandedInstanceIDs: c62300007e5b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
 <<<<<<< HEAD
@@ -628,12 +687,17 @@ MonoBehaviour:
     x: 0
     y: 73
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 648
     height: 906
 =======
     width: 482
     height: 609
 >>>>>>> German
+=======
+    width: 462
+    height: 1037
+>>>>>>> Tom
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -641,6 +705,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
       m_SelectedIDs: 48720000
       m_LastClickedID: 0
@@ -650,6 +715,11 @@ MonoBehaviour:
       m_LastClickedID: 0
       m_ExpandedIDs: 26fbffff
 >>>>>>> German
+=======
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: c4b6ffff7eb8ffff1cb9ffff30cbffff90ccfffffcd8ffff5cf7ffff14f8ffff30f9ffffeaf9ffff2cfbffffd4590000fc590000165a00002e5a0000545a0000785a0000aa5a0000c45a0000de5a0000e65a0000f85a0000045b0000185b0000205b0000de5d0000025e00004e5e0000705e0000825e000036610000ae620000ce620000e8620000f062000002630000166300003a630000546300005c6300006c6300007e63000098630000a0630000b2630000be630000d2630000da63000032660000926700002e6a0000
+>>>>>>> Tom
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -694,6 +764,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 649
     y: 73
     width: 791
@@ -704,6 +775,12 @@ MonoBehaviour:
     width: 594
     height: 609
 >>>>>>> German
+=======
+    x: 463
+    y: 73
+    width: 977
+    height: 1037
+>>>>>>> Tom
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -928,6 +1005,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 0, y: 0, z: 0}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0}
@@ -936,6 +1014,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 502.68152, y: 298.14847, z: 16.619658}
 >>>>>>> German
+=======
+    m_Target: {x: 353.4198, y: 758.8684, z: 5.659999}
+    speed: 2
+    m_Value: {x: 387.49725, y: 765.4586, z: 5.1096973}
+>>>>>>> Tom
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -987,6 +1070,7 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: 10
     speed: 2
     m_Value: 10
@@ -995,6 +1079,11 @@ MonoBehaviour:
     speed: 2
     m_Value: 527.25165
 >>>>>>> German
+=======
+    m_Target: 1167.8777
+    speed: 2
+    m_Value: 1222.9086
+>>>>>>> Tom
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1043,6 +1132,7 @@ MonoBehaviour:
     x: 1442
     y: 73
     width: 1182
+<<<<<<< HEAD
     height: 906
 =======
     x: 1079
@@ -1050,6 +1140,9 @@ MonoBehaviour:
     width: 874
     height: 609
 >>>>>>> German
+=======
+    height: 1037
+>>>>>>> Tom
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1061,10 +1154,14 @@ MonoBehaviour:
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_TargetSize: {x: 1182, y: 885}
 =======
   m_TargetSize: {x: 1080, y: 1920}
 >>>>>>> German
+=======
+  m_TargetSize: {x: 1080, y: 1920}
+>>>>>>> Tom
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1074,26 +1171,36 @@ MonoBehaviour:
   m_Gizmos: 0
   m_Stats: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 =======
   m_SelectedSizes: 0a000000000000000000000000000000000000000000000000000000000000000000000000000000
 >>>>>>> German
+=======
+  m_SelectedSizes: 07000000000000000000000000000000000000000000000000000000000000000000000000000000
+>>>>>>> Tom
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_HBaseRangeMin: -591
     m_HBaseRangeMax: 591
     m_VBaseRangeMin: -442.5
     m_VBaseRangeMax: 442.5
 =======
+=======
+>>>>>>> Tom
     m_HBaseRangeMin: -540
     m_HBaseRangeMax: 540
     m_VBaseRangeMin: -960
     m_VBaseRangeMax: 960
+<<<<<<< HEAD
 >>>>>>> German
+=======
+>>>>>>> Tom
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1102,7 +1209,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1113,6 +1220,7 @@ MonoBehaviour:
       y: 21
 <<<<<<< HEAD
       width: 1182
+<<<<<<< HEAD
       height: 885
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 591, y: 442.5}
@@ -1122,12 +1230,18 @@ MonoBehaviour:
     m_Scale: {x: 0.30625, y: 0.30625}
     m_Translation: {x: 437, y: 294}
 >>>>>>> German
+=======
+      height: 1016
+    m_Scale: {x: 0.52916664, y: 0.52916664}
+    m_Translation: {x: 591, y: 508}
+>>>>>>> Tom
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
       x: -591
       y: -442.5
@@ -1145,6 +1259,15 @@ MonoBehaviour:
   m_defaultScale: 0.30625
   m_LastWindowPixelSize: {x: 874, y: 609}
 >>>>>>> German
+=======
+      x: -1116.8505
+      y: -960.00006
+      width: 2233.701
+      height: 1920.0001
+    m_MinimalGUI: 1
+  m_defaultScale: 0.52916664
+  m_LastWindowPixelSize: {x: 1182, y: 1037}
+>>>>>>> Tom
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1171,6 +1294,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
 <<<<<<< HEAD
+<<<<<<< HEAD
     x: 2249
     y: 726.5
     width: 920
@@ -1181,6 +1305,12 @@ MonoBehaviour:
     width: 1954
     height: 296
 >>>>>>> German
+=======
+    x: 0
+    y: 1000
+    width: 2625
+    height: 351
+>>>>>>> Tom
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
