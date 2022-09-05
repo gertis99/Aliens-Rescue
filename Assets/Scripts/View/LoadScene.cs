@@ -64,8 +64,16 @@ public class LoadScene : MonoBehaviour
         { if (c != camera) { c.gameObject.SetActive(false); } }
         camera.gameObject.SetActive(true);
 
-        if (currentScene.isLoaded) { yield return SceneManager.UnloadSceneAsync(currentScene); }
-        yield return SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+        if (currentScene.isLoaded) {
+            AsyncOperation unloadOperation = SceneManager.UnloadSceneAsync(currentScene);
+            while (!unloadOperation.isDone)
+            { yield return null; }
+        }
+        {
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+            while (!loadOperation.isDone)
+            { yield return null; }
+        }
 
         while (SceneManager.sceneCount > 2)
         {

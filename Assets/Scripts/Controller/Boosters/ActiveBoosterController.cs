@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ActiveBoosterController
 {
-    public delegate void ActiveBooster(IBooster booster, Vector2 pos);
+    public delegate void ActiveBooster(ABooster booster, Vector2 pos);
     public static event ActiveBooster OnBoosterActived;
-    private IBooster actualBooster;
+    private ABooster actualBooster;
 
     public void ActiveBoosterLineVertical(Vector2 pos)
     {

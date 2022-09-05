@@ -82,7 +82,6 @@ public class GridView : MonoBehaviour
             }
             gridLevel[pos.x, pos.y] = gridLevel[el.GetPosX(), el.GetPosY()];
         }
-        
     }
 
     private void SwapCellsView(Element el1, Element el2)
