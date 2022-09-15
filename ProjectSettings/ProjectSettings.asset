@@ -732,7 +732,8 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Game Performance: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -746,11 +747,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 2b7410d4-0aeb-448f-989b-67f88a9b3b6b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Aliens Rescue!
+  organizationId: g-man-productions
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
