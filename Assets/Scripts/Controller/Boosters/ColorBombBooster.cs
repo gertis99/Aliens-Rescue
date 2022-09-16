@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ColorBombBooster : ABooster
 {
-    private int elementColor;
+    private AlienType alienType;
 
     public override bool CheckCondition(int nHorizontal, int nVertical)
     {
@@ -17,13 +17,13 @@ public class ColorBombBooster : ABooster
 
         List<Element> elements = new List<Element>();
 
-        elementColor = gridModel.GridLevel[(int)pos.x, (int)pos.y].GetColorType();
+        alienType = ((Alien)gridModel.GridLevel[(int)pos.x, (int)pos.y]).GetElementType();
 
         for(int i = 0; i < gridModel.GridLevel.GetLength(0); i++)
         {
             for(int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
-                if (gridModel.GridLevel[i, j].GetColorType() == elementColor)
+                if (((Alien)gridModel.GridLevel[i, j]).GetElementType() == alienType)
                 {
                     elements.Add(gridModel.GridLevel[i, j]);
                     LevelController.levelControllerInstance.DestroyCell(i, j, false);

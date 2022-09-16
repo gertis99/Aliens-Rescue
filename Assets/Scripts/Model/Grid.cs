@@ -29,11 +29,13 @@ public class Grid
 
     private void GenerateLevel()
     {
+        
+
         for (int i = 0; i < GridLevel.GetLength(0); i++)
         {
             for (int j = 0; j < GridLevel.GetLength(1); j++)
             {
-                GridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
+                GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
             }
         }
     }

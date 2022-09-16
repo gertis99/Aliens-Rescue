@@ -29,7 +29,7 @@ public class BoosterController
     private bool TryCreateVerticalBooster(int nHorizontal, int nVertical, int row, int col)
     {
         if (nVertical < 4) return false;
-        gridModel.GridLevel[row, col] = new Element(row, col, 6);
+        gridModel.GridLevel[row, col] = new Booster(row, col, BoosterType.VerticalLineBooster);
         levelController.CreateCell(gridModel.GridLevel[row, col]);
         return true;
     }
@@ -37,7 +37,7 @@ public class BoosterController
     private bool TryCreateHorizontalBooster(int nHorizontal, int nVertical, int row, int col)
     {
         if (nHorizontal < 4) return false;
-        gridModel.GridLevel[row, col] = new Element(row, col, 9);
+        gridModel.GridLevel[row, col] = new Booster(row, col, BoosterType.HorizontalLineBooster);
         levelController.CreateCell(gridModel.GridLevel[row, col]);
         return true;
     }
@@ -45,7 +45,7 @@ public class BoosterController
     private bool TryCreateBombBooster(int nHorizontal, int nVertical, int row, int col)
     {
         if (nHorizontal < 3 || nVertical < 3) return false;
-        gridModel.GridLevel[row, col] = new Element(row, col, 7);
+        gridModel.GridLevel[row, col] = new Booster(row, col, BoosterType.BombBooster);
         levelController.CreateCell(gridModel.GridLevel[row, col]);
         return true;
     }
@@ -53,7 +53,7 @@ public class BoosterController
     private bool TryCreateColorBombBooster(int nHorizontal, int nVertical, int row, int col)
     {
         if (nHorizontal < 5 && nVertical < 5) return false;
-        gridModel.GridLevel[row, col] = new Element(row, col, 8);
+        gridModel.GridLevel[row, col] = new Booster(row, col, BoosterType.ColorBombBooster);
         levelController.CreateCell(gridModel.GridLevel[row, col]);
         return true;
     }

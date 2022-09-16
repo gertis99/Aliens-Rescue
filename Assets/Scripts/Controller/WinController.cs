@@ -25,27 +25,19 @@ public class WinController : MonoBehaviour
         LevelController.OnCheckedMatch -= AddPoints;
     }
 
-    public void AddPoints(Element element)
+    public void AddPoints(Alien element)
     {
-        if(element.GetColorType() < colorPoints.Length)
-        {
-            colorPoints[element.GetColorType()]++;
-            OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
-            CheckWin();
-        }
-        
+        colorPoints[(int)element.GetElementType()]++;
+        OnPointsChanged(colorPoints[(int)element.GetElementType()], (int)element.GetElementType());
+        CheckWin();
     }
 
-    public void AddPoints(List<Element> elements)
+    public void AddPoints(List<Alien> elements)
     {
         for(int i = 0; i < elements.Count; i++)
         {
-            if (elements[i].GetColorType() < colorPoints.Length)
-            {
-                colorPoints[elements[i].GetColorType()]++;
-                OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
-            }
-                
+            colorPoints[(int)elements[i].GetElementType()]++;
+            OnPointsChanged(colorPoints[(int)elements[i].GetElementType()], (int)elements[i].GetElementType());
         }
 
         CheckWin();
