@@ -8,6 +8,7 @@ public class StoreInfo : MonoBehaviour
     private GameConfigService gameConfig;
     //private GameProgressionService _gameProgression;
     private AdsGameService adsService;
+    private AnalyticsGameService analytics;
 
     public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster;
 
@@ -19,6 +20,7 @@ public class StoreInfo : MonoBehaviour
         gameConfig = ServiceLocator.GetService<GameConfigService>();
         //gameProgression = ServiceLocator.GetService<GameProgressionService>();
         adsService = ServiceLocator.GetService<AdsGameService>();
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
     }
 
     // Start is called before the first frame update
@@ -48,6 +50,7 @@ public class StoreInfo : MonoBehaviour
             PlayerInfo.Coins -= priceHorizontalBooster;
             PlayerInfo.HorizontalBoosters++;
             UpdateInfo();
+            analytics.SendEvent("buyHorizontalLineBooster");
         }
     }
 
@@ -58,6 +61,7 @@ public class StoreInfo : MonoBehaviour
             PlayerInfo.Coins -= priceVerticalBooster;
             PlayerInfo.VerticalBoosters++;
             UpdateInfo();
+            analytics.SendEvent("buyVerticalLineBooster");
         }
     }
 
@@ -68,6 +72,7 @@ public class StoreInfo : MonoBehaviour
             PlayerInfo.Coins -= priceBombBooster;
             PlayerInfo.BombBoosters++;
             UpdateInfo();
+            analytics.SendEvent("buyBombBooster");
         }
     }
 
@@ -78,6 +83,7 @@ public class StoreInfo : MonoBehaviour
             PlayerInfo.Coins -= priceColorBombBooster;
             PlayerInfo.ColorBombBoosters++;
             UpdateInfo();
+            analytics.SendEvent("buyColorBombBooster");
         }
     }
 }
