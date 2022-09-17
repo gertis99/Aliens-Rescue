@@ -10,10 +10,10 @@ public class StoreInfo : MonoBehaviour
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
 
-    public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster;
+    public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster, coinsPerAd;
 
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
-    public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster;
+    public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
 
     private void Awake()
     {
@@ -26,6 +26,7 @@ public class StoreInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        textGoldPerAd.text = gameConfig.GoldPerAd.ToString();
         UpdateInfo();
     }
 
@@ -84,6 +85,15 @@ public class StoreInfo : MonoBehaviour
             PlayerInfo.ColorBombBoosters++;
             UpdateInfo();
             analytics.SendEvent("buyColorBombBooster");
+        }
+    }
+
+    public async void PlayAd()
+    {
+        if (await ServiceLocator.GetService<AdsGameService>().ShowAd())
+        {
+            PlayerInfo.Coins += gameConfig.GoldPerAd;
+            UpdateInfo();
         }
     }
 }

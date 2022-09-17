@@ -9,8 +9,11 @@ public class AdsGameService : IUnityAdsInitializationListener, IUnityAdsLoadList
     private string _adsGameId;
     private string _adUnitId;
 
-    public bool IsAdReady => Advertisement.IsReady(_adUnitId);
-    private Action<bool> _adWatched = null;
+    public bool IsAdReady => IsInitialized && Advertisement.IsReady(_adUnitId);
+    public bool IsInitialized => _initializationTaskStatus == TaskStatus.RanToCompletion;
+
+    private TaskStatus _initializationTaskStatus = TaskStatus.Created;
+    private TaskStatus _showTaskStatus           = TaskStatus.Created;
 
     public AdsGameService(string adsGameId, string adUnitId)
     {
@@ -18,23 +21,32 @@ public class AdsGameService : IUnityAdsInitializationListener, IUnityAdsLoadList
         _adUnitId = adUnitId;
     }
 
-    public void Initialize(bool testMode = false)
+    public async Task<bool> Initialize(bool testMode = false)
     {
+        _initializationTaskStatus = TaskStatus.Running;
         Advertisement.Initialize(_adsGameId, testMode, true, this);
+        while (_initializationTaskStatus == TaskStatus.Running)
+        {
+            await Task.Delay(500);
+        }
+
+        return IsInitialized;
     }
 
     public void OnInitializationComplete()
     {
         Debug.Log("Unity Ads initialization complete.");
         LoadAd();
+        _initializationTaskStatus = TaskStatus.RanToCompletion;
     }
 
     public void OnInitializationFailed(UnityAdsInitializationError error, string message)
     {
         Debug.Log($"Unity Ads Initialization Failed: {error.ToString()} - {message}");
+        _initializationTaskStatus = TaskStatus.Faulted;
     }
 
-    public void LoadAd()
+    private void LoadAd()
     {
         Debug.Log("Loading Ad: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
@@ -45,39 +57,52 @@ public class AdsGameService : IUnityAdsInitializationListener, IUnityAdsLoadList
         Debug.Log("Ad Loaded: " + adUnitId);
     }
 
-    public void ShowAd(Action<bool> onFinished)
-    {
-        _adWatched = onFinished;
-        Advertisement.Show(_adUnitId, this);
-#if UNITY_EDITOR
-        DelayedDebugWatch();
-#endif
-    }
-
-    private async void DelayedDebugWatch()
-    {
-        await Task.Delay(2000);
-        OnUnityAdsShowComplete(_adUnitId, UnityAdsShowCompletionState.COMPLETED);
-    }
-
-    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
-    {
-        Debug.Log("Unity Ads Rewarded Ad:" + showCompletionState.ToString());
-        Advertisement.Load(_adUnitId, this);
-        _adWatched?.Invoke(showCompletionState == UnityAdsShowCompletionState.COMPLETED);
-        _adWatched = null;
-    }
-
     public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
     {
         Debug.Log($"Error loading Ad Unit {adUnitId}: {error.ToString()} - {message}");
         Advertisement.Load(_adUnitId, this);
     }
 
+    public async Task<bool> ShowAd()
+    {
+        if (_showTaskStatus == TaskStatus.Running)
+            return false;
+
+        if (!IsInitialized)
+            return false;
+
+        if (!IsAdReady)
+            return false;
+
+        _showTaskStatus = TaskStatus.Running;
+
+        Advertisement.Show(_adUnitId, this);
+#if UNITY_EDITOR
+        await Task.Delay(2000);
+        OnUnityAdsShowComplete(_adUnitId, UnityAdsShowCompletionState.COMPLETED);
+#endif
+        while (_showTaskStatus == TaskStatus.Running)
+        {
+            await Task.Delay(500);
+        }
+
+        return _showTaskStatus == TaskStatus.RanToCompletion;
+    }
+
+    public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
+    {
+        Debug.Log("Unity Ads Rewarded Ad:" + showCompletionState);
+        Advertisement.Load(_adUnitId, this);
+        _showTaskStatus = showCompletionState == UnityAdsShowCompletionState.COMPLETED
+            ? TaskStatus.RanToCompletion
+            : TaskStatus.Faulted;
+    }
+
     public void OnUnityAdsShowFailure(string adUnitId, UnityAdsShowError error, string message)
     {
         Debug.Log($"Error showing Ad Unit {adUnitId}: {error.ToString()} - {message}");
         Advertisement.Load(_adUnitId, this);
+        _showTaskStatus = TaskStatus.Faulted;
     }
 
     public void OnUnityAdsShowStart(string adUnitId)

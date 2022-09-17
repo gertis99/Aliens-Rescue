@@ -28,37 +28,40 @@ public class LoadingSceneLogic : MonoBehaviour
     }
 
     private async Task LoadServices()
-        {
-            string environmentId = IsDevBuild ? "development" : "production";
+    {
+        string environmentId = IsDevBuild ? "development" : "production";
 
-            ServicesInitializer servicesInitializer = new ServicesInitializer(environmentId);
+        ServicesInitializer servicesInitializer = new ServicesInitializer(environmentId);
 
-            //create services
-            GameConfigService gameConfig = new GameConfigService();
-            //GameProgressionService gameProgression = new GameProgressionService();
+        //create services
+        GameConfigService gameConfig = new GameConfigService();
+        //GameProgressionService gameProgression = new GameProgressionService();
 
-            RemoteConfigGameService remoteConfig = new RemoteConfigGameService();
-            LoginGameService loginService = new LoginGameService();
-            AnalyticsGameService analyticsService = new AnalyticsGameService();
-            AdsGameService adsService = new AdsGameService("4928651", "Rewarded_Android");
+        RemoteConfigGameService remoteConfig = new RemoteConfigGameService();
+        LoginGameService loginService = new LoginGameService();
+        AnalyticsGameService analyticsService = new AnalyticsGameService();
+        AdsGameService adsService = new AdsGameService("4928651", "Rewarded_Android");
 
-            //register services
-            ServiceLocator.RegisterService(gameConfig);
-            //ServiceLocator.RegisterService(gameProgression);
-            ServiceLocator.RegisterService(remoteConfig);
-            ServiceLocator.RegisterService(loginService);
-            ServiceLocator.RegisterService(adsService);
-            ServiceLocator.RegisterService(analyticsService);
+        //register services
+        ServiceLocator.RegisterService(gameConfig);
+        //ServiceLocator.RegisterService(gameProgression);
+        ServiceLocator.RegisterService(remoteConfig);
+        ServiceLocator.RegisterService(loginService);
+        ServiceLocator.RegisterService(adsService);
+        ServiceLocator.RegisterService(analyticsService);
 
-            //initialize services
-            await servicesInitializer.Initialize();
-            await loginService.Initialize();
-            await remoteConfig.Initialize();
-            await analyticsService.Initialize();
-            gameConfig.Initialize(remoteConfig);
-            //gameProgression.Initialize(gameConfig);
-            adsService.Initialize(Application.isEditor);
+        //initialize services
+        await servicesInitializer.Initialize();
+        await loginService.Initialize();
+        await remoteConfig.Initialize();
+        await analyticsService.Initialize();
+        bool adsInitialized = await adsService.Initialize(Application.isEditor);
+            
+        Debug.Log("AdsInitialized: " + adsInitialized);
 
-            //SceneManager.LoadScene(1);
-        }
+        gameConfig.Initialize(remoteConfig);
+        //gameProgression.Initialize(gameConfig);
+
+        //SceneManager.LoadScene(1);
     }
+}
