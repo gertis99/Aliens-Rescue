@@ -5,10 +5,21 @@ using TMPro;
 
 public class StoreInfo : MonoBehaviour
 {
+    private GameConfigService gameConfig;
+    //private GameProgressionService _gameProgression;
+    private AdsGameService adsService;
+
     public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster;
 
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
     public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster;
+
+    private void Awake()
+    {
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+        //gameProgression = ServiceLocator.GetService<GameProgressionService>();
+        adsService = ServiceLocator.GetService<AdsGameService>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -24,10 +35,10 @@ public class StoreInfo : MonoBehaviour
         colorBombBoosters.text = PlayerInfo.ColorBombBoosters.ToString();
         coins.text = PlayerInfo.Coins.ToString();
 
-        textPriceHorizontalBooster.text = priceHorizontalBooster.ToString();
-        textPriceVerticalBooster.text = priceVerticalBooster.ToString();
-        textPriceBombBooster.text = priceBombBooster.ToString();
-        textPriceColorBombBooster.text = priceColorBombBooster.ToString();
+        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
+        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
+        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
+        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
     }
 
     public void BuyHorizontalBooster()
