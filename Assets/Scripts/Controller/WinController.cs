@@ -15,8 +15,11 @@ public class WinController : MonoBehaviour
     public int level;   
     public int[] colorPoints = new int[6];
 
+    private GameProgressionService gameProgression;
+
     private void Awake()
     {
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
         LevelController.OnCheckedMatch += AddPoints;
     }
 
@@ -55,8 +58,8 @@ public class WinController : MonoBehaviour
                 coinsGained += colorPoints[i] - condition;
         }
         OnWinChecked();
-        if (PlayerInfo.ActualLevel == level)
-            PlayerInfo.ActualLevel++;
-        PlayerInfo.Coins += coinsGained;
+        if (gameProgression.CurrentLevel == level)
+            gameProgression.UpdateCurrentLevel(1);
+        gameProgression.UpdateGold(coinsGained);
     }
 }

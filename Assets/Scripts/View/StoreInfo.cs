@@ -6,7 +6,7 @@ using TMPro;
 public class StoreInfo : MonoBehaviour
 {
     private GameConfigService gameConfig;
-    //private GameProgressionService _gameProgression;
+    private GameProgressionService gameProgression;
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
 
@@ -18,7 +18,7 @@ public class StoreInfo : MonoBehaviour
     private void Awake()
     {
         gameConfig = ServiceLocator.GetService<GameConfigService>();
-        //gameProgression = ServiceLocator.GetService<GameProgressionService>();
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
         adsService = ServiceLocator.GetService<AdsGameService>();
         analytics = ServiceLocator.GetService<AnalyticsGameService>();
     }
@@ -32,11 +32,11 @@ public class StoreInfo : MonoBehaviour
 
     private void UpdateInfo()
     {
-        horizontalBoosters.text = PlayerInfo.HorizontalBoosters.ToString();
-        verticalBoosters.text = PlayerInfo.VerticalBoosters.ToString();
-        bombBoosters.text = PlayerInfo.BombBoosters.ToString();
-        colorBombBoosters.text = PlayerInfo.ColorBombBoosters.ToString();
-        coins.text = PlayerInfo.Coins.ToString();
+        horizontalBoosters.text = gameProgression.HorizontalLineBoosters.ToString();
+        verticalBoosters.text = gameProgression.VerticalLineBoosters.ToString();
+        bombBoosters.text = gameProgression.BombBoosters.ToString();
+        colorBombBoosters.text = gameProgression.ColorBombBoosters.ToString();
+        coins.text = gameProgression.Gold.ToString();
 
         textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
         textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
@@ -46,10 +46,10 @@ public class StoreInfo : MonoBehaviour
 
     public void BuyHorizontalBooster()
     {
-        if(PlayerInfo.Coins >= priceHorizontalBooster)
+        if(gameProgression.Gold >= gameConfig.PriceHorizontalLineBooster)
         {
-            PlayerInfo.Coins -= priceHorizontalBooster;
-            PlayerInfo.HorizontalBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceHorizontalLineBooster);
+            gameProgression.UpdateHorizontalLineBoosters(1);
             UpdateInfo();
             analytics.SendEvent("buyHorizontalLineBooster");
         }
@@ -57,10 +57,10 @@ public class StoreInfo : MonoBehaviour
 
     public void BuyVerticalBooster()
     {
-        if (PlayerInfo.Coins >= priceVerticalBooster)
+        if (gameProgression.Gold >= gameConfig.PriceVericalLineBooster)
         {
-            PlayerInfo.Coins -= priceVerticalBooster;
-            PlayerInfo.VerticalBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceVericalLineBooster);
+            gameProgression.UpdateVerticalLineBoosters(1);
             UpdateInfo();
             analytics.SendEvent("buyVerticalLineBooster");
         }
@@ -68,10 +68,10 @@ public class StoreInfo : MonoBehaviour
 
     public void BuyBombBooster()
     {
-        if (PlayerInfo.Coins >= priceBombBooster)
+        if (gameProgression.Gold >= gameConfig.PriceBombBooster)
         {
-            PlayerInfo.Coins -= priceBombBooster;
-            PlayerInfo.BombBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceBombBooster);
+            gameProgression.UpdateBombBoosters(1);
             UpdateInfo();
             analytics.SendEvent("buyBombBooster");
         }
@@ -79,10 +79,10 @@ public class StoreInfo : MonoBehaviour
 
     public void BuyColorBombBooster()
     {
-        if (PlayerInfo.Coins >= priceColorBombBooster)
+        if (gameProgression.Gold >= gameConfig.PriceColorBombBooster)
         {
-            PlayerInfo.Coins -= priceColorBombBooster;
-            PlayerInfo.ColorBombBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceColorBombBooster);
+            gameProgression.UpdateColorBombBoosters(1);
             UpdateInfo();
             analytics.SendEvent("buyColorBombBooster");
         }
@@ -92,7 +92,7 @@ public class StoreInfo : MonoBehaviour
     {
         if (await ServiceLocator.GetService<AdsGameService>().ShowAd())
         {
-            PlayerInfo.Coins += gameConfig.GoldPerAd;
+            gameProgression.UpdateGold(gameConfig.GoldPerAd);
             UpdateInfo();
         }
     }

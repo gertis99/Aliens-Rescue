@@ -6,6 +6,7 @@ public class LoadingSceneLogic : MonoBehaviour
 {
     [SerializeField]
     private bool IsDevBuild = true;
+    public LoadScene loadScene;
 
     private TaskCompletionSource<bool> _cancellationTaskSource;
 
@@ -35,7 +36,7 @@ public class LoadingSceneLogic : MonoBehaviour
 
         //create services
         GameConfigService gameConfig = new GameConfigService();
-        //GameProgressionService gameProgression = new GameProgressionService();
+        GameProgressionService gameProgression = new GameProgressionService();
 
         RemoteConfigGameService remoteConfig = new RemoteConfigGameService();
         LoginGameService loginService = new LoginGameService();
@@ -44,7 +45,7 @@ public class LoadingSceneLogic : MonoBehaviour
 
         //register services
         ServiceLocator.RegisterService(gameConfig);
-        //ServiceLocator.RegisterService(gameProgression);
+        ServiceLocator.RegisterService(gameProgression);
         ServiceLocator.RegisterService(remoteConfig);
         ServiceLocator.RegisterService(loginService);
         ServiceLocator.RegisterService(adsService);
@@ -55,13 +56,14 @@ public class LoadingSceneLogic : MonoBehaviour
         await loginService.Initialize();
         await remoteConfig.Initialize();
         await analyticsService.Initialize();
+
+        gameConfig.Initialize(remoteConfig);
+        gameProgression.Initialize(gameConfig);
+
         bool adsInitialized = await adsService.Initialize(Application.isEditor);
             
         Debug.Log("AdsInitialized: " + adsInitialized);
 
-        gameConfig.Initialize(remoteConfig);
-        //gameProgression.Initialize(gameConfig);
-
-        //SceneManager.LoadScene(1);
+        loadScene.LoadThisScene(1);
     }
 }

@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
     
-//[System.Serializable]
-/* public class GameProgressionService : IService
+[System.Serializable]
+public class GameProgressionService : IService
 {
-    [SerializeField]
-    private int _gold;
-    public int Gold => _gold;
-
-    public int Gems;
-    public int BoosterAmount;
+    public int Gold;
     public int CurrentLevel;
+    public int HorizontalLineBoosters;
+    public int VerticalLineBoosters;
+    public int BombBoosters;
+    public int ColorBombBoosters;
 
-    public event Action OnInventoryChanged;
+    //public event Action OnInventoryChanged;
 
     private AnalyticsGameService _analytics;
 
@@ -26,49 +25,65 @@ using UnityEngine;
 
     public void UpdateGold(int amount)
     {
-        _gold += amount;
-        OnInventoryChanged?.Invoke();
+        Gold += amount;
         Save();
-        if (amount > 0)
-            _analytics.SendEvent("receive_gold", new Dictionary<string, object>
-            {
-                ["amount"] = amount
-            });
     }
 
-    public void UpdateGems(int amount)
+    public void UpdateHorizontalLineBoosters(int amount)
     {
-        Gems += amount;
-        OnInventoryChanged?.Invoke();
+        HorizontalLineBoosters += amount;
+        //OnInventoryChanged?.Invoke();
         Save();
     }
 
-    public void UpdateBooster(int amount)
+    public void UpdateVerticalLineBoosters(int amount)
     {
-        BoosterAmount += amount;
-        OnInventoryChanged?.Invoke();
+        VerticalLineBoosters += amount;
         Save();
     }
 
-//save and load
+    public void UpdateBombBoosters(int amount)
+    {
+        BombBoosters += amount;
+        Save();
+    }
+
+    public void UpdateColorBombBoosters(int amount)
+    {
+        ColorBombBoosters += amount;
+        Save();
+    }
+
+    public void UpdateCurrentLevel(int amount)
+    {
+        CurrentLevel += amount;
+        Save();
+    }
+
+    //save and load
     private static string kSavePath = "/gameProgression.json";
 
     public void Save()
     {
-        System.IO.File.WriteAllText(Application.persistentDataPath + kSavePath, JsonUtility.ToJson(this));
+        System.IO.File.WriteAllText(Application.dataPath + kSavePath, JsonUtility.ToJson(this));
     }
 
-    private void Load(GameConfigService config)
+    public void Load(GameConfigService config)
     {
-        if (System.IO.File.Exists(Application.persistentDataPath + kSavePath))
+        if (System.IO.File.Exists(Application.dataPath + kSavePath))
         {
-            JsonUtility.FromJsonOverwrite(System.IO.File.ReadAllText(Application.persistentDataPath + kSavePath),
+            JsonUtility.FromJsonOverwrite(System.IO.File.ReadAllText(Application.dataPath + kSavePath),
                 this);
             return;
         }
 
-        _gold = config.InitialGold;
-        Gems = config.InitialGems;
+        Gold = config.InitialGold;
+        HorizontalLineBoosters = config.InitialHorizontalLineBooster;
+        VerticalLineBoosters = config.InitialVerticalLineBooster;
+        BombBoosters = config.InitialBombBooster;
+        ColorBombBoosters = config.InitialColorBombBooster;
+        CurrentLevel = 1;
+
         Save();
     }
 //end of save and load
@@ -76,4 +91,4 @@ using UnityEngine;
     public void Clear()
     {
     }
-}*/
+}

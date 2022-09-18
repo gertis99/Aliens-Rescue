@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "16a0b293",
         "name": "com.GManGames.AliensRescue",
-        "processId": 7578,
+        "processId": 8635,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -12,6 +12,18 @@
             "deviceId": "16a0b293",
             "name": "com.GManGames.AliensRescue",
             "processId": 7578,
+            "exited": true
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.android.settings",
+            "processId": 1976,
+            "exited": false
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.GManGames.AliensRescue",
+            "processId": 8635,
             "exited": false
         }
     ],
