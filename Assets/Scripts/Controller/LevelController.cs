@@ -18,7 +18,7 @@ public class LevelController
     private BoosterController boosterController;
 
     public delegate void SwapDone(Element[,] grid);
-    public delegate void CheckedMatch(Element element);
+    public delegate void CheckedMatch(Alien element);
     public delegate void MoveDone();
     public static event SwapDone OnSwapDone = Grid => { };
     public static event CheckedMatch OnCheckedMatch;
@@ -60,13 +60,13 @@ public class LevelController
 
     public void AddPoints(Element el)
     {
-        OnCheckedMatch(el);
+        OnCheckedMatch(el as Alien);
     }
 
     public void AddPoints(List<Element> els)
     {
         foreach (Element el in els)
-            OnCheckedMatch(el);
+            OnCheckedMatch(el as Alien);
     }
 
 
@@ -114,7 +114,7 @@ public class LevelController
             {
                 if (gridModel.GridLevel[x, y] == null)
                 {
-                    gridModel.GridLevel[x, y] = new Element(x, y, UnityEngine.Random.Range(0, colorTypes));
+                    gridModel.GridLevel[x, y] = new Alien(x, y, (AlienType)UnityEngine.Random.Range(0, colorTypes));
                     if (gridCreated)
                     {
                         OnCellCreated(gridModel.GridLevel[x, y]);
@@ -135,48 +135,52 @@ public class LevelController
     {
         if (gridModel.GridLevel[row, col] != null)
         {
-            if (gridModel.GridLevel[row, col].GetColorType() == 6)
+            if(gridModel.GridLevel[row, col] is Booster)
             {
-                if (gridCreated)
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.VerticalLineBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    boosterController.FireVerticalLineBooster(new Vector2(row, col), moveBooster);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
+
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.HorizontalLineBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    boosterController.FireHorizontalLineBooster(new Vector2(row, col), moveBooster);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
+
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.BombBooster)
+                {
                     OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireVerticalLineBooster(new Vector2(row, col), moveBooster);
-                gridModel.GridLevel[row, col] = null;
-                return;
+                    boosterController.FireBombBooster(new Vector2(row, col), moveBooster);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
+
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.ColorBombBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    if (gridModel.IsOnGrid(row + 1, col))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row + 1, col), moveBooster);
+                    else if (gridModel.IsOnGrid(row, col + 1))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col + 1), moveBooster);
+                    else if (gridModel.IsOnGrid(row, col - 1))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col - 1), moveBooster);
+                    else if (gridModel.IsOnGrid(row - 1, col))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row - 1, col), moveBooster);
+
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
             }
 
-            if (gridModel.GridLevel[row, col].GetColorType() == 7)
-            {
-                OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireBombBooster(new Vector2(row, col), moveBooster);
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
-
-            if (gridModel.GridLevel[row, col].GetColorType() == 8)
-            {
-                if (gridCreated)
-                    OnCellDestroyed(gridModel.GridLevel[row, col]);
-                if (gridModel.IsOnGrid(row + 1, col))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row + 1, col), moveBooster);
-                else if (gridModel.IsOnGrid(row, col + 1))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col + 1), moveBooster);
-                else if (gridModel.IsOnGrid(row, col - 1))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col - 1), moveBooster);
-                else if (gridModel.IsOnGrid(row - 1, col))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row - 1, col), moveBooster);
-
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
-
-            if (gridModel.GridLevel[row, col].GetColorType() == 9)
-            {
-                if (gridCreated)
-                    OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireHorizontalLineBooster(new Vector2(row, col), moveBooster);
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
             if (gridCreated)
                 OnCellDestroyed(gridModel.GridLevel[row, col]);
             gridModel.GridLevel[row, col] = null;
@@ -187,48 +191,52 @@ public class LevelController
     {
         if (gridModel.GridLevel[row, col] != null)
         {
-            if (gridModel.GridLevel[row, col].GetColorType() == 6)
+            if(gridModel.GridLevel[row, col] is Booster)
             {
-                if (gridCreated)
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.VerticalLineBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    boosterController.FireVerticalLineBooster(new Vector2(row, col), true);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
+
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.HorizontalLineBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    boosterController.FireHorizontalLineBooster(new Vector2(row, col), true);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
+
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.BombBooster)
+                {
                     OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireVerticalLineBooster(new Vector2(row, col), true);
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
+                    boosterController.FireBombBooster(new Vector2(row, col), true);
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
 
-            if (gridModel.GridLevel[row, col].GetColorType() == 7)
-            {
-                OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireBombBooster(new Vector2(row, col), true);
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
+                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.ColorBombBooster)
+                {
+                    if (gridCreated)
+                        OnCellDestroyed(gridModel.GridLevel[row, col]);
+                    if (gridModel.IsOnGrid(row + 1, col))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row + 1, col), true);
+                    else if (gridModel.IsOnGrid(row, col + 1))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col + 1), true);
+                    else if (gridModel.IsOnGrid(row, col - 1))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col - 1), true);
+                    else if (gridModel.IsOnGrid(row - 1, col))
+                        boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row - 1, col), true);
 
-            if (gridModel.GridLevel[row, col].GetColorType() == 8)
-            {
-                if (gridCreated)
-                    OnCellDestroyed(gridModel.GridLevel[row, col]);
-                if (gridModel.IsOnGrid(row + 1, col))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row + 1, col), true);
-                else if (gridModel.IsOnGrid(row, col + 1))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col + 1), true);
-                else if (gridModel.IsOnGrid(row, col - 1))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row, col - 1), true);
-                else if (gridModel.IsOnGrid(row - 1, col))
-                    boosterController.FireColorBombBooster(gridModel.GridLevel[row, col], new Vector2(row - 1, col), true);
-
-                gridModel.GridLevel[row, col] = null;
-                return;
+                    gridModel.GridLevel[row, col] = null;
+                    return;
+                }
             }
-
-            if (gridModel.GridLevel[row, col].GetColorType() == 9)
-            {
-                if (gridCreated)
-                    OnCellDestroyed(gridModel.GridLevel[row, col]);
-                boosterController.FireHorizontalLineBooster(new Vector2(row, col), true);
-                gridModel.GridLevel[row, col] = null;
-                return;
-            }
+            
             if (gridCreated)
                 OnCellDestroyed(gridModel.GridLevel[row, col]);
             gridModel.GridLevel[row, col] = null;
@@ -245,9 +253,9 @@ public class LevelController
         {
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
-                while (gridModel.GridLevel[i, j] != null && IsAMatch(gridModel.GridLevel[i, j], i, j))
+                while (gridModel.GridLevel[i, j] != null && gridModel.GridLevel[i, j] is Alien && IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j))
                 {
-                    CheckMatch(gridModel.GridLevel[i, j], i, j);
+                    CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j);
                     existMatch = true;
                 }
             }
@@ -277,8 +285,8 @@ public class LevelController
         {
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
-                if (gridModel.GridLevel[i, j].GetColorType() < colorTypes - 1)
-                    gridModel.GridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
+                if (gridModel.GridLevel[i, j]is Alien)
+                    gridModel.GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
             }
         }
 
@@ -293,9 +301,9 @@ public class LevelController
         else
             return;
 
-        if (elementSelected != null)
+        if (elementSelected != null && elementSelected is Booster)
         {
-            if (elementSelected.GetColorType() == 6)
+            if (((Booster)elementSelected).GetElementType() == BoosterType.VerticalLineBooster)
             {
                 boosterController.FireVerticalLineBooster(element.transform.position, true);
                 if (gridCreated)
@@ -305,7 +313,7 @@ public class LevelController
                 return;
             }
 
-            if (elementSelected.GetColorType() == 7)
+            if (((Booster)elementSelected).GetElementType() == BoosterType.BombBooster)
             {
                 boosterController.FireBombBooster(element.transform.position, true);
                 if (gridCreated)
@@ -315,7 +323,7 @@ public class LevelController
                 return;
             }
 
-            if (elementSelected.GetColorType() == 9)
+            if (((Booster)elementSelected).GetElementType() == BoosterType.HorizontalLineBooster)
             {
                 boosterController.FireHorizontalLineBooster(element.transform.position, true);
                 if (gridCreated)
@@ -335,30 +343,30 @@ public class LevelController
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
                 // Check if it is a booster
-                if (gridModel.GridLevel[i, j].GetColorType() > 5)
+                if (gridModel.GridLevel[i, j] is Booster)
                     return true;
 
                 if (gridModel.IsOnGrid(i + 1, j))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j], i + 1, j))
+                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i + 1, j))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i - 1, j))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j], i - 1, j))
+                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i - 1, j))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i, j + 1))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j], i, j + 1))
+                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j + 1))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i, j - 1))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j], i, j - 1))
+                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j - 1))
                         return true;
                 }
             }
@@ -422,32 +430,32 @@ public class LevelController
     // Swap the elements
     public void SwapPositions(int row1, int col1, int row2, int col2)
     {
-        if (gridModel.GridLevel[row1, col1].GetColorType() == 8)
+        if(gridModel.GridLevel[row1, col1] is Booster)
         {
-            boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row2, col2), true);
-            if (gridCreated)
+            if (((Booster)gridModel.GridLevel[row1, col1]).GetElementType() == BoosterType.ColorBombBooster)
             {
-                OnMoveDone();
+                boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row2, col2), true);
+                if (gridCreated)
+                {
+                    OnMoveDone();
+                }
+                gridModel.GridLevel[row1, col1] = null;
+                MoveDownPieces();
+                return;
             }
-            gridModel.GridLevel[row1, col1] = null;
-            MoveDownPieces();
-            return;
-        }
 
-        if (gridModel.GridLevel[row2, col2].GetColorType() == 8)
-        {
-            boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row1, col1), true);
-            if (gridCreated)
+            if (((Booster)gridModel.GridLevel[row2, col2]).GetElementType() == BoosterType.ColorBombBooster)
             {
-                OnMoveDone();
+                boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row1, col1), true);
+                if (gridCreated)
+                {
+                    OnMoveDone();
+                }
+                gridModel.GridLevel[row2, col2] = null;
+                MoveDownPieces();
+                return;
             }
-            gridModel.GridLevel[row2, col2] = null;
-            MoveDownPieces();
-            return;
-        }
-
-
-        if (IsAMatch(gridModel.GridLevel[row1, col1], row2, col2) || IsAMatch(gridModel.GridLevel[row2, col2], row1, col1))
+        }else if (IsAMatch(gridModel.GridLevel[row1, col1] as Alien, row2, col2) || IsAMatch(gridModel.GridLevel[row2, col2] as Alien, row1, col1))
         {
             OnCellsSwapped(gridModel.GridLevel[row1, col1], gridModel.GridLevel[row2, col2]);
 
@@ -458,8 +466,8 @@ public class LevelController
             gridModel.GridLevel[row1, col1].SetPos(row1, col1);
             gridModel.GridLevel[row2, col2].SetPos(row2, col2);
 
-            CheckMatch(gridModel.GridLevel[row1, col1], row1, col1);
-            CheckMatch(gridModel.GridLevel[row2, col2], row2, col2);
+            CheckMatch(gridModel.GridLevel[row1, col1] as Alien, row1, col1);
+            CheckMatch(gridModel.GridLevel[row2, col2] as Alien, row2, col2);
             MoveDownPieces();
             if (gridCreated)
             {
@@ -470,20 +478,23 @@ public class LevelController
     }
 
     // Check if there is a match with the element in the position row col
-    public bool IsAMatch(Element element, int row, int col)
+    public bool IsAMatch(Alien element, int row, int col)
     {
+        if (element == null || element is not Alien)
+            return false;
+
         bool res = false;
 
         bool sameColor = true;
         int pos = 1, nSameColor = 1;
-        int elementColor = element.GetColorType();
+        AlienType elementColor = element.GetElementType();
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX())
             {
-                if (elementColor == gridModel.GridLevel[row - pos, col].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
                 {
                     pos++;
                     nSameColor++;
@@ -510,7 +521,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX())
             {
-                if (elementColor == gridModel.GridLevel[row + pos, col].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
                 {
                     pos++;
                     nSameColor++;
@@ -538,7 +549,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY())
             {
-                if (elementColor == gridModel.GridLevel[row, col - pos].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
                 {
                     pos++;
                     nSameColor++;
@@ -564,7 +575,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY())
             {
-                if (elementColor == gridModel.GridLevel[row, col + pos].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
                 {
                     pos++;
                     nSameColor++;
@@ -604,7 +615,7 @@ public class LevelController
     //};
 
     // Check the match of the element given and make it
-    private bool CheckMatch(Element element, int row, int col)
+    private bool CheckMatch(Alien element, int row, int col)
     {
         bool res = false;
 
@@ -616,14 +627,14 @@ public class LevelController
 
         bool sameColor = true;
         int pos = 1;
-        int elementColor = element.GetColorType();
+        AlienType elementColor = element.GetElementType();
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col))
             {
-                if (elementColor == gridModel.GridLevel[row - pos, col].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row - pos, col]);
                     pos++;
@@ -647,7 +658,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col))
             {
-                if (elementColor == gridModel.GridLevel[row + pos, col].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row + pos, col]);
                     pos++;
@@ -671,7 +682,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos))
             {
-                if (elementColor == gridModel.GridLevel[row, col - pos].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col - pos]);
                     pos++;
@@ -694,7 +705,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos))
             {
-                if (elementColor == gridModel.GridLevel[row, col + pos].GetColorType())
+                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col + pos]);
                     pos++;
@@ -716,7 +727,7 @@ public class LevelController
             {
                 if (gridCreated)
                 {
-                    OnCheckedMatch(sameColorHorizontal[i]);
+                    OnCheckedMatch(sameColorHorizontal[i] as Alien);
                 }
                 DestroyCell((int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY());
             }
@@ -725,7 +736,7 @@ public class LevelController
             {
                 if (gridCreated)
                 {
-                    OnCheckedMatch(sameColorVertical[i]);
+                    OnCheckedMatch(sameColorVertical[i] as Alien);
                 }
                 DestroyCell((int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY());
             }
@@ -739,7 +750,7 @@ public class LevelController
             {
                 if (gridCreated)
                 {
-                    OnCheckedMatch(sameColorHorizontal[i]);
+                    OnCheckedMatch(sameColorHorizontal[i] as Alien);
                 }
                 DestroyCell((int)sameColorHorizontal[i].GetPosX(), (int)sameColorHorizontal[i].GetPosY());
             }
@@ -753,7 +764,7 @@ public class LevelController
             {
                 if (gridCreated)
                 {
-                    OnCheckedMatch(sameColorVertical[i]);
+                    OnCheckedMatch(sameColorVertical[i] as Alien);
                 }
                 DestroyCell((int)sameColorVertical[i].GetPosX(), (int)sameColorVertical[i].GetPosY());
             }

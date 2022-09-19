@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class MainMenuInfo : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI actualLevel;
+    public TMPro.TextMeshProUGUI currentLevel;
+    private GameProgressionService gameProgression;
+
+    private void Awake()
+    {
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        actualLevel.text = PlayerInfo.ActualLevel.ToString();
+        currentLevel.text = gameProgression.CurrentLevel.ToString();
     }
 
     // Update is called once per frame

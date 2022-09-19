@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PointsView : MonoBehaviour
 {
-    public Text[] pointsText = new Text[6];
-    public Text win, lose, movementsText;
+    public TMPro.TextMeshProUGUI[] pointsText = new TMPro.TextMeshProUGUI[6];
+    public TMPro.TextMeshProUGUI win, lose, movementsText;
     public int winCondition = 20, movements = 15, maxMovements = 15;
 
     private void Start()
