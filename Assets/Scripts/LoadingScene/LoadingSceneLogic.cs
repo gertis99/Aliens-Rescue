@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,6 +43,7 @@ public class LoadingSceneLogic : MonoBehaviour
         LoginGameService loginService = new LoginGameService();
         AnalyticsGameService analyticsService = new AnalyticsGameService();
         AdsGameService adsService = new AdsGameService("4928651", "Rewarded_Android");
+        UnityIAPGameService iapService = new UnityIAPGameService();
 
         //register services
         ServiceLocator.RegisterService(gameConfig);
@@ -50,12 +52,17 @@ public class LoadingSceneLogic : MonoBehaviour
         ServiceLocator.RegisterService(loginService);
         ServiceLocator.RegisterService(adsService);
         ServiceLocator.RegisterService(analyticsService);
+        ServiceLocator.RegisterService<IIAPGameService>(iapService);
 
         //initialize services
         await servicesInitializer.Initialize();
         await loginService.Initialize();
         await remoteConfig.Initialize();
         await analyticsService.Initialize();
+        await iapService.Initialize(new Dictionary<string, string>
+        {
+            ["test123"] = "test"
+        });
 
         gameConfig.Initialize(remoteConfig);
         gameProgression.Initialize(gameConfig);

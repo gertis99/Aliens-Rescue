@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class StoreInfo : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class StoreInfo : MonoBehaviour
     private GameProgressionService gameProgression;
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
+    private IIAPGameService _iapService;
+
+    public Button _buyAdGemsButton;
+    [SerializeField]
+    private TMP_Text _iapGemsCostText = null;
 
     public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster, coinsPerAd;
 
@@ -21,6 +27,7 @@ public class StoreInfo : MonoBehaviour
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
         adsService = ServiceLocator.GetService<AdsGameService>();
         analytics = ServiceLocator.GetService<AnalyticsGameService>();
+        _iapService = ServiceLocator.GetService<IIAPGameService>();
     }
 
     // Start is called before the first frame update

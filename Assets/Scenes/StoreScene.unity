@@ -4205,7 +4205,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.09900001, y: 0.45967868}
   m_AnchorMax: {x: 0.91542876, y: 0.768}
-  m_AnchoredPosition: {x: -0.00000071525574, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.0000014305115, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1578762068
@@ -5115,6 +5115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb1f9ad0abbf9242ab143b3ada58323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buyAdGemsButton: {fileID: 0}
+  _iapGemsCostText: {fileID: 0}
   priceHorizontalBooster: 15
   priceVerticalBooster: 15
   priceBombBooster: 25

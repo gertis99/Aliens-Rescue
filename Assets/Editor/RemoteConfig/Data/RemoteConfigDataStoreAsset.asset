@@ -12,60 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e50f8b31-c2da-4fe4-a2c4-dd593f137188\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d247d316-8891-4c5a-b763-d004e4c28648\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialGold\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 200\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f5dfa19-461c-44fb-ab77-851f923dc413\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ea3dbbd2-d323-46f1-bbeb-56600b7ea421\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d596693c-46d0-4f2a-90af-7e5861c41e2d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"586722e2-2938-4e57-bb46-4df31f75378c\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialVerticalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"10e94370-cd3a-496c-80dc-3d948eef5a8b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8157ed7f-8066-4e33-a4da-9302c502ae02\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialBombBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c20d788b-d9ec-4106-86dd-6993565cef6e\"\r\n   
+    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"899c8ff0-1d8e-4778-a9aa-8d611df0d1a9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialColorBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"fcaebffa-5d39-4310-9dcf-496934b16316\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"cd885d78-30b3-41de-91bb-e02aa869829e\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"PriceHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0584dd97-04b2-4c8b-9877-90f2e473b6b7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"f6d3072b-d2b4-42a4-991c-d0e1650230a1\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PriceVericalLineBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ce7b9597-8a56-4106-a0a4-4dee0167afef\"\r\n   
+    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2c0b3123-ea5b-4638-9d7a-73eb24e8770b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 20\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"4a097b3f-2d2f-4830-af78-78a5dd6f9741\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"4600c192-f410-4b16-9ecf-9ca4aa9fe16e\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PriceColorBombBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 40\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"5b2cac9d-902f-4e51-a8ef-3010ff300097\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"2231b4ce-8aee-4fb8-8bc6-a77f177ee5bc\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"GoldPerAd\",\r\n      \"type\": \"int\",\r\n      \"value\": 50\r\n   
     }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"e50f8b31-c2da-4fe4-a2c4-dd593f137188\"\r\n   
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"d247d316-8891-4c5a-b763-d004e4c28648\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialGold\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 200\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"3f5dfa19-461c-44fb-ab77-851f923dc413\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"ea3dbbd2-d323-46f1-bbeb-56600b7ea421\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d596693c-46d0-4f2a-90af-7e5861c41e2d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"586722e2-2938-4e57-bb46-4df31f75378c\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialVerticalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"10e94370-cd3a-496c-80dc-3d948eef5a8b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8157ed7f-8066-4e33-a4da-9302c502ae02\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialBombBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c20d788b-d9ec-4106-86dd-6993565cef6e\"\r\n   
+    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"899c8ff0-1d8e-4778-a9aa-8d611df0d1a9\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialColorBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"fcaebffa-5d39-4310-9dcf-496934b16316\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"cd885d78-30b3-41de-91bb-e02aa869829e\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"PriceHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0584dd97-04b2-4c8b-9877-90f2e473b6b7\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"f6d3072b-d2b4-42a4-991c-d0e1650230a1\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PriceVericalLineBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ce7b9597-8a56-4106-a0a4-4dee0167afef\"\r\n   
+    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"2c0b3123-ea5b-4638-9d7a-73eb24e8770b\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 20\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"4a097b3f-2d2f-4830-af78-78a5dd6f9741\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"4600c192-f410-4b16-9ecf-9ca4aa9fe16e\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PriceColorBombBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 40\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"5b2cac9d-902f-4e51-a8ef-3010ff300097\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"2231b4ce-8aee-4fb8-8bc6-a77f177ee5bc\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"GoldPerAd\",\r\n      \"type\": \"int\",\r\n      \"value\": 50\r\n   
     }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"2b7410d4-0aeb-448f-989b-67f88a9b3b6b\",\r\n   
