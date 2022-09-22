@@ -10,7 +10,9 @@ public class GameConfigService : IService
     public int PriceVericalLineBooster { get; private set; }
     public int PriceBombBooster { get; private set; }
     public int PriceColorBombBooster { get; private set; }
+    public int PriceHUDColors { get; private set; }
     public int GoldPerAd { get; private set; }
+
 
     public void Initialize(RemoteConfigGameService dataProvider)
     {
@@ -23,6 +25,7 @@ public class GameConfigService : IService
         PriceVericalLineBooster = dataProvider.Get("PriceVericalLineBooster", 10);
         PriceBombBooster = dataProvider.Get("PriceBombBooster", 20);
         PriceColorBombBooster = dataProvider.Get("PriceColorBombBooster", 40);
+        PriceHUDColors = dataProvider.Get("PriceHUDColors", 10);
         GoldPerAd = dataProvider.Get("GoldPerAd", 50);
     }
 

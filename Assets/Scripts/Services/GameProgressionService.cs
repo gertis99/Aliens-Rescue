@@ -12,6 +12,7 @@ public class GameProgressionService : IService
     public int VerticalLineBoosters;
     public int BombBoosters;
     public int ColorBombBoosters;
+    public HUDColors currentHUDColor;
 
     //public event Action OnInventoryChanged;
 
@@ -60,6 +61,12 @@ public class GameProgressionService : IService
         Save();
     }
 
+    public void UpdateHUDColor(HUDColors color)
+    {
+        currentHUDColor = color;
+        Save();
+    }
+
     //save and load
     private static string kSavePath = "/gameProgression.json";
 
@@ -83,6 +90,7 @@ public class GameProgressionService : IService
         BombBoosters = config.InitialBombBooster;
         ColorBombBoosters = config.InitialColorBombBooster;
         CurrentLevel = 1;
+        currentHUDColor = HUDColors.ORANGE;
 
         Save();
     }

@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 29800156}
   - component: {fileID: 29800155}
   m_Layer: 5
-  m_Name: Image
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2427,6 +2427,12 @@ MonoBehaviour:
   verticalBooster: {fileID: 1661448206}
   bombBooster: {fileID: 772852667}
   colorBombBooster: {fileID: 932181892}
+  HUD: {fileID: 29800155}
+  huds:
+  - {fileID: 21300000, guid: 1d69f485bf8bab74083c568b53406497, type: 3}
+  - {fileID: 21300000, guid: a533f70d881103d45b0d634d71cfded5, type: 3}
+  - {fileID: 21300000, guid: 27420042fa9fec4488cb423996fb83c4, type: 3}
+  - {fileID: 21300000, guid: ebce1e0e023590243927b9e9a0f9049f, type: 3}
 --- !u!1 &1201163996
 GameObject:
   m_ObjectHideFlags: 0

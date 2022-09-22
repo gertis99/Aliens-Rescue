@@ -20,6 +20,7 @@ public class StoreInfo : MonoBehaviour
 
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
     public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
+    public TMPro.TextMeshProUGUI textPriceOrangeHudColor, textPriceBlueHudColor, textPriceGreenHudColor, textPricePurpleHudColor;
 
     private void Awake()
     {
@@ -34,6 +35,16 @@ public class StoreInfo : MonoBehaviour
     void Start()
     {
         textGoldPerAd.text = gameConfig.GoldPerAd.ToString();
+
+        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
+        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
+        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
+        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
+        textPriceOrangeHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPriceBlueHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPriceGreenHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPricePurpleHudColor.text = gameConfig.PriceHUDColors.ToString();
+
         UpdateInfo();
     }
 
@@ -44,11 +55,6 @@ public class StoreInfo : MonoBehaviour
         bombBoosters.text = gameProgression.BombBoosters.ToString();
         colorBombBoosters.text = gameProgression.ColorBombBoosters.ToString();
         coins.text = gameProgression.Gold.ToString();
-
-        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
-        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
-        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
-        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
     }
 
     public void BuyHorizontalBooster()
@@ -92,6 +98,38 @@ public class StoreInfo : MonoBehaviour
             gameProgression.UpdateColorBombBoosters(1);
             UpdateInfo();
             analytics.SendEvent("buyColorBombBooster");
+        }
+    }
+
+    public void BuyOrangeHUD()
+    {
+        if(gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.ORANGE);
+        }
+    }
+
+    public void BuyBlueHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.BLUE);
+        }
+    }
+
+    public void BuyGreenHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.GREEN);
+        }
+    }
+
+    public void BuyPurpleHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.PURPLE);
         }
     }
 
