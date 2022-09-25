@@ -7,7 +7,7 @@ public class LoseController : MonoBehaviour
 {
     public delegate void LoseChecked();
     public static event LoseChecked OnLoseChecked;
-    public int nMovements = 15;
+    public int nMovements;
 
     // Start is called before the first frame update
     void Start()

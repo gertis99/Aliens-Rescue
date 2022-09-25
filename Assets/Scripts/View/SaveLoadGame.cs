@@ -2,7 +2,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveLoadGame
+/*public static class SaveLoadGame
 {
     public static void SaveGame()
     {
@@ -43,7 +43,7 @@ public static class SaveLoadGame
             PlayerInfo.VerticalBoosters = 5;
             PlayerInfo.BombBoosters = 5;
             PlayerInfo.ColorBombBoosters = 5;
-            PlayerInfo.ActualLevel = 0;
+            PlayerInfo.ActualLevel = 1;
         }
     }
-}
+}*/

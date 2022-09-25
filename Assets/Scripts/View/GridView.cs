@@ -10,8 +10,8 @@ public class GridView : MonoBehaviour
 {
     public int width = 9, height = 9, colorTypes = 6;
 
-    public GameObject[] levelElemnts;
-    public GameObject[] baseElement;
+    public GameObject blueAlienPrefab, redAlienPrefab, yellowAlienPrefab, purpleAlienPrefab, greenAlienPrefab, orangeAlienPrefab;
+    public GameObject horizontalLineBoosterPrefab, verticalLineBoosterPrefab, bombPrefab, colorBombPrefab;
     public Sprite[] sprites;
     private GameObject[,] gridLevel;
     private LevelController levelController;
@@ -82,7 +82,6 @@ public class GridView : MonoBehaviour
             }
             gridLevel[pos.x, pos.y] = gridLevel[el.GetPosX(), el.GetPosY()];
         }
-        
     }
 
     private void SwapCellsView(Element el1, Element el2)
@@ -100,10 +99,12 @@ public class GridView : MonoBehaviour
 
     private void CreateCellView(Element el)
     {
-        if(el.GetColorType() < 6)
-            gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
+        if (el is Alien)
+            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), gridLevel.GetLength(1) + 10));
+        //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(alienElemnts[(int)((Alien)el).GetElementType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
         else
-            gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(levelElemnts[el.GetColorType()], new Vector2(el.GetPosX(), el.GetPosY()), Quaternion.identity, this.transform);
+            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), el.GetPosY()));
+            //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(boosterElemnts[(int)((Booster)el).GetElementType()], new Vector2(el.GetPosX(), el.GetPosY()), Quaternion.identity, this.transform);
 
         gridLevel[el.GetPosX(), el.GetPosY()].SetActive(false);
 
@@ -172,33 +173,7 @@ public class GridView : MonoBehaviour
         {
             elementSelected = null;
         }
-    }
-
-    /*private void UpdateLevel(Element[,] grid)
-    {
-        for (int i = 0; i < grid.GetLength(0); i++)
-        {
-            for (int j = 0; j < grid.GetLength(1); j++)
-            {
-                if(grid[i,j] == null)
-                {
-                    //gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
-                }
-                else
-                {
-                    /*if(grid[i, j].GetColorType() < 5)
-                        gridLevel[i, j].GetComponent<SpriteRenderer>().sprite = sprites[grid[i,j].GetColorType()];
-                    else
-                        gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);*/
-                    /*Destroy(gridLevel[i, j]);
-                    gridLevel[i, j] = Instantiate(levelElemnts[grid[i, j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
-                    gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), grid[i, j].GetColorType());
-                }
-            }
-        }
-    }*/
-
-    
+    }    
 
     private void CreateLevel(Element[,] grid)
     {
@@ -208,8 +183,55 @@ public class GridView : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
-                gridLevel[i,j] = Instantiate(levelElemnts[grid[i,j].GetColorType()], new Vector2(i, j), Quaternion.identity, this.transform);
-                gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), grid[i, j].GetColorType());
+                InstantiateElement(grid[i, j], i, j, new Vector2(i, j));
+                //gridLevel[i,j] = Instantiate(alienElemnts[(int)((Alien)grid[i,j]).GetElementType()], new Vector2(i, j), Quaternion.identity, this.transform);
+                gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), (int)((Alien)grid[i, j]).GetElementType());
+            }
+        }
+    }
+
+    private void InstantiateElement(Element element, int row, int col, Vector2 pos)
+    {
+        if(element is Alien)
+        {
+            switch (((Alien)element).GetElementType())
+            {
+                case AlienType.BlueAlien:
+                    gridLevel[row, col] = Instantiate(blueAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case AlienType.RedAlien:
+                    gridLevel[row, col] = Instantiate(redAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case AlienType.GreenAlien:
+                    gridLevel[row, col] = Instantiate(greenAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case AlienType.PurpleAlien:
+                    gridLevel[row, col] = Instantiate(purpleAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case AlienType.YellowAlien:
+                    gridLevel[row, col] = Instantiate(yellowAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case AlienType.OrangeAlien:
+                    gridLevel[row, col] = Instantiate(orangeAlienPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+            }
+        }
+        else
+        {
+            switch (((Booster)element).GetElementType())
+            {
+                case BoosterType.HorizontalLineBooster:
+                    gridLevel[row, col] = Instantiate(horizontalLineBoosterPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case BoosterType.VerticalLineBooster:
+                    gridLevel[row, col] = Instantiate(verticalLineBoosterPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case BoosterType.BombBooster:
+                    gridLevel[row, col] = Instantiate(bombPrefab, pos, Quaternion.identity, this.transform);
+                    break;
+                case BoosterType.ColorBombBooster:
+                    gridLevel[row, col] = Instantiate(colorBombPrefab, pos, Quaternion.identity, this.transform);
+                    break;
             }
         }
     }

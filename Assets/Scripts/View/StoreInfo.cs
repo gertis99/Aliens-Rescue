@@ -5,67 +5,94 @@ using TMPro;
 
 public class StoreInfo : MonoBehaviour
 {
-    public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster;
+    private GameConfigService gameConfig;
+    private GameProgressionService gameProgression;
+    private AdsGameService adsService;
+    private AnalyticsGameService analytics;
+
+    public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster, coinsPerAd;
 
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
-    public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster;
+    public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
+
+    private void Awake()
+    {
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
+        adsService = ServiceLocator.GetService<AdsGameService>();
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        textGoldPerAd.text = gameConfig.GoldPerAd.ToString();
         UpdateInfo();
     }
 
     private void UpdateInfo()
     {
-        horizontalBoosters.text = PlayerInfo.HorizontalBoosters.ToString();
-        verticalBoosters.text = PlayerInfo.VerticalBoosters.ToString();
-        bombBoosters.text = PlayerInfo.BombBoosters.ToString();
-        colorBombBoosters.text = PlayerInfo.ColorBombBoosters.ToString();
-        coins.text = PlayerInfo.Coins.ToString();
+        horizontalBoosters.text = gameProgression.HorizontalLineBoosters.ToString();
+        verticalBoosters.text = gameProgression.VerticalLineBoosters.ToString();
+        bombBoosters.text = gameProgression.BombBoosters.ToString();
+        colorBombBoosters.text = gameProgression.ColorBombBoosters.ToString();
+        coins.text = gameProgression.Gold.ToString();
 
-        textPriceHorizontalBooster.text = priceHorizontalBooster.ToString();
-        textPriceVerticalBooster.text = priceVerticalBooster.ToString();
-        textPriceBombBooster.text = priceBombBooster.ToString();
-        textPriceColorBombBooster.text = priceColorBombBooster.ToString();
+        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
+        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
+        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
+        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
     }
 
     public void BuyHorizontalBooster()
     {
-        if(PlayerInfo.Coins >= priceHorizontalBooster)
+        if(gameProgression.Gold >= gameConfig.PriceHorizontalLineBooster)
         {
-            PlayerInfo.Coins -= priceHorizontalBooster;
-            PlayerInfo.HorizontalBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceHorizontalLineBooster);
+            gameProgression.UpdateHorizontalLineBoosters(1);
             UpdateInfo();
+            analytics.SendEvent("buyHorizontalLineBooster");
         }
     }
 
     public void BuyVerticalBooster()
     {
-        if (PlayerInfo.Coins >= priceVerticalBooster)
+        if (gameProgression.Gold >= gameConfig.PriceVericalLineBooster)
         {
-            PlayerInfo.Coins -= priceVerticalBooster;
-            PlayerInfo.VerticalBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceVericalLineBooster);
+            gameProgression.UpdateVerticalLineBoosters(1);
             UpdateInfo();
+            analytics.SendEvent("buyVerticalLineBooster");
         }
     }
 
     public void BuyBombBooster()
     {
-        if (PlayerInfo.Coins >= priceBombBooster)
+        if (gameProgression.Gold >= gameConfig.PriceBombBooster)
         {
-            PlayerInfo.Coins -= priceBombBooster;
-            PlayerInfo.BombBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceBombBooster);
+            gameProgression.UpdateBombBoosters(1);
             UpdateInfo();
+            analytics.SendEvent("buyBombBooster");
         }
     }
 
     public void BuyColorBombBooster()
     {
-        if (PlayerInfo.Coins >= priceColorBombBooster)
+        if (gameProgression.Gold >= gameConfig.PriceColorBombBooster)
         {
-            PlayerInfo.Coins -= priceColorBombBooster;
-            PlayerInfo.ColorBombBoosters++;
+            gameProgression.UpdateGold(-gameConfig.PriceColorBombBooster);
+            gameProgression.UpdateColorBombBoosters(1);
+            UpdateInfo();
+            analytics.SendEvent("buyColorBombBooster");
+        }
+    }
+
+    public async void PlayAd()
+    {
+        if (await ServiceLocator.GetService<AdsGameService>().ShowAd())
+        {
+            gameProgression.UpdateGold(gameConfig.GoldPerAd);
             UpdateInfo();
         }
     }
