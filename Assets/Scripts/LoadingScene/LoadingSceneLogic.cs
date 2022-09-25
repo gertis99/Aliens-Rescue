@@ -11,7 +11,7 @@ public class LoadingSceneLogic : MonoBehaviour
 
     private TaskCompletionSource<bool> _cancellationTaskSource;
 
-    void Start()
+    void Awake()
     {
         Debug.Log("Antes de todo");
         _cancellationTaskSource = new();
@@ -35,26 +35,18 @@ public class LoadingSceneLogic : MonoBehaviour
     {
         string environmentId = IsDevBuild ? "development" : "production";
 
-        Debug.Log("B");
         ServicesInitializer servicesInitializer = new ServicesInitializer(environmentId);
 
-        Debug.Log("C");
         //create services
         GameConfigService gameConfig = new GameConfigService();
-        Debug.Log("D");
         GameProgressionService gameProgression = new GameProgressionService();
-        Debug.Log("E");
 
         RemoteConfigGameService remoteConfig = new RemoteConfigGameService();
-        Debug.Log("F");
         LoginGameService loginService = new LoginGameService();
-        Debug.Log("G");
         AnalyticsGameService analyticsService = new AnalyticsGameService();
-        Debug.Log("H");
         AdsGameService adsService = new AdsGameService("4928651", "Rewarded_Android");
-        Debug.Log("I");
         UnityIAPGameService iapService = new UnityIAPGameService();
-        Debug.Log("J");
+        IGameProgressionProvider gameProgressionProvider = new GameProgressionProvider();
 
         //register services
         ServiceLocator.RegisterService(gameConfig);
@@ -64,7 +56,6 @@ public class LoadingSceneLogic : MonoBehaviour
         ServiceLocator.RegisterService(adsService);
         ServiceLocator.RegisterService(analyticsService);
         ServiceLocator.RegisterService<IIAPGameService>(iapService);
-        Debug.Log("K");
 
         //initialize services
         await servicesInitializer.Initialize();
@@ -75,11 +66,11 @@ public class LoadingSceneLogic : MonoBehaviour
         {
             ["test1"] = "es.gmangames.alienrescue.test1"
         });
-        Debug.Log("L");
 
+
+        await gameProgressionProvider.Initialize();
         gameConfig.Initialize(remoteConfig);
-        gameProgression.Initialize(gameConfig);
-        Debug.Log("M");
+        gameProgression.Initialize(gameConfig, gameProgressionProvider);
 
         bool adsInitialized = await adsService.Initialize(Application.isEditor);
             
