@@ -16,11 +16,8 @@ public class GameProgressionService : IService
 
     //public event Action OnInventoryChanged;
 
-    private AnalyticsGameService _analytics;
-
     public void Initialize(GameConfigService gameConfig)
     {
-        _analytics = ServiceLocator.GetService<AnalyticsGameService>();
         Load(gameConfig);
     }
 
@@ -72,18 +69,21 @@ public class GameProgressionService : IService
 
     public void Save()
     {
-        System.IO.File.WriteAllText(Application.dataPath + kSavePath, JsonUtility.ToJson(this));
+        System.IO.File.WriteAllText(Application.persistentDataPath + kSavePath, JsonUtility.ToJson(this));
+        Debug.Log("DD");
     }
 
     public void Load(GameConfigService config)
     {
-        if (System.IO.File.Exists(Application.dataPath + kSavePath))
+        Debug.Log("AA");
+        if (System.IO.File.Exists(Application.persistentDataPath + kSavePath))
         {
             JsonUtility.FromJsonOverwrite(System.IO.File.ReadAllText(Application.dataPath + kSavePath),
                 this);
             return;
         }
 
+        Debug.Log("BB");
         Gold = config.InitialGold;
         HorizontalLineBoosters = config.InitialHorizontalLineBooster;
         VerticalLineBoosters = config.InitialVerticalLineBooster;
@@ -91,7 +91,7 @@ public class GameProgressionService : IService
         ColorBombBoosters = config.InitialColorBombBooster;
         CurrentLevel = 1;
         currentHUDColor = HUDColors.ORANGE;
-
+        Debug.Log("CC");
         Save();
     }
 //end of save and load

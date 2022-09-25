@@ -10,7 +10,7 @@ public class StoreInfo : MonoBehaviour
     private GameProgressionService gameProgression;
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
-    private IIAPGameService _iapService;
+    private IIAPGameService iapService;
 
     public Button _buyAdGemsButton;
     [SerializeField]
@@ -21,6 +21,7 @@ public class StoreInfo : MonoBehaviour
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
     public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
     public TMPro.TextMeshProUGUI textPriceOrangeHudColor, textPriceBlueHudColor, textPriceGreenHudColor, textPricePurpleHudColor;
+    public TMPro.TextMeshProUGUI textGoldPerBuy, textPriceGold;
 
     private void Awake()
     {
@@ -28,13 +29,15 @@ public class StoreInfo : MonoBehaviour
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
         adsService = ServiceLocator.GetService<AdsGameService>();
         analytics = ServiceLocator.GetService<AnalyticsGameService>();
-        _iapService = ServiceLocator.GetService<IIAPGameService>();
+        iapService = ServiceLocator.GetService<IIAPGameService>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         textGoldPerAd.text = gameConfig.GoldPerAd.ToString();
+        textGoldPerBuy.text = gameConfig.GoldPerBuy.ToString();
+        //textPriceGold.text += iapService.GetLocalizedPrice("test1");
 
         textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
         textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
@@ -46,6 +49,7 @@ public class StoreInfo : MonoBehaviour
         textPricePurpleHudColor.text = gameConfig.PriceHUDColors.ToString();
 
         UpdateInfo();
+        StartCoroutine(WaitForIAPReady());
     }
 
     private void UpdateInfo()
@@ -141,4 +145,30 @@ public class StoreInfo : MonoBehaviour
             UpdateInfo();
         }
     }
+
+    public async void PurchaseIAPGems()
+    {
+        if (await iapService.StartPurchase("test1"))
+        {
+            gameProgression.UpdateGold(gameConfig.GoldPerBuy);
+        }
+        else
+        {
+            Debug.LogError("Purchase failed");
+        }
+    }
+
+    IEnumerator WaitForIAPReady()
+    {
+        textPriceGold.text = "Loading...";
+        //_buyIAPGemsButton.interactable = false;
+        while (!iapService.IsReady())
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        //_buyIAPGemsButton.interactable = true;
+        textPriceGold.text = iapService.GetLocalizedPrice("test1");
+    }
+
 }

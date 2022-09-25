@@ -73,10 +73,10 @@ public class LoadScene : MonoBehaviour
             while (!loadOperation.isDone)
             { yield return null; }
             Debug.Log("Despues carga");
-            while (SceneManager.GetActiveScene().buildIndex != sceneIndex)
+            /*while (SceneManager.GetActiveScene().buildIndex != sceneIndex)
             {
                 yield return null;
-            }
+            }*/
 
             Debug.Log("Dewspues carga 2");
         }

@@ -12,6 +12,7 @@ public class GameConfigService : IService
     public int PriceColorBombBooster { get; private set; }
     public int PriceHUDColors { get; private set; }
     public int GoldPerAd { get; private set; }
+    public int GoldPerBuy { get; private set; }
 
 
     public void Initialize(RemoteConfigGameService dataProvider)
@@ -27,6 +28,7 @@ public class GameConfigService : IService
         PriceColorBombBooster = dataProvider.Get("PriceColorBombBooster", 40);
         PriceHUDColors = dataProvider.Get("PriceHUDColors", 10);
         GoldPerAd = dataProvider.Get("GoldPerAd", 50);
+        GoldPerBuy = dataProvider.Get("GoldPerBuy", 500);
     }
 
     public void Clear()

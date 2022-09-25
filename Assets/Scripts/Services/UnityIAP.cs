@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
-public class UnityIAPGameService  : IIAPGameService, IStoreListener
+public class UnityIAPGameService : IIAPGameService, IStoreListener
 {
     private bool _isInitialized = false;
     private IStoreController _unityStoreController = null;
     private TaskStatus _purchaseTaskStatus = TaskStatus.Created;
-
+    private TaskStatus _initializeTaskStatus = TaskStatus.Created;
 
     public async Task Initialize(Dictionary<string, string> products)
     {
@@ -17,12 +17,17 @@ public class UnityIAPGameService  : IIAPGameService, IStoreListener
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         foreach (KeyValuePair<string, string> productEntry in products)
         {
-            builder.AddProduct(productEntry.Key, ProductType.Consumable, new IDs
-                {
-                    { GooglePlay.Name, productEntry.Value }
-                });
+            var ids = new IDs();
+            ids.Add(productEntry.Value, new[] { GooglePlay.Name });
+            builder.AddProduct(productEntry.Key, ProductType.Consumable, ids);
         }
+
+        _initializeTaskStatus = TaskStatus.Running;
         UnityPurchasing.Initialize(this, builder);
+        while (_initializeTaskStatus == TaskStatus.Running)
+        {
+            await Task.Delay(100);
+        }
     }
 
     public bool IsReady() => _isInitialized;
@@ -54,12 +59,20 @@ public class UnityIAPGameService  : IIAPGameService, IStoreListener
 
     public void Clear()
     {
+    }
 
+    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
+    {
+        _isInitialized = true;
+        _unityStoreController = controller;
+        _initializeTaskStatus = TaskStatus.RanToCompletion;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         _isInitialized = false;
+        _initializeTaskStatus = TaskStatus.RanToCompletion;
+        Debug.LogError("Initialization failed with error: " + error);
     }
 
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs purchaseEvent)
@@ -73,10 +86,5 @@ public class UnityIAPGameService  : IIAPGameService, IStoreListener
         Debug.LogError("Purchase failed with error: " + failureReason);
         _purchaseTaskStatus = TaskStatus.Faulted;
     }
-
-    public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
-    {
-        _isInitialized = true;
-        _unityStoreController = controller;
-    }
 }
+
