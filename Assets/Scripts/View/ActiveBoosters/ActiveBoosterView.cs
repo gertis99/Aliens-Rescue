@@ -9,9 +9,12 @@ public class ActiveBoosterView : MonoBehaviour
     protected bool isActivated = false;
     public int boostersLeft;
 
+    protected GameProgressionService gameProgression;
+
     private void Awake()
     {
         controller = new ActiveBoosterController();
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
     }
 
     private void Start()

@@ -9,7 +9,7 @@ using UnityEngine;
 public class Grid
 {
 
-    private Element[,] gridLevel;
+    public Element[,] GridLevel { get; set; }
     public int width = 9, height = 9;
     public int colorTypes = 6;
 
@@ -18,7 +18,7 @@ public class Grid
         width = w;
         height = h;
         colorTypes = colors;
-        gridLevel = new Element[width, height];
+        GridLevel = new Element[width, height];
         GenerateLevel();
     }
 
@@ -29,11 +29,13 @@ public class Grid
 
     private void GenerateLevel()
     {
-        for (int i = 0; i < gridLevel.GetLength(0); i++)
+        
+
+        for (int i = 0; i < GridLevel.GetLength(0); i++)
         {
-            for (int j = 0; j < gridLevel.GetLength(1); j++)
+            for (int j = 0; j < GridLevel.GetLength(1); j++)
             {
-                gridLevel[i, j] = new Element(i, j, UnityEngine.Random.Range(0, colorTypes));
+                GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
             }
         }
     }
@@ -42,18 +44,31 @@ public class Grid
     // Getters
     public Element[,] GetGridLevel()
     {
-        return gridLevel;
+        return GridLevel;
     }
 
     public Element GetElement(int x, int y)
     {
-        return gridLevel[x, y];
+        return GridLevel[x, y];
     }
 
     /*************************************************************************/
     // Setters
     public void SetGridLevel(Element[,] grid)
     {
-        gridLevel = grid;
+        GridLevel = grid;
+    }
+
+    /**************************************************************************/
+    public bool IsOnGrid(int row, int col)
+    {
+        if (row < GridLevel.GetLength(0) && col < GridLevel.GetLength(1) && row >= 0 && col >= 0 && GridLevel[row, col] != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class DataToSave
+//[System.Serializable]
+/*public class DataToSave
 {
     public int coins, horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, actualLevel;
 
@@ -14,5 +14,5 @@ public class DataToSave
         colorBombBoosters = PlayerInfo.ColorBombBoosters;
         actualLevel = PlayerInfo.ActualLevel;
     }
-}
+}*/
 

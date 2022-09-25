@@ -11,11 +11,15 @@ public class WinController : MonoBehaviour
     public static event PointsChanged OnPointsChanged;
 
 
-    public int condition = 20;
-    private static int[] colorPoints = new int[6];
+    public int condition;
+    public int level;   
+    public int[] colorPoints = new int[6];
+
+    private GameProgressionService gameProgression;
 
     private void Awake()
     {
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
         LevelController.OnCheckedMatch += AddPoints;
     }
 
@@ -24,36 +28,38 @@ public class WinController : MonoBehaviour
         LevelController.OnCheckedMatch -= AddPoints;
     }
 
-    public static void AddPoints(Element element)
+    public void AddPoints(Alien element)
     {
-        if(element.GetColorType() < colorPoints.Length)
-        {
-            colorPoints[element.GetColorType()]++;
-            OnPointsChanged(colorPoints[element.GetColorType()], element.GetColorType());
-        }
-        
+        colorPoints[(int)element.GetElementType()]++;
+        OnPointsChanged(colorPoints[(int)element.GetElementType()], (int)element.GetElementType());
+        CheckWin();
     }
 
-    public static void AddPoints(List<Element> elements)
+    public void AddPoints(List<Alien> elements)
     {
         for(int i = 0; i < elements.Count; i++)
         {
-            if (elements[i].GetColorType() < colorPoints.Length)
-            {
-                colorPoints[elements[i].GetColorType()]++;
-                OnPointsChanged(colorPoints[elements[i].GetColorType()], elements[i].GetColorType());
-            }
-                
+            colorPoints[(int)elements[i].GetElementType()]++;
+            OnPointsChanged(colorPoints[(int)elements[i].GetElementType()], (int)elements[i].GetElementType());
         }
+
+        CheckWin();
     }
 
     private void CheckWin()
     {
+        int coinsGained = 0;
+
         for(int i=0; i<colorPoints.Length; i++)
         {
             if (colorPoints[i] < condition)
                 return;
+            else
+                coinsGained += colorPoints[i] - condition;
         }
         OnWinChecked();
+        if (gameProgression.CurrentLevel == level)
+            gameProgression.UpdateCurrentLevel(1);
+        gameProgression.UpdateGold(coinsGained);
     }
 }

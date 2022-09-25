@@ -16,7 +16,7 @@ public class ActiveBoosterColorBombView : ActiveBoosterView
                 {
                     controller.ActiveBoosterColorBomb(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
-                    PlayerInfo.ColorBombBoosters--;
+                    gameProgression.UpdateColorBombBoosters(-1);
                     GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
                 }
