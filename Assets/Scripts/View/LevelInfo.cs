@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelInfo : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class LevelInfo : MonoBehaviour
 
     private GameProgressionService gameProgression;
 
+    private HUDColors currentHUDColor;
+    public Image HUD;
+    public Sprite[] huds;
+
     private void Awake()
     {
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
@@ -18,6 +23,9 @@ public class LevelInfo : MonoBehaviour
         verticalBooster.boostersLeft = gameProgression.VerticalLineBoosters;
         bombBooster.boostersLeft = gameProgression.BombBoosters;
         colorBombBooster.boostersLeft = gameProgression.ColorBombBoosters;
+        currentHUDColor = gameProgression.currentHUDColor;
+
+        HUD.sprite = huds[(int)currentHUDColor];
     }
 
     void Start()

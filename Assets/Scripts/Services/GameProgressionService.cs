@@ -12,14 +12,13 @@ public class GameProgressionService : IService
     public int VerticalLineBoosters;
     public int BombBoosters;
     public int ColorBombBoosters;
+    public HUDColors currentHUDColor;
 
-    //public event Action OnInventoryChanged;
+    private IGameProgressionProvider progressionProvider;
 
-    private AnalyticsGameService _analytics;
-
-    public void Initialize(GameConfigService gameConfig)
+    public void Initialize(GameConfigService gameConfig, IGameProgressionProvider progressionProvider)
     {
-        _analytics = ServiceLocator.GetService<AnalyticsGameService>();
+        this.progressionProvider = progressionProvider;
         Load(gameConfig);
     }
 
@@ -60,31 +59,37 @@ public class GameProgressionService : IService
         Save();
     }
 
-    //save and load
-    private static string kSavePath = "/gameProgression.json";
+    public void UpdateHUDColor(HUDColors color)
+    {
+        currentHUDColor = color;
+        Save();
+    }
 
     public void Save()
     {
-        System.IO.File.WriteAllText(Application.dataPath + kSavePath, JsonUtility.ToJson(this));
+        progressionProvider.Save(JsonUtility.ToJson(this));
     }
 
     public void Load(GameConfigService config)
     {
-        if (System.IO.File.Exists(Application.dataPath + kSavePath))
+        string data = progressionProvider.Load();
+        if (string.IsNullOrEmpty(data))
         {
-            JsonUtility.FromJsonOverwrite(System.IO.File.ReadAllText(Application.dataPath + kSavePath),
-                this);
-            return;
+            Gold = config.InitialGold;
+            HorizontalLineBoosters = config.InitialHorizontalLineBooster;
+            VerticalLineBoosters = config.InitialVerticalLineBooster;
+            BombBoosters = config.InitialBombBooster;
+            ColorBombBoosters = config.InitialColorBombBooster;
+            CurrentLevel = 1;
+            currentHUDColor = HUDColors.ORANGE;
+            Debug.Log("CC");
+            Save();
         }
-
-        Gold = config.InitialGold;
-        HorizontalLineBoosters = config.InitialHorizontalLineBooster;
-        VerticalLineBoosters = config.InitialVerticalLineBooster;
-        BombBoosters = config.InitialBombBooster;
-        ColorBombBoosters = config.InitialColorBombBooster;
-        CurrentLevel = 1;
-
-        Save();
+        else
+        {
+            JsonUtility.FromJsonOverwrite(data, this);
+        }
+        
     }
 //end of save and load
 

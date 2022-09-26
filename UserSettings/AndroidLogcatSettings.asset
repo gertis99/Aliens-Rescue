@@ -3,27 +3,45 @@
     "m_SelectedPackage": {
         "deviceId": "16a0b293",
         "name": "com.GManGames.AliensRescue",
-        "processId": 8635,
+        "processId": 10308,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
         {
             "deviceId": "16a0b293",
-            "name": "com.GManGames.AliensRescue",
-            "processId": 7578,
-            "exited": true
-        },
-        {
-            "deviceId": "16a0b293",
-            "name": "com.android.settings",
-            "processId": 1976,
+            "name": "com.miui.home",
+            "processId": 2759,
             "exited": false
         },
         {
             "deviceId": "16a0b293",
             "name": "com.GManGames.AliensRescue",
-            "processId": 8635,
+            "processId": 1514,
+            "exited": true
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.GManGames.AliensRescue",
+            "processId": 9372,
+            "exited": true
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.GManGames.AliensRescue",
+            "processId": 19177,
+            "exited": true
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.GManGames.AliensRescue",
+            "processId": 24057,
+            "exited": true
+        },
+        {
+            "deviceId": "16a0b293",
+            "name": "com.GManGames.AliensRescue",
+            "processId": 10308,
             "exited": false
         }
     ],
@@ -35,7 +53,7 @@
             },
             {
                 "m_Name": "No Filter",
-                "m_Selected": true
+                "m_Selected": false
             },
             {
                 "m_Name": "",
@@ -51,7 +69,7 @@
             },
             {
                 "m_Name": "Unity",
-                "m_Selected": false
+                "m_Selected": true
             },
             {
                 "m_Name": "CRASH",
@@ -78,7 +96,7 @@
         "Behavior": 0
     },
     "m_FilterOptions": {
-        "m_Filter": "unity",
+        "m_Filter": "",
         "m_UseRegularExpressions": false,
         "m_MatchCase": false
     },

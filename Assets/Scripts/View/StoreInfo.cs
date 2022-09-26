@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class StoreInfo : MonoBehaviour
 {
@@ -9,11 +10,18 @@ public class StoreInfo : MonoBehaviour
     private GameProgressionService gameProgression;
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
+    private IIAPGameService iapService;
+
+    public Button _buyAdGemsButton;
+    [SerializeField]
+    private TMP_Text _iapGemsCostText = null;
 
     public int priceHorizontalBooster, priceVerticalBooster, priceBombBooster, priceColorBombBooster, coinsPerAd;
 
     public TMPro.TextMeshProUGUI horizontalBoosters, verticalBoosters, bombBoosters, colorBombBoosters, coins;
     public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
+    public TMPro.TextMeshProUGUI textPriceOrangeHudColor, textPriceBlueHudColor, textPriceGreenHudColor, textPricePurpleHudColor;
+    public TMPro.TextMeshProUGUI textGoldPerBuy, textPriceGold;
 
     private void Awake()
     {
@@ -21,13 +29,27 @@ public class StoreInfo : MonoBehaviour
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
         adsService = ServiceLocator.GetService<AdsGameService>();
         analytics = ServiceLocator.GetService<AnalyticsGameService>();
+        iapService = ServiceLocator.GetService<IIAPGameService>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         textGoldPerAd.text = gameConfig.GoldPerAd.ToString();
+        textGoldPerBuy.text = gameConfig.GoldPerBuy.ToString();
+        //textPriceGold.text += iapService.GetLocalizedPrice("test1");
+
+        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
+        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
+        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
+        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
+        textPriceOrangeHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPriceBlueHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPriceGreenHudColor.text = gameConfig.PriceHUDColors.ToString();
+        textPricePurpleHudColor.text = gameConfig.PriceHUDColors.ToString();
+
         UpdateInfo();
+        StartCoroutine(WaitForIAPReady());
     }
 
     private void UpdateInfo()
@@ -37,11 +59,6 @@ public class StoreInfo : MonoBehaviour
         bombBoosters.text = gameProgression.BombBoosters.ToString();
         colorBombBoosters.text = gameProgression.ColorBombBoosters.ToString();
         coins.text = gameProgression.Gold.ToString();
-
-        textPriceHorizontalBooster.text = gameConfig.PriceHorizontalLineBooster.ToString();
-        textPriceVerticalBooster.text = gameConfig.PriceVericalLineBooster.ToString();
-        textPriceBombBooster.text = gameConfig.PriceBombBooster.ToString();
-        textPriceColorBombBooster.text = gameConfig.PriceColorBombBooster.ToString();
     }
 
     public void BuyHorizontalBooster()
@@ -88,6 +105,38 @@ public class StoreInfo : MonoBehaviour
         }
     }
 
+    public void BuyOrangeHUD()
+    {
+        if(gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.ORANGE);
+        }
+    }
+
+    public void BuyBlueHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.BLUE);
+        }
+    }
+
+    public void BuyGreenHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.GREEN);
+        }
+    }
+
+    public void BuyPurpleHUD()
+    {
+        if (gameProgression.Gold >= gameConfig.PriceHUDColors)
+        {
+            gameProgression.UpdateHUDColor(HUDColors.PURPLE);
+        }
+    }
+
     public async void PlayAd()
     {
         if (await ServiceLocator.GetService<AdsGameService>().ShowAd())
@@ -96,4 +145,30 @@ public class StoreInfo : MonoBehaviour
             UpdateInfo();
         }
     }
+
+    public async void PurchaseIAPGems()
+    {
+        if (await iapService.StartPurchase("test1"))
+        {
+            gameProgression.UpdateGold(gameConfig.GoldPerBuy);
+        }
+        else
+        {
+            Debug.LogError("Purchase failed");
+        }
+    }
+
+    IEnumerator WaitForIAPReady()
+    {
+        textPriceGold.text = "Loading...";
+        //_buyIAPGemsButton.interactable = false;
+        while (!iapService.IsReady())
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        //_buyIAPGemsButton.interactable = true;
+        textPriceGold.text = iapService.GetLocalizedPrice("test1");
+    }
+
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,12 +11,14 @@ public class LoadingSceneLogic : MonoBehaviour
 
     private TaskCompletionSource<bool> _cancellationTaskSource;
 
-    void Start()
+    void Awake()
     {
+        Debug.Log("Antes de todo");
         _cancellationTaskSource = new();
         LoadServicesCancellable().ContinueWith(task =>
                 Debug.LogException(task.Exception),
             TaskContinuationOptions.OnlyOnFaulted);
+        Debug.Log("Z");
     }
 
     private void OnDestroy()
@@ -42,6 +45,8 @@ public class LoadingSceneLogic : MonoBehaviour
         LoginGameService loginService = new LoginGameService();
         AnalyticsGameService analyticsService = new AnalyticsGameService();
         AdsGameService adsService = new AdsGameService("4928651", "Rewarded_Android");
+        UnityIAPGameService iapService = new UnityIAPGameService();
+        IGameProgressionProvider gameProgressionProvider = new GameProgressionProvider();
 
         //register services
         ServiceLocator.RegisterService(gameConfig);
@@ -50,15 +55,22 @@ public class LoadingSceneLogic : MonoBehaviour
         ServiceLocator.RegisterService(loginService);
         ServiceLocator.RegisterService(adsService);
         ServiceLocator.RegisterService(analyticsService);
+        ServiceLocator.RegisterService<IIAPGameService>(iapService);
 
         //initialize services
         await servicesInitializer.Initialize();
         await loginService.Initialize();
         await remoteConfig.Initialize();
         await analyticsService.Initialize();
+        await iapService.Initialize(new Dictionary<string, string>
+        {
+            ["test1"] = "es.gmangames.alienrescue.test1"
+        });
 
+
+        await gameProgressionProvider.Initialize();
         gameConfig.Initialize(remoteConfig);
-        gameProgression.Initialize(gameConfig);
+        gameProgression.Initialize(gameConfig, gameProgressionProvider);
 
         bool adsInitialized = await adsService.Initialize(Application.isEditor);
             
