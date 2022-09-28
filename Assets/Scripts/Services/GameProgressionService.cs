@@ -13,6 +13,7 @@ public class GameProgressionService : IService
     public int BombBoosters;
     public int ColorBombBoosters;
     public HUDColors currentHUDColor;
+    public int[] cosmeticsBought; // pos = id, number of items
 
     private IGameProgressionProvider progressionProvider;
 
@@ -65,6 +66,12 @@ public class GameProgressionService : IService
         Save();
     }
 
+    public void UpdateCosmetics(int id, int number)
+    {
+        cosmeticsBought[id] += number;
+        Save();
+    }
+
     public void Save()
     {
         progressionProvider.Save(JsonUtility.ToJson(this));
@@ -82,6 +89,7 @@ public class GameProgressionService : IService
             ColorBombBoosters = config.InitialColorBombBooster;
             CurrentLevel = 1;
             currentHUDColor = HUDColors.ORANGE;
+            cosmeticsBought = new int[6];
             Debug.Log("CC");
             Save();
         }
@@ -92,6 +100,14 @@ public class GameProgressionService : IService
         
     }
 //end of save and load
+
+    public int GetNumberItemsById(int id)
+    {
+        if (id < cosmeticsBought.Length)
+            return cosmeticsBought[id];
+
+        return 0;
+    }
 
     public void Clear()
     {

@@ -22,6 +22,7 @@ public class StoreInfo : MonoBehaviour
     public TMPro.TextMeshProUGUI textPriceHorizontalBooster, textPriceVerticalBooster, textPriceBombBooster, textPriceColorBombBooster, textGoldPerAd;
     public TMPro.TextMeshProUGUI textPriceOrangeHudColor, textPriceBlueHudColor, textPriceGreenHudColor, textPricePurpleHudColor;
     public TMPro.TextMeshProUGUI textGoldPerBuy, textPriceGold;
+    public TMPro.TextMeshProUGUI textItemsBowtie, textItemsTopHat, textItemsFrogHat, textItemsLogoPin, textItemsLogoHat;
 
     private void Awake()
     {
@@ -59,6 +60,12 @@ public class StoreInfo : MonoBehaviour
         bombBoosters.text = gameProgression.BombBoosters.ToString();
         colorBombBoosters.text = gameProgression.ColorBombBoosters.ToString();
         coins.text = gameProgression.Gold.ToString();
+
+        textItemsBowtie.text = gameProgression.cosmeticsBought[1].ToString();
+        textItemsFrogHat.text = gameProgression.cosmeticsBought[2].ToString();
+        textItemsLogoHat.text = gameProgression.cosmeticsBought[4].ToString();
+        textItemsLogoPin.text = gameProgression.cosmeticsBought[3].ToString();
+        textItemsTopHat.text = gameProgression.cosmeticsBought[5].ToString();
     }
 
     public void BuyHorizontalBooster()
@@ -109,6 +116,7 @@ public class StoreInfo : MonoBehaviour
     {
         if(gameProgression.Gold >= gameConfig.PriceHUDColors)
         {
+            gameProgression.UpdateGold(-gameConfig.PriceHUDColors);
             gameProgression.UpdateHUDColor(HUDColors.ORANGE);
         }
     }
@@ -117,6 +125,7 @@ public class StoreInfo : MonoBehaviour
     {
         if (gameProgression.Gold >= gameConfig.PriceHUDColors)
         {
+            gameProgression.UpdateGold(-gameConfig.PriceHUDColors);
             gameProgression.UpdateHUDColor(HUDColors.BLUE);
         }
     }
@@ -125,6 +134,7 @@ public class StoreInfo : MonoBehaviour
     {
         if (gameProgression.Gold >= gameConfig.PriceHUDColors)
         {
+            gameProgression.UpdateGold(-gameConfig.PriceHUDColors);
             gameProgression.UpdateHUDColor(HUDColors.GREEN);
         }
     }
@@ -133,7 +143,18 @@ public class StoreInfo : MonoBehaviour
     {
         if (gameProgression.Gold >= gameConfig.PriceHUDColors)
         {
+            gameProgression.UpdateGold(-gameConfig.PriceHUDColors);
             gameProgression.UpdateHUDColor(HUDColors.PURPLE);
+        }
+    }
+
+    public void BuyCosmetic(int id)
+    {
+        if(gameProgression.Gold >= 25)  // CHANGE TO REMOTE CONFIG
+        {
+            gameProgression.UpdateGold(-25);
+            gameProgression.UpdateCosmetics(id, 1);
+            UpdateInfo();
         }
     }
 
