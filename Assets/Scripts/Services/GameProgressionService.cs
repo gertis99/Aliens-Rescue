@@ -10,6 +10,7 @@ public class GameProgressionService : IService
     public List<ActiveBoosterItemModel> ActiveBoosters;
     public List<CosmeticItemModel> Cosmetics;
     public List<ColorHudItemModel> HudColors;
+    public string currentHudColor;
     public List<InGameCurrency> Currencies;
 
     private IGameProgressionProvider progressionProvider;
@@ -103,6 +104,7 @@ public class GameProgressionService : IService
             CurrentLevel = 1;
             HudColors = new List<ColorHudItemModel>();
             HudColors.Add(new ColorHudItemModel { Name = "Orange", Selected = true });
+            currentHudColor = "Orange";
             Cosmetics = new List<CosmeticItemModel>();
             Debug.Log("CC");
             Save();
@@ -154,7 +156,7 @@ public class GameProgressionService : IService
 
     public bool IsHudColorActive(string name)
     {
-        foreach(ColorHudItemModel colorHud in HudColors)
+        /*foreach(ColorHudItemModel colorHud in HudColors)
         {
             if(colorHud.Name == name)
             {
@@ -162,7 +164,8 @@ public class GameProgressionService : IService
             }
         }
 
-        return false;
+        return false;*/
+        return name == currentHudColor;
     }
 
     public void Clear()

@@ -11,21 +11,29 @@ public class LevelView : MonoBehaviour
     public ActiveBoosterColorBombView colorBombBooster;
 
     private GameProgressionService gameProgression;
+    private GameConfigService gameConfig;
 
-    private HUDColors currentHUDColor;
+    private string currentHUDColor;
     public Image HUD;
-    public Sprite[] huds;
 
     private void Awake()
     {
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
         horizotntalBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("HorizontalLineBooster");
         verticalBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("VerticalLineBooster");
         bombBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("BombBooster");
         colorBombBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("ColorBombBooster");
-        /*currentHUDColor = gameProgression.currentHUDColor;
+        currentHUDColor = gameProgression.currentHudColor;
 
-        HUD.sprite = huds[(int)currentHUDColor];*/
+        foreach(ColorHudItemInfo colorHud in gameConfig.HudColors)
+        {
+            if(colorHud.ColorHudName == currentHUDColor)
+            {
+                HUD.sprite = Resources.Load<Sprite>(colorHud.ConsoleImage);
+                break;
+            }
+        }
     }
 
     void Start()

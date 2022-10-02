@@ -31,6 +31,7 @@ public class ShopController
         {
             gameProgression.UpdateColorHud(item.ItemName, true);
             gameProgression.UpdateCurrency(item.Price.Name, -item.Price.Amount);
+            gameProgression.currentHudColor = item.ItemName;
             return;
         }
     }
