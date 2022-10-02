@@ -25,10 +25,10 @@ public class GameProgressionProvider : IGameProgressionProvider
         string localData = _local.Load();
         string remoteData = _remote.Load();
 
-        if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
+        /*if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
         {
             return remoteData;
-        }
+        }*/
 
         if (!string.IsNullOrEmpty(localData) && string.IsNullOrEmpty(remoteData))
         {

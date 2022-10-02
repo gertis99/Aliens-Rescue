@@ -49,7 +49,7 @@ public class GridView : MonoBehaviour
     private void Update()
     {
         if (IsAnimating)
-            return;
+          return;
 
         CheckInputs();
     }
@@ -141,7 +141,7 @@ public class GridView : MonoBehaviour
         }
         
 
-        if (elementSelected != null && Input.GetMouseButton(0) && !IsAnimating)
+        if (elementSelected != null && Input.GetMouseButton(0))
         {
             if (elementSelected.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {

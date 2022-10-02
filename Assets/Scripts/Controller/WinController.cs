@@ -60,6 +60,6 @@ public class WinController : MonoBehaviour
         OnWinChecked();
         if (gameProgression.CurrentLevel == level)
             gameProgression.UpdateCurrentLevel(1);
-        gameProgression.UpdateGold(coinsGained);
+        gameProgression.UpdateCurrency("Gold", coinsGained);
     }
 }

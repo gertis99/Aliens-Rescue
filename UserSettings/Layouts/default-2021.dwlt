@@ -16,10 +16,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 43
-    width: 3440
-    height: 1349
+    width: 2560
+    height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 7}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -39,25 +39,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1596
+    x: 1337
     y: 0
-    width: 710
-    height: 809
+    width: 610
+    height: 633
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 20}
-=======
-    x: 1290
-    y: 0
-    width: 643
-    height: 592
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 21}
->>>>>>> German
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 21}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &3
@@ -79,11 +69,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 3440
-    height: 1299
+    width: 2560
+    height: 947
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -97,6 +88,9 @@ MonoBehaviour:
 =======
   controlID: 129
 >>>>>>> Tom
+=======
+  controlID: 137
+>>>>>>> German
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -107,32 +101,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InspectorWindow
+  m_Name: 
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 2306
+    x: 1947
     y: 0
-    width: 1134
-    height: 1299
+    width: 613
+    height: 947
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-=======
-    x: 1933
-    y: 0
-    width: 627
-    height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
->>>>>>> German
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 15}
   m_Panes:
-  - {fileID: 17}
   - {fileID: 15}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 0
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -150,18 +134,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 628
-    height: 809
-=======
-    width: 525
-    height: 592
->>>>>>> German
+    width: 481
+    height: 633
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 16}
   m_Panes:
-  - {fileID: 18}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &6
@@ -174,34 +153,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 809
-    width: 2306
-    height: 490
+    y: 633
+    width: 1947
+    height: 314
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 16}
-=======
-    y: 592
-    width: 1933
-    height: 355
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 20}
->>>>>>> German
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 16}
-  - {fileID: 20}
   - {fileID: 14}
+  - {fileID: 18}
   - {fileID: 13}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,8 +191,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 3440
-    height: 1349
+    width: 2560
+    height: 997
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -247,7 +216,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 3440
+    width: 2560
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -268,8 +237,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 1329
-    width: 3440
+    y: 977
+    width: 2560
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -293,6 +262,7 @@ MonoBehaviour:
     x: 0
     y: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 2306
     height: 1299
   m_MinSize: {x: 300, y: 200}
@@ -303,10 +273,14 @@ MonoBehaviour:
   controlID: 106
 =======
     width: 1933
+=======
+    width: 1947
+>>>>>>> German
     height: 947
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
+<<<<<<< HEAD
   controlID: 72
 >>>>>>> German
 =======
@@ -315,6 +289,9 @@ MonoBehaviour:
 =======
   controlID: 103
 >>>>>>> Tom
+=======
+  controlID: 105
+>>>>>>> German
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -335,12 +312,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 2306
-    height: 809
+    width: 1947
+    height: 633
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   controlID: 107
@@ -358,6 +335,9 @@ MonoBehaviour:
 =======
   controlID: 104
 >>>>>>> Tom
+=======
+  controlID: 106
+>>>>>>> German
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -373,22 +353,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 628
+    x: 481
     y: 0
-    width: 968
-    height: 809
-=======
-    x: 525
-    y: 0
-    width: 765
-    height: 592
->>>>>>> German
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 19}
+    width: 856
+    height: 633
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 19}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &13
@@ -400,6 +373,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: ac9b4e439aace6446a0642ca97e8f43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -434,6 +408,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+=======
+>>>>>>> German
   m_Script: {fileID: 11500000, guid: c3c54c3b8da9f488298dd023b76c89ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -447,6 +423,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     y: 704
     width: 1932
     height: 295
@@ -455,6 +432,11 @@ MonoBehaviour:
     width: 2305
     height: 469
 >>>>>>> Tom
+=======
+    y: 706
+    width: 1946
+    height: 293
+>>>>>>> German
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -488,35 +470,7 @@ MonoBehaviour:
     m_Columns: []
     m_VisibleColumns: 
     m_SortedColumns: 
---- !u!114 &15
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12402, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 300, y: 150}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Services
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 1716
-    y: 73
-    width: 843
-    height: 926
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
---- !u!114 &16
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -537,15 +491,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 882
-    width: 2305
-    height: 469
-=======
-    y: 665
-    width: 1932
-    height: 334
->>>>>>> German
+    y: 706
+    width: 1946
+    height: 293
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -566,6 +514,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Images/Buttons
 =======
     - Assets/Scripts/Services
@@ -576,11 +525,15 @@ MonoBehaviour:
 =======
     - Assets/Images/Final Icons
 >>>>>>> Tom
+=======
+    - Assets/Prefabs
+>>>>>>> German
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -594,12 +547,16 @@ MonoBehaviour:
 =======
   - Assets/Images/Final Icons
 >>>>>>> Tom
+=======
+  - Assets/Prefabs
+>>>>>>> German
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: D:\Alien Rescue\Aliens-Rescue
+  m_LastProjectPath: D:\USUARIO\UNIVERSIDAD\Bootcamp\Aliens-Rescue-Github
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -621,6 +578,11 @@ MonoBehaviour:
     m_LastClickedID: 23770
     m_ExpandedIDs: 00000000b05c0000bc5c0000da5c000000ca9a3b
 >>>>>>> Tom
+=======
+    m_SelectedIDs: 2a5e0000
+    m_LastClickedID: 24106
+    m_ExpandedIDs: 00000000f05d0000265e0000305e00003a5e00003c5e0000425e000050720000
+>>>>>>> German
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -651,6 +613,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000e4660000
 =======
     m_ExpandedIDs: 00000000585d00005a5d00005c5d00005e5d0000605d0000625d0000
@@ -661,6 +624,9 @@ MonoBehaviour:
 =======
     m_ExpandedIDs: 00000000b05c0000
 >>>>>>> Tom
+=======
+    m_ExpandedIDs: 00000000f05d0000
+>>>>>>> German
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -685,12 +651,13 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7e810100
-    m_LastClickedInstanceID: 98686
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c62300005a5d000036770000ba670000
+    m_ExpandedInstanceIDs: c623000014730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -708,12 +675,17 @@ MonoBehaviour:
       m_Name: ShortenedBorderCockpits
       m_OriginalName: ShortenedBorderCockpits
 >>>>>>> Tom
+=======
+      m_Name: StoreScene
+      m_OriginalName: StoreScene
+>>>>>>> German
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -727,6 +699,9 @@ MonoBehaviour:
 =======
       m_UserData: 23932
 >>>>>>> Tom
+=======
+      m_UserData: 24240
+>>>>>>> German
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -743,7 +718,7 @@ MonoBehaviour:
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &17
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -763,17 +738,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 2306
+    x: 1947
     y: 73
-    width: 1133
-    height: 1278
-=======
-    x: 1933
-    y: 73
-    width: 626
+    width: 612
     height: 926
->>>>>>> German
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -791,7 +759,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
---- !u!114 &18
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -813,13 +781,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-<<<<<<< HEAD
-    width: 627
-    height: 788
-=======
-    width: 524
-    height: 571
->>>>>>> German
+    width: 480
+    height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -827,9 +790,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
       m_SelectedIDs: 
       m_LastClickedID: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       m_ExpandedIDs: 2af1ffff
@@ -844,6 +807,9 @@ MonoBehaviour:
 =======
       m_ExpandedIDs: b6faffff
 >>>>>>> Tom
+=======
+      m_ExpandedIDs: 9a44ffff2446ffffda47ffffc64dffff9652ffff3a67ffff6e68ffff0eacffff1eacffff82d3ffff2eedffff04fbffff765f00003c610000ba61000058620000826200008e6200002e970000449700006897000048a600008ea600009aa60000c8a60000f6a6000066ae000094ae0000ecb1000022b20000
+>>>>>>> German
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -859,7 +825,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 12}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -867,7 +833,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &19
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -887,17 +853,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 628
+    x: 481
     y: 73
-    width: 966
-    height: 788
-=======
-    x: 525
-    y: 73
-    width: 763
-    height: 571
->>>>>>> German
+    width: 854
+    height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1123,6 +1082,7 @@ MonoBehaviour:
   m_Position:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: {x: 353.4198, y: 758.8684, z: 5.659999}
 =======
     m_Target: {x: 659.21686, y: 1433.2758, z: -0.6759114}
@@ -1134,6 +1094,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 569.0195, y: 1039.2732, z: 4.9441676}
 >>>>>>> Tom
+=======
+    m_Target: {x: 91.54284, y: 1401.9498, z: -9.704402}
+    speed: 2
+    m_Value: {x: 91.54284, y: 1401.9498, z: -9.704402}
+>>>>>>> German
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1186,6 +1151,7 @@ MonoBehaviour:
   m_Size:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_Target: 1167.8777
 =======
     m_Target: 686.9082
@@ -1197,6 +1163,11 @@ MonoBehaviour:
     speed: 2
     m_Value: 1279.7925
 >>>>>>> Tom
+=======
+    m_Target: 1004.63135
+    speed: 2
+    m_Value: 1004.63135
+>>>>>>> German
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1221,7 +1192,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &20
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1242,14 +1213,14 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 665
-    width: 1932
-    height: 334
+    y: 706
+    width: 1946
+    height: 293
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
---- !u!114 &21
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1269,17 +1240,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1596
+    x: 1337
     y: 73
-    width: 708
-    height: 788
-=======
-    x: 1290
-    y: 73
-    width: 641
-    height: 571
->>>>>>> German
+    width: 608
+    height: 612
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1287,7 +1251,7 @@ MonoBehaviour:
   m_SerializedViewNames:
   - UnityEditor.DeviceSimulation.SimulatorWindow
   m_SerializedViewValues:
-  - D:\USUARIO\UNIVERSIDAD\Bootcamp\Aliens-Rescue-Github\Library\PlayModeViewStates\0152dac1171ebb3439aefd7e35349044
+  - D:\USUARIO\UNIVERSIDAD\Bootcamp\Aliens-Rescue-Github\Library\PlayModeViewStates\9c3c4323a4cd6d74ebc92750a5c6f176
   m_PlayModeViewName: GameView
   m_ShowGizmos: 0
   m_TargetDisplay: 0
@@ -1301,11 +1265,7 @@ MonoBehaviour:
   m_VSyncEnabled: 0
   m_Gizmos: 0
   m_Stats: 0
-<<<<<<< HEAD
-  m_SelectedSizes: 07000000000000000000000000000000000000000000000000000000000000000000000000000000
-=======
-  m_SelectedSizes: 0a000000000000000000000012000000000000000000000000000000000000000000000000000000
->>>>>>> German
+  m_SelectedSizes: 00000000000000000000000012000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
@@ -1333,6 +1293,7 @@ MonoBehaviour:
       x: 0
       y: 21
 <<<<<<< HEAD
+<<<<<<< HEAD
       width: 708
       height: 767
 <<<<<<< HEAD
@@ -1348,12 +1309,19 @@ MonoBehaviour:
     m_Scale: {x: 0.41041666, y: 0.41041666}
     m_Translation: {x: 354, y: 383.5}
 >>>>>>> Tom
+=======
+      width: 608
+      height: 591
+    m_Scale: {x: 0.3078125, y: 0.3078125}
+    m_Translation: {x: 304, y: 295.49997}
+>>>>>>> German
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
       x: -886.1538
@@ -1371,13 +1339,15 @@ MonoBehaviour:
   m_LastWindowPixelSize: {x: 708, y: 788}
 =======
       x: -1118.8363
+=======
+      x: -987.6142
+>>>>>>> German
       y: -959.9999
-      width: 2237.6726
+      width: 1975.2284
       height: 1919.9999
     m_MinimalGUI: 1
-  m_defaultScale: 0.28645834
-  m_LastWindowPixelSize: {x: 641, y: 571}
->>>>>>> German
+  m_defaultScale: 0.3078125
+  m_LastWindowPixelSize: {x: 608, y: 612}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000001000000000000

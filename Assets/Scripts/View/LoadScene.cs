@@ -72,6 +72,7 @@ public class LoadScene : MonoBehaviour
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
             while (!loadOperation.isDone)
             { yield return null; }
+            currentScene = SceneManager.GetSceneAt(0);
             Debug.Log("Despues carga");
             /*while (SceneManager.GetActiveScene().buildIndex != sceneIndex)
             {
@@ -89,17 +90,20 @@ public class LoadScene : MonoBehaviour
         Debug.Log("Eliminar scenes");
 
         camera.gameObject.SetActive(false);
-        currentScene = SceneManager.GetSceneAt(1);
+        
 
-        while (canvas.alpha > 0f)
+        /*while (canvas.alpha > 0f)
         {
             canvas.alpha -= Time.deltaTime;
             yield return null;
-        }
+        }*/
+
+        
 
         Debug.Log("fin");
 
         canvas.gameObject.SetActive(false);
+        currentScene = SceneManager.GetSceneAt(1);
         StopAllCoroutines();
         
     }
