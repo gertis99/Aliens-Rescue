@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopView : MonoBehaviour
@@ -13,6 +14,9 @@ public class ShopView : MonoBehaviour
 
     public ShopItemView shopItemPrefab;
     public Transform panel;
+
+    public TMP_Text gold;
+    public TMP_Text goldPerAd, goldPerBuy, priceGold;
 
     private void Awake()
     {
@@ -39,6 +43,16 @@ public class ShopView : MonoBehaviour
         {
             Instantiate(shopItemPrefab, panel).SetData(shopItemModel, OnPurchaseItem);
         }
+
+        goldPerAd.text = gameConfig.GoldPerAd.ToString();
+        goldPerBuy.text = gameConfig.GoldPerBuy.ToString();
+        UpdateInfo();
+        StartCoroutine(WaitForIAPReady());
+    }
+
+    private void UpdateInfo()
+    {
+        gold.text = gameProgression.GetCurrency("Gold").ToString();
     }
 
     private void OnPurchaseItem(ShopItemModel model)
@@ -46,4 +60,37 @@ public class ShopView : MonoBehaviour
         controller.PurchaseItem(model);
     }
 
+    public async void PlayAd()
+    {
+        if (await ServiceLocator.GetService<AdsGameService>().ShowAd())
+        {
+            gameProgression.UpdateCurrency("Gold", gameConfig.GoldPerAd);
+            UpdateInfo();
+        }
+    }
+
+    public async void PurchaseIAPGems()
+    {
+        if (await iapService.StartPurchase("test1"))
+        {
+            gameProgression.UpdateCurrency("Gold", gameConfig.GoldPerBuy);
+        }
+        else
+        {
+            Debug.LogError("Purchase failed");
+        }
+    }
+
+    IEnumerator WaitForIAPReady()
+    {
+        priceGold.text = "Loading...";
+        //_buyIAPGemsButton.interactable = false;
+        while (!iapService.IsReady())
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        //_buyIAPGemsButton.interactable = true;
+        priceGold.text = iapService.GetLocalizedPrice("test1");
+    }
 }

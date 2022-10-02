@@ -759,9 +759,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: StoreInfo, Assembly-CSharp
-        m_MethodName: BuyHorizontalBooster
+      - m_Target: {fileID: 2518917096545710443}
+        m_TargetAssemblyTypeName: ShopItemView, Assembly-CSharp
+        m_MethodName: OnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

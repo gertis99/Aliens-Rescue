@@ -19,6 +19,8 @@ public class GameConfigService : IService
     public List<CosmeticItemInfo> Cosmetics { get; private set; }
     public List<ColorHudItemInfo> HudColors { get; private set; }
     public List<ShopItemModel> ShopItems { get; private set; }
+    public List<InGameCurrency> InitialCurrencies { get; private set; }
+    public List<ActiveBoosterItemModel> InitialActiveBoosters { get; private set; }
 
 
     public void Initialize(RemoteConfigGameService dataProvider)
@@ -40,6 +42,9 @@ public class GameConfigService : IService
         Cosmetics = dataProvider.Get("Cosmetics", new List<CosmeticItemInfo>());
         HudColors = dataProvider.Get("HudColors", new List<ColorHudItemInfo>());
         ShopItems = dataProvider.Get("ShopItems", new List<ShopItemModel>());
+
+        InitialCurrencies = dataProvider.Get("InitialCurrencies", new List<InGameCurrency>());
+        InitialActiveBoosters = dataProvider.Get("InitialActiveBoosters", new List<ActiveBoosterItemModel>());
     }
 
     public void Clear()

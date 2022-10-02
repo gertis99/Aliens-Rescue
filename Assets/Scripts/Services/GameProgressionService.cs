@@ -105,11 +105,11 @@ public class GameProgressionService : IService
         string data = progressionProvider.Load();
         if (string.IsNullOrEmpty(data))
         {
-            Gold = config.InitialGold;
-            ActiveBoosters = new List<ActiveBoosterItemModel>();
+            Currencies = config.InitialCurrencies;
+            ActiveBoosters = config.InitialActiveBoosters;
             CurrentLevel = 1;
             HudColors = new List<ColorHudItemModel>();
-            HudColors.Add(new ColorHudItemModel { Name = "OragneHud", Selected = true });
+            HudColors.Add(new ColorHudItemModel { Name = "Orange", Selected = true });
             Cosmetics = new List<CosmeticItemModel>();
             Debug.Log("CC");
             Save();
