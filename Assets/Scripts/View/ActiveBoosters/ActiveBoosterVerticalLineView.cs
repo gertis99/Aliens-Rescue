@@ -16,7 +16,7 @@ public class ActiveBoosterVerticalLineView : ActiveBoosterView
                 {
                     controller.ActiveBoosterLineVertical(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
-                    gameProgression.UpdateVerticalLineBoosters(-1);
+                    gameProgression.UpdateActiveBooster("VerticalLineBooster", -1);
                     GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
                 }

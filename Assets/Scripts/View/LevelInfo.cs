@@ -19,13 +19,13 @@ public class LevelInfo : MonoBehaviour
     private void Awake()
     {
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
-        horizotntalBooster.boostersLeft = gameProgression.HorizontalLineBoosters;
-        verticalBooster.boostersLeft = gameProgression.VerticalLineBoosters;
-        bombBooster.boostersLeft = gameProgression.BombBoosters;
-        colorBombBooster.boostersLeft = gameProgression.ColorBombBoosters;
-        currentHUDColor = gameProgression.currentHUDColor;
+        horizotntalBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("HorizontalLineBooster");
+        verticalBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("VerticalLineBooster");
+        bombBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("BombBooster");
+        colorBombBooster.boostersLeft = gameProgression.GetActiveBoosterAmount("ColorBombBooster");
+        /*currentHUDColor = gameProgression.currentHUDColor;
 
-        HUD.sprite = huds[(int)currentHUDColor];
+        HUD.sprite = huds[(int)currentHUDColor];*/
     }
 
     void Start()

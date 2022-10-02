@@ -16,7 +16,7 @@ public class ActiveBoosterHorizontalLineView : ActiveBoosterView
                 {
                     controller.ActiveBoosterLineHorizontal(hitData.collider.gameObject.transform.position);
                     boostersLeft--;
-                    gameProgression.UpdateHorizontalLineBoosters(-1);
+                    gameProgression.UpdateActiveBooster("HorizontalLineBooster", -1);
                     GetComponentInChildren<TMPro.TextMeshProUGUI>().text = boostersLeft.ToString();
                     isActivated = false;
                 }

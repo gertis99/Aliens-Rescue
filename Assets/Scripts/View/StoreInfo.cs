@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class StoreInfo : MonoBehaviour
 {
-    private GameConfigService gameConfig;
+    /*private GameConfigService gameConfig;
     private GameProgressionService gameProgression;
     private AdsGameService adsService;
     private AnalyticsGameService analytics;
@@ -190,6 +190,6 @@ public class StoreInfo : MonoBehaviour
 
         //_buyIAPGemsButton.interactable = true;
         textPriceGold.text = iapService.GetLocalizedPrice("test1");
-    }
+    }*/
 
 }

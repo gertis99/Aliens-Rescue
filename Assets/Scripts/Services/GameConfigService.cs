@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+
 public class GameConfigService : IService
 {
     public int InitialGold { get; private set; }
@@ -13,6 +15,10 @@ public class GameConfigService : IService
     public int PriceHUDColors { get; private set; }
     public int GoldPerAd { get; private set; }
     public int GoldPerBuy { get; private set; }
+    public List<ActiveBoosterItemInfo> ActiveBoosters { get; private set; }
+    public List<CosmeticItemInfo> Cosmetics { get; private set; }
+    public List<ColorHudItemInfo> HudColors { get; private set; }
+    public List<ShopItemModel> ShopItems { get; private set; }
 
 
     public void Initialize(RemoteConfigGameService dataProvider)
@@ -29,6 +35,11 @@ public class GameConfigService : IService
         PriceHUDColors = dataProvider.Get("PriceHUDColors", 10);
         GoldPerAd = dataProvider.Get("GoldPerAd", 50);
         GoldPerBuy = dataProvider.Get("GoldPerBuy", 500);
+
+        ActiveBoosters = dataProvider.Get("ActiveBoosters", new List<ActiveBoosterItemInfo>());
+        Cosmetics = dataProvider.Get("Cosmetics", new List<CosmeticItemInfo>());
+        HudColors = dataProvider.Get("HudColors", new List<ColorHudItemInfo>());
+        ShopItems = dataProvider.Get("ShopItems", new List<ShopItemModel>());
     }
 
     public void Clear()

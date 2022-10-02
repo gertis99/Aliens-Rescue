@@ -31,10 +31,10 @@ public class AlienCosmeticView : MonoBehaviour
             cosAux.GetComponent<CosmeticPrefab>().Id = cosmetics[i].id;
             buttons[i] = cosAux;
 
-            if (gameProgressionService.cosmeticsBought[cosAux.GetComponent<CosmeticPrefab>().Id] > 0)
+            /*if (gameProgressionService.cosmeticsBought[cosAux.GetComponent<CosmeticPrefab>().Id] > 0)
                 buttons[i].GetComponent<Button>().interactable = true;
             else
-                buttons[i].GetComponent<Button>().interactable = false;
+                buttons[i].GetComponent<Button>().interactable = false;*/
         }
     }
 

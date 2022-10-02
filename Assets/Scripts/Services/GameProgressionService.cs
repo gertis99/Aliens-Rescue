@@ -8,12 +8,10 @@ public class GameProgressionService : IService
 {
     public int Gold;
     public int CurrentLevel;
-    public int HorizontalLineBoosters;
-    public int VerticalLineBoosters;
-    public int BombBoosters;
-    public int ColorBombBoosters;
-    public HUDColors currentHUDColor;
-    public int[] cosmeticsBought; // pos = id, number of items
+    public List<ActiveBoosterItemModel> ActiveBoosters;
+    public List<CosmeticItemModel> Cosmetics;
+    public List<ColorHudItemModel> HudColors;
+    public List<InGameCurrency> Currencies;
 
     private IGameProgressionProvider progressionProvider;
 
@@ -29,28 +27,19 @@ public class GameProgressionService : IService
         Save();
     }
 
-    public void UpdateHorizontalLineBoosters(int amount)
+    public void UpdateActiveBooster(string name, int amount)
     {
-        HorizontalLineBoosters += amount;
-        //OnInventoryChanged?.Invoke();
-        Save();
-    }
+        foreach(ActiveBoosterItemModel boosterItem in ActiveBoosters)
+        {
+            if(boosterItem.Name == name)
+            {
+                boosterItem.Amount += amount;
+                Save();
+                return;
+            }
+        }
 
-    public void UpdateVerticalLineBoosters(int amount)
-    {
-        VerticalLineBoosters += amount;
-        Save();
-    }
-
-    public void UpdateBombBoosters(int amount)
-    {
-        BombBoosters += amount;
-        Save();
-    }
-
-    public void UpdateColorBombBoosters(int amount)
-    {
-        ColorBombBoosters += amount;
+        ActiveBoosters.Add(new ActiveBoosterItemModel { Name = name, Amount = amount });
         Save();
     }
 
@@ -60,15 +49,49 @@ public class GameProgressionService : IService
         Save();
     }
 
-    public void UpdateHUDColor(HUDColors color)
+    public void UpdateColorHud(string name, bool selected)
     {
-        currentHUDColor = color;
+        foreach (ColorHudItemModel colorHudItem in HudColors)
+        {
+            if (colorHudItem.Name == name)
+            {
+                colorHudItem.Selected = selected;
+                Save();
+                return;
+            }
+        }
+
+        HudColors.Add(new ColorHudItemModel { Name = name, Selected = selected });
         Save();
     }
 
-    public void UpdateCosmetics(int id, int number)
+    public void UpdateCosmetic(string name, int amountPurchased, int amountAvailable)
     {
-        cosmeticsBought[id] += number;
+        foreach (CosmeticItemModel cosmeticItem in Cosmetics)
+        {
+            if (cosmeticItem.Name == name)
+            {
+                cosmeticItem.AmountPurchased += amountPurchased;
+                cosmeticItem.AmountAvailable += amountAvailable;
+                Save();
+                return;
+            }
+        }
+
+        Cosmetics.Add(new CosmeticItemModel { Name = name, AmountPurchased = amountPurchased, AmountAvailable = amountAvailable });
+        Save();
+    }
+
+    public void UpdateCurrency(string name, int amount)
+    {
+        foreach(InGameCurrency currency in Currencies)
+        {
+            if(currency.Name == name)
+            {
+                currency.Amount += amount;
+            }
+        }
+
         Save();
     }
 
@@ -83,13 +106,11 @@ public class GameProgressionService : IService
         if (string.IsNullOrEmpty(data))
         {
             Gold = config.InitialGold;
-            HorizontalLineBoosters = config.InitialHorizontalLineBooster;
-            VerticalLineBoosters = config.InitialVerticalLineBooster;
-            BombBoosters = config.InitialBombBooster;
-            ColorBombBoosters = config.InitialColorBombBooster;
+            ActiveBoosters = new List<ActiveBoosterItemModel>();
             CurrentLevel = 1;
-            currentHUDColor = HUDColors.ORANGE;
-            cosmeticsBought = new int[6];
+            HudColors = new List<ColorHudItemModel>();
+            HudColors.Add(new ColorHudItemModel { Name = "OragneHud", Selected = true });
+            Cosmetics = new List<CosmeticItemModel>();
             Debug.Log("CC");
             Save();
         }
@@ -101,12 +122,54 @@ public class GameProgressionService : IService
     }
 //end of save and load
 
-    public int GetNumberItemsById(int id)
+    public int GetCurrency(string name)
     {
-        if (id < cosmeticsBought.Length)
-            return cosmeticsBought[id];
+        foreach(InGameCurrency curreny in Currencies)
+        {
+            if (curreny.Name == name)
+                return curreny.Amount;
+        }
 
         return 0;
+    }
+
+    public int GetCosmeticAmount(string name)
+    {
+        foreach(CosmeticItemModel cosmetic in Cosmetics)
+        {
+            if(cosmetic.Name == name)
+            {
+                return cosmetic.AmountPurchased;
+            }
+        }
+
+        return 0;
+    }
+
+    public int GetActiveBoosterAmount(string name)
+    {
+        foreach (ActiveBoosterItemModel booster in ActiveBoosters)
+        {
+            if (booster.Name == name)
+            {
+                return booster.Amount;
+            }
+        }
+
+        return 0;
+    }
+
+    public bool IsHudColorActive(string name)
+    {
+        foreach(ColorHudItemModel colorHud in HudColors)
+        {
+            if(colorHud.Name == name)
+            {
+                return colorHud.Selected;
+            }
+        }
+
+        return false;
     }
 
     public void Clear()
