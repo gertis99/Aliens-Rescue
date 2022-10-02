@@ -58,6 +58,7 @@ public class ShopView : MonoBehaviour
     private void OnPurchaseItem(ShopItemModel model)
     {
         controller.PurchaseItem(model);
+        UpdateInfo();
     }
 
     public async void PlayAd()

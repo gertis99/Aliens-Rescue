@@ -62,7 +62,7 @@ public class ShopItemView : MonoBehaviour
 
     public void OnClicked()
     {
-        if(model != null && selected.activeInHierarchy && CanPay())
+        if(model != null && !selected.activeInHierarchy && CanPay())
         {
             onClickedEvent?.Invoke(model);
             UpdateVisuals();
