@@ -6,7 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class GameProgressionService : IService
 {
-    public int Gold;
     public int CurrentLevel;
     public List<ActiveBoosterItemModel> ActiveBoosters;
     public List<CosmeticItemModel> Cosmetics;
@@ -19,12 +18,6 @@ public class GameProgressionService : IService
     {
         this.progressionProvider = progressionProvider;
         Load(gameConfig);
-    }
-
-    public void UpdateGold(int amount)
-    {
-        Gold += amount;
-        Save();
     }
 
     public void UpdateActiveBooster(string name, int amount)
