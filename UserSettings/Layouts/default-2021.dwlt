@@ -78,6 +78,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 49
 =======
   controlID: 71
@@ -91,6 +92,9 @@ MonoBehaviour:
 =======
   controlID: 137
 >>>>>>> German
+=======
+  controlID: 101
+>>>>>>> Tom
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -270,6 +274,7 @@ MonoBehaviour:
   vertical: 1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   controlID: 106
 =======
     width: 1933
@@ -292,6 +297,9 @@ MonoBehaviour:
 =======
   controlID: 105
 >>>>>>> German
+=======
+  controlID: 107
+>>>>>>> Tom
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -327,6 +335,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
+<<<<<<< HEAD
   controlID: 73
 >>>>>>> German
 =======
@@ -338,6 +347,9 @@ MonoBehaviour:
 =======
   controlID: 106
 >>>>>>> German
+=======
+  controlID: 108
+>>>>>>> Tom
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -515,6 +527,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Images/Buttons
 =======
     - Assets/Scripts/Services
@@ -528,11 +541,15 @@ MonoBehaviour:
 =======
     - Assets/Prefabs
 >>>>>>> German
+=======
+    - Assets/Images
+>>>>>>> Tom
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -550,12 +567,16 @@ MonoBehaviour:
 =======
   - Assets/Prefabs
 >>>>>>> German
+=======
+  - Assets/Images
+>>>>>>> Tom
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\USUARIO\UNIVERSIDAD\Bootcamp\Aliens-Rescue-Github
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -583,6 +604,11 @@ MonoBehaviour:
     m_LastClickedID: 24106
     m_ExpandedIDs: 00000000f05d0000265e0000305e00003a5e00003c5e0000425e000050720000
 >>>>>>> German
+=======
+    m_SelectedIDs: a65d0000
+    m_LastClickedID: 23974
+    m_ExpandedIDs: 00000000985d000000ca9a3b
+>>>>>>> Tom
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -614,6 +640,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000e4660000
 =======
     m_ExpandedIDs: 00000000585d00005a5d00005c5d00005e5d0000605d0000625d0000
@@ -627,6 +654,9 @@ MonoBehaviour:
 =======
     m_ExpandedIDs: 00000000f05d0000
 >>>>>>> German
+=======
+    m_ExpandedIDs: 00000000985d0000
+>>>>>>> Tom
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -661,6 +691,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_Name: OrangeAlien
       m_OriginalName: OrangeAlien
 =======
@@ -679,12 +710,17 @@ MonoBehaviour:
       m_Name: StoreScene
       m_OriginalName: StoreScene
 >>>>>>> German
+=======
+      m_Name: 
+      m_OriginalName: 
+>>>>>>> Tom
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -702,9 +738,12 @@ MonoBehaviour:
 =======
       m_UserData: 24240
 >>>>>>> German
+=======
+      m_UserData: 0
+>>>>>>> Tom
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:
@@ -714,7 +753,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 186}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
@@ -790,8 +829,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 325e0000
       m_LastClickedID: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -810,6 +850,9 @@ MonoBehaviour:
 =======
       m_ExpandedIDs: 9a44ffff2446ffffda47ffffc64dffff9652ffff3a67ffff6e68ffff0eacffff1eacffff82d3ffff2eedffff04fbffff765f00003c610000ba61000058620000826200008e6200002e970000449700006897000048a600008ea600009aa60000c8a60000f6a6000066ae000094ae0000ecb1000022b20000
 >>>>>>> German
+=======
+      m_ExpandedIDs: 2cfbffff
+>>>>>>> Tom
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
