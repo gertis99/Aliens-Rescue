@@ -2286,13 +2286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd32ac3c221c804984c7564451d2a56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aliens:
-  - {fileID: 11400000, guid: d2c2e5309864f4f45bd7bba2d43e0792, type: 2}
-  - {fileID: 11400000, guid: fb9dd859ca25e604aa349a1376ebc353, type: 2}
-  - {fileID: 11400000, guid: a350f09706a374349b6631ceb7af1ce2, type: 2}
-  - {fileID: 11400000, guid: c8cd6fbb221859840914bf4d27628788, type: 2}
-  - {fileID: 11400000, guid: 5d647f449a3a9264e976a2d57a66cde9, type: 2}
-  - {fileID: 11400000, guid: f7de3e15e63bb724aa2255cbed07ff51, type: 2}
+  panel: {fileID: 1527137576}
+  alienButtonPrefab: {fileID: -5954253392899519513, guid: 7f4075d07d26d7141875dd217bff2e01, type: 3}
 --- !u!114 &2042425852
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,17 +4,35 @@ using UnityEngine;
 
 public class AliensSceneView : MonoBehaviour
 {
-    public AlienView[] aliens;
+    [SerializeField]
+    private Transform panel;
+    [SerializeField]
+    private AlienSelectorView alienButtonPrefab;
 
-    public void ClickOnAlien(int id)
+    private GameConfigService gameConfig;
+
+    private void Awake()
     {
-        for(int i = 0; i < aliens.Length; i++)
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+    }
+
+    private void Start()
+    {
+        while (panel.childCount > 0)
         {
-            if(aliens[i].id == id)
-            {
-                AlienCosmeticView.currentSprite= aliens[i].sprite;
-                return;
-            }
+            Transform child = panel.GetChild(0);
+            child.SetParent(null);
+            Destroy(child.gameObject);
         }
+
+        foreach (AliensInfo alienModel in gameConfig.Aliens)
+        {
+            Instantiate(alienButtonPrefab, panel).SetData(alienModel, OnClickedAlien);
+        }
+    }
+
+    private void OnClickedAlien(int id)
+    {
+        AlienCosmeticView.currentAlienId = id;
     }
 }

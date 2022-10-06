@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f787384746907704ba873c4478be25fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentAlien: {fileID: 358509835}
+  currentAlienImage: {fileID: 358509835}
   cosmetics:
   - {fileID: 11400000, guid: a9f7934022f79d74e8a6ba69303ec750, type: 2}
   - {fileID: 11400000, guid: 7b0d72474770adc48b223bfaa4e9cc65, type: 2}

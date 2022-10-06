@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class AlienCosmeticView : MonoBehaviour
 {
-    public Image currentAlien;
-    public static Sprite currentSprite;
+    public Image currentAlienImage;
+    public static int currentAlienId;
     public Cosmetic[] cosmetics;
     public GameObject panel;
     public GameObject cosmeticPrefab;
@@ -23,7 +23,15 @@ public class AlienCosmeticView : MonoBehaviour
 
     private void Start()
     {
-        currentAlien.sprite = currentSprite;
+        foreach(AliensInfo alienInfo in gameConfigService.Aliens)
+        {
+            if(alienInfo.Id == currentAlienId)
+            {
+                currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
+                break;
+            }
+        }
+        
         buttons = new GameObject[cosmetics.Length];
 
         for (int i = 0; i < gameProgressionService.Cosmetics.Count; i++)
