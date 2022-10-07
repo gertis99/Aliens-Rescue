@@ -21,7 +21,7 @@ public class GameConfigService : IService
     public List<ShopItemModel> ShopItems { get; private set; }
     public List<InGameCurrency> InitialCurrencies { get; private set; }
     public List<ActiveBoosterItemModel> InitialActiveBoosters { get; private set; }
-    public List<AliensInfo> Aliens { get; private set; }
+    public List<AlienInfo> Aliens { get; private set; }
 
 
     public void Initialize(RemoteConfigGameService dataProvider)
@@ -43,10 +43,21 @@ public class GameConfigService : IService
         Cosmetics = dataProvider.Get("Cosmetics", new List<CosmeticItemInfo>());
         HudColors = dataProvider.Get("HudColors", new List<ColorHudItemInfo>());
         ShopItems = dataProvider.Get("ShopItems", new List<ShopItemModel>());
-        Aliens = dataProvider.Get("Aliens", new List<AliensInfo>());
+        Aliens = dataProvider.Get("Aliens", new List<AlienInfo>());
 
         InitialCurrencies = dataProvider.Get("InitialCurrencies", new List<InGameCurrency>());
         InitialActiveBoosters = dataProvider.Get("InitialActiveBoosters", new List<ActiveBoosterItemModel>());
+    }
+
+    public AlienInfo GetAlienInfo(int id)
+    {
+        foreach(AlienInfo alien in Aliens)
+        {
+            if (alien.Id == id)
+                return alien;
+        }
+
+        return null;
     }
 
     public void Clear()

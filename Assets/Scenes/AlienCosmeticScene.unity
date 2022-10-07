@@ -1031,5 +1031,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28bdbd4496af7c646b5bac89b4c39290, type: 2}
   - {fileID: 11400000, guid: ef588e6a690079e40b6a17743d760ea3, type: 2}
   - {fileID: 11400000, guid: 59b3a7e04a2817f47877c18f4829b00d, type: 2}
-  panel: {fileID: 1527137575}
-  cosmeticPrefab: {fileID: 2850165200563466959, guid: 40470edd6a1382b45bfabb7565bda84f, type: 3}
+  panel: {fileID: 1527137576}
+  cosmeticPrefab: {fileID: -5283291348667710773, guid: 40470edd6a1382b45bfabb7565bda84f, type: 3}

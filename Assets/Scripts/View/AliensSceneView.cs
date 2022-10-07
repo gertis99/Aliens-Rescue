@@ -25,7 +25,7 @@ public class AliensSceneView : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        foreach (AliensInfo alienModel in gameConfig.Aliens)
+        foreach (AlienInfo alienModel in gameConfig.Aliens)
         {
             Instantiate(alienButtonPrefab, panel).SetData(alienModel, OnClickedAlien);
         }

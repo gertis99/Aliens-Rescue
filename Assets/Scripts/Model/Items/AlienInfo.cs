@@ -1,5 +1,5 @@
  [System.Serializable]
-public class AliensInfo
+public class AlienInfo
 {
     public int Id;
     public string Name;

@@ -16,7 +16,7 @@ public class AlienSelectorView : MonoBehaviour
         
     }
 
-    public void SetData(AliensInfo model, Action<int> onClickedEvent)
+    public void SetData(AlienInfo model, Action<int> onClickedEvent)
     {
         alienId = model.Id;
         image.sprite = Resources.Load<Sprite>(model.Image);

@@ -8,12 +8,15 @@ public class AlienCosmeticView : MonoBehaviour
     public Image currentAlienImage;
     public static int currentAlienId;
     public Cosmetic[] cosmetics;
-    public GameObject panel;
-    public GameObject cosmeticPrefab;
-    private GameObject[] buttons;
+    public Transform panel;
+    public CosmeticPrefab cosmeticPrefab;
+
+    private AlienCosmeticController controller;
 
     private GameProgressionService gameProgressionService;
     private GameConfigService gameConfigService;
+
+    private List<CosmeticPrefab> cosmeticsPrefab = new List<CosmeticPrefab>();
 
     private void Awake()
     {
@@ -23,38 +26,60 @@ public class AlienCosmeticView : MonoBehaviour
 
     private void Start()
     {
-        foreach(AliensInfo alienInfo in gameConfigService.Aliens)
+        controller = new AlienCosmeticController();
+
+        
+
+        foreach(CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
         {
-            if(alienInfo.Id == currentAlienId)
+            CosmeticPrefab cosAux = Instantiate(cosmeticPrefab, panel);
+            cosAux.SetData(cosmetic, currentAlienId, OnCosmeticClicked);
+            cosmeticsPrefab.Add(cosAux);
+        }
+
+        foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
+        {
+            if (cosmetic.SelectedAliensIds.Contains(currentAlienId)){
+                currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
+                return;
+            }
+        }
+
+        foreach (AlienInfo alienInfo in gameConfigService.Aliens)
+        {
+            if (alienInfo.Id == currentAlienId)
             {
                 currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
                 break;
             }
         }
-        
-        buttons = new GameObject[cosmetics.Length];
-
-        for (int i = 0; i < gameProgressionService.Cosmetics.Count; i++)
-        {
-            GameObject cosAux = Instantiate(cosmeticPrefab, panel.transform);
-
-            foreach(CosmeticItemInfo cosmeticInfo in gameConfigService.Cosmetics)
-            {
-                if(cosmeticInfo.CosmeticName == gameProgressionService.Cosmetics[i].Name)
-                {
-                    cosAux.GetComponent<CosmeticPrefab>().SetSprite(Resources.Load<Sprite>(cosmeticInfo.Image));
-                    //cosAux.GetComponent<CosmeticPrefab>().Id = cosmetics[i].id;
-                    //buttons[i] = cosAux;
-                    break;
-                }
-            }
-
-            /*if (gameProgressionService.cosmeticsBought[cosAux.GetComponent<CosmeticPrefab>().Id] > 0)
-                buttons[i].GetComponent<Button>().interactable = true;
-            else
-                buttons[i].GetComponent<Button>().interactable = false;*/
-        }
     }
 
+    private void OnCosmeticClicked(string cosmeticName, int alienId)
+    {
+        controller.SelectedCosmetic(cosmeticName, alienId);
 
+        foreach(CosmeticPrefab cosmetic in cosmeticsPrefab)
+        {
+            cosmetic.UpdateVisuals();
+        }
+
+        foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
+        {
+            if (cosmetic.SelectedAliensIds.Contains(currentAlienId))
+            {
+                currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
+                return;
+            }
+        }
+
+        foreach (AlienInfo alienInfo in gameConfigService.Aliens)
+        {
+            if (alienInfo.Id == currentAlienId)
+            {
+                currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
+                break;
+            }
+        }
+    }
 }
