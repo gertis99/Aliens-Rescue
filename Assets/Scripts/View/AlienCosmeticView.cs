@@ -28,8 +28,6 @@ public class AlienCosmeticView : MonoBehaviour
     {
         controller = new AlienCosmeticController();
 
-        
-
         foreach(CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
         {
             CosmeticPrefab cosAux = Instantiate(cosmeticPrefab, panel);
