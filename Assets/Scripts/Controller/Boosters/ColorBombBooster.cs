@@ -23,7 +23,7 @@ public class ColorBombBooster : ABooster
         {
             for(int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
-                if (((Alien)gridModel.GridLevel[i, j]).GetElementType() == alienType)
+                if (gridModel.GridLevel[i, j] != null && ((Alien)gridModel.GridLevel[i, j]).GetElementType() == alienType)
                 {
                     elements.Add(gridModel.GridLevel[i, j]);
                     LevelController.levelControllerInstance.DestroyCell(i, j, false);

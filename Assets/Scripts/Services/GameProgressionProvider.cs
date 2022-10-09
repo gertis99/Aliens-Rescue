@@ -25,17 +25,17 @@ public class GameProgressionProvider : IGameProgressionProvider
         string localData = _local.Load();
         string remoteData = _remote.Load();
 
-        if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
+        /*if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
         {
             return remoteData;
-        }
+        }*/
 
         if (!string.IsNullOrEmpty(localData) && string.IsNullOrEmpty(remoteData))
         {
             return localData;
         }
 
-        FileSaveComparator fileSave = new FileSaveComparator();
+        /*FileSaveComparator fileSave = new FileSaveComparator();
         RemoteSaveComparator remoteSave = new RemoteSaveComparator();
         JsonUtility.FromJsonOverwrite(localData, fileSave);
         JsonUtility.FromJsonOverwrite(localData, remoteSave);
@@ -88,7 +88,7 @@ public class GameProgressionProvider : IGameProgressionProvider
             return localData;
 
         if (fileSave.Currencies[0].Amount < remoteSave.Currencies[0].Amount)
-            return remoteData;
+            return remoteData;*/
 
         // If it is the same
         return localData;

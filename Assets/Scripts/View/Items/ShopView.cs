@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopView : MonoBehaviour
 {
@@ -75,6 +76,7 @@ public class ShopView : MonoBehaviour
         if (await iapService.StartPurchase("test1"))
         {
             gameProgression.UpdateCurrency("Gold", gameConfig.GoldPerBuy);
+            UpdateInfo();
         }
         else
         {

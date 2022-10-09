@@ -492,7 +492,7 @@ public class LevelController
         // Check horizontal
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX())
+            if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX() && gridModel.GridLevel[row - pos, col] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
                 {
@@ -519,7 +519,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX())
+            if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX() && gridModel.GridLevel[row + pos, col] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
                 {
@@ -547,7 +547,7 @@ public class LevelController
         // Check vertical
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY())
+            if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY() && gridModel.GridLevel[row, col - pos] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
                 {
@@ -573,7 +573,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY())
+            if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY() && gridModel.GridLevel[row, col + pos] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
                 {
@@ -617,6 +617,9 @@ public class LevelController
     // Check the match of the element given and make it
     private bool CheckMatch(Alien element, int row, int col)
     {
+        if (element == null || element is not Alien)
+            return false;
+
         bool res = false;
 
         List<Element> sameColorVertical = new List<Element>();
@@ -632,7 +635,7 @@ public class LevelController
         // Check horizontal
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row - pos, col))
+            if (gridModel.IsOnGrid(row - pos, col) && gridModel.GridLevel[row - pos, col] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
                 {
@@ -656,7 +659,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row + pos, col))
+            if (gridModel.IsOnGrid(row + pos, col) && gridModel.GridLevel[row + pos, col] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
                 {
@@ -680,7 +683,7 @@ public class LevelController
         // Check vertical
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row, col - pos))
+            if (gridModel.IsOnGrid(row, col - pos) && gridModel.GridLevel[row, col - pos] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
                 {
@@ -703,7 +706,7 @@ public class LevelController
 
         while (sameColor)
         {
-            if (gridModel.IsOnGrid(row, col + pos))
+            if (gridModel.IsOnGrid(row, col + pos) && gridModel.GridLevel[row, col + pos] is Alien)
             {
                 if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
                 {
