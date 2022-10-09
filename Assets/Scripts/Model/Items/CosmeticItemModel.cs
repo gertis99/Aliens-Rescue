@@ -6,5 +6,5 @@ public class CosmeticItemModel
     public string Name;
     public int AmountPurchased;
     public int AmountAvailable;
-    public List<int> SelectedAliensIds;
+    public List<int> SelectedAliensIds = new List<int>();
 }

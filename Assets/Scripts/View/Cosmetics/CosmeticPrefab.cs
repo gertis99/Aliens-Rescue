@@ -65,6 +65,6 @@ public class CosmeticPrefab : MonoBehaviour
     public void OnClicked()
     {
         onClickedEvent?.Invoke(model.Name, alienId);
-        gameProgression.Save();
+        //gameProgression.Save();
     }
 }
