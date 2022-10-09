@@ -3250,7 +3250,7 @@ MonoBehaviour:
   win: {fileID: 1318201659}
   lose: {fileID: 348819473}
   movementsText: {fileID: 2113690173}
-  winCondition: 1
+  winCondition: 20
   movements: 15
   maxMovements: 15
 --- !u!114 &1096394266
@@ -4966,7 +4966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aabd8678d26fb24e95e945865f2c4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  condition: 1
+  condition: 20
   level: 1
   colorPoints: 000000000000000000000000000000000000000000000000
 --- !u!114 &1745555486
