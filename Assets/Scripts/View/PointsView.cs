@@ -10,20 +10,39 @@ public class PointsView : MonoBehaviour
     public TMPro.TextMeshProUGUI[] pointsTextFinish = new TMPro.TextMeshProUGUI[6];
     public GameObject win;
     public TMPro.TextMeshProUGUI lose, movementsText;
-    public int winCondition = 20, movements = 15, maxMovements = 15;
+    public int winCondition = 1, movements = 1, maxMovements = 1;
+
+    private GameConfigService gameConfig;
+
+    private void Awake()
+    {
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+    }
 
     private void Start()
     {
-        for(int i=0; i < pointsText.Length; i++)
+        foreach (LevelInfo level in gameConfig.Levels)
+        {
+            if (level.Id == PlayerPrefs.GetInt("LevelToLoad", 1))
+            {
+                maxMovements = level.Movements;
+                winCondition = level.Goal;
+                break;
+            }
+        }
+
+        for (int i=0; i < pointsText.Length; i++)
         {
             pointsText[i].text = 0 + "/" + winCondition;
         }
+
+        movements = maxMovements;
 
         movementsText.text = movements.ToString(); 
 
         WinController.OnPointsChanged += AddPoint;
         WinController.OnWinChecked += ActiveWin;
-        LevelController.OnMoveDone += MoveDone;
+        LoseController.OnMoveDone += MoveDone;
         LoseController.OnLoseChecked += ActiveLose;
     }
 
@@ -31,7 +50,7 @@ public class PointsView : MonoBehaviour
     {
         WinController.OnPointsChanged -= AddPoint;
         WinController.OnWinChecked -= ActiveWin;
-        LevelController.OnMoveDone -= MoveDone;
+        LoseController.OnMoveDone -= MoveDone;
         LoseController.OnLoseChecked -= ActiveLose;
     }
 

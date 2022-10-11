@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinController : MonoBehaviour
+public class WinController
 {
     public delegate void WinChecked();
     public delegate void PointsChanged(int number, int color);
@@ -11,21 +11,29 @@ public class WinController : MonoBehaviour
     public static event PointsChanged OnPointsChanged;
 
 
-    public int condition;
-    public int level;   
+    private int condition = 1;
     public int[] colorPoints = new int[6];
 
     private GameProgressionService gameProgression;
+    private GameConfigService gameConfig;
 
-    private void Awake()
+    private LevelController levelController;
+
+    public WinController(LevelController controller)
     {
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
-        LevelController.OnCheckedMatch += AddPoints;
-    }
-
-    private void OnDisable()
-    {
-        LevelController.OnCheckedMatch -= AddPoints;
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+        levelController = controller;
+        levelController.OnCheckedMatch += AddPoints;
+        
+        foreach(LevelInfo level in gameConfig.Levels)
+        {
+            if(level.Id == PlayerPrefs.GetInt("LevelToLoad", 1))
+            {
+                condition = level.Goal;
+                break;
+            }
+        }
     }
 
     public void AddPoints(Alien element)
@@ -58,7 +66,7 @@ public class WinController : MonoBehaviour
                 coinsGained += colorPoints[i] - condition;
         }
         OnWinChecked();
-        if (gameProgression.CurrentLevel == level)
+        if (gameProgression.CurrentLevel == PlayerPrefs.GetInt("LevelToLoad", 1))
             gameProgression.UpdateCurrentLevel(1);
         gameProgression.UpdateCurrency("Gold", coinsGained);
     }

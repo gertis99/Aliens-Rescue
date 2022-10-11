@@ -3,26 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoseController : MonoBehaviour
+public class LoseController
 {
     public delegate void LoseChecked();
     public static event LoseChecked OnLoseChecked;
-    public int nMovements;
+    public int nMovements = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    private LevelController levelController;
+    private GameConfigService gameConfig;
+
+    public static event Action OnMoveDone;
+
+    public LoseController(LevelController controller)
     {
-        LevelController.OnMoveDone += MoveDone;
-    }
+        levelController = controller;
+        levelController.OnMoveDone += MoveDone;
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
 
-    private void OnDisable()
-    {
-        LevelController.OnMoveDone -= MoveDone;
+        foreach (LevelInfo level in gameConfig.Levels)
+        {
+            if (level.Id == PlayerPrefs.GetInt("LevelToLoad", 1))
+            {
+                nMovements = level.Movements;
+                break;
+            }
+        }
     }
-
+    
     private void MoveDone()
     {
         nMovements--;
+        OnMoveDone();
         if(nMovements <= 0)
         {
             OnLoseChecked();

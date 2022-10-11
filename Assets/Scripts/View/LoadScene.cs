@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
@@ -14,11 +13,15 @@ public class LoadScene : MonoBehaviour
     {
         //LoadThisScene(1);
         ButtonLoadScene.OnLoadButtonClicked += LoadThisScene;
+        ButtonLoadLevel.OnLoadLevelButtonClicked += LoadThisLevel;
+        ButtonLoadAlienCosmetic.OnLoadAlienCosmeticButtonClicked += LoadThisAlienCosmetic;
     }
 
     private void OnDisable()
     {
         ButtonLoadScene.OnLoadButtonClicked -= LoadThisScene;
+        ButtonLoadLevel.OnLoadLevelButtonClicked -= LoadThisLevel;
+        ButtonLoadAlienCosmetic.OnLoadAlienCosmeticButtonClicked -= LoadThisAlienCosmetic;
     }
 
 
@@ -26,6 +29,18 @@ public class LoadScene : MonoBehaviour
     {
         Debug.Log("Pulsado");
         StartCoroutine(LoadSceneAsync(sceneIndex));
+    }
+
+    public void LoadThisLevel(int levelId)
+    {
+        PlayerPrefs.SetInt("LevelToLoad", levelId);
+        LoadThisScene(2);
+    }
+
+    public void LoadThisAlienCosmetic(int alienId)
+    {
+        PlayerPrefs.SetInt("AlienToLoad", alienId);
+        LoadThisScene(6);
     }
 
     private IEnumerator DescativateButtons(int sceneIndex)

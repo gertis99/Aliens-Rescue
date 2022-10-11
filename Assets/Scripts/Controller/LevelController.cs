@@ -19,10 +19,9 @@ public class LevelController
 
     public delegate void SwapDone(Element[,] grid);
     public delegate void CheckedMatch(Alien element);
-    public delegate void MoveDone();
     public static event SwapDone OnSwapDone = Grid => { };
-    public static event CheckedMatch OnCheckedMatch;
-    public static event MoveDone OnMoveDone;
+    public event Action<Alien> OnCheckedMatch;
+    public event Action OnMoveDone;
 
     private Element elementSelected;
     private bool gridCreated = false, isPossibleSwap = true;
@@ -33,6 +32,9 @@ public class LevelController
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
     public event Action<Element, Element> OnCellsSwapped = delegate (Element el1, Element el2) { };
+
+    private WinController winController;
+    private LoseController loseController;
 
     public void DestroyCell(Element el) => OnCellDestroyed(el);
     public void CreateCell(Element el) => OnCellCreated(el);
@@ -47,6 +49,9 @@ public class LevelController
         boosterController = new BoosterController(gridModel, this);
 
         levelControllerInstance = this;
+
+        winController = new WinController(this);
+        loseController = new LoseController(this);
 
         WinController.OnWinChecked += IsPossibleToSwap;
         LoseController.OnLoseChecked += IsPossibleToSwap;

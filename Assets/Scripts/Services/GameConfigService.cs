@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 
 public class GameConfigService : IService
@@ -22,6 +21,7 @@ public class GameConfigService : IService
     public List<InGameCurrency> InitialCurrencies { get; private set; }
     public List<ActiveBoosterItemModel> InitialActiveBoosters { get; private set; }
     public List<AlienInfo> Aliens { get; private set; }
+    public List<LevelInfo> Levels { get; private set; }
 
 
     public void Initialize(RemoteConfigGameService dataProvider)
@@ -44,6 +44,7 @@ public class GameConfigService : IService
         HudColors = dataProvider.Get("HudColors", new List<ColorHudItemInfo>());
         ShopItems = dataProvider.Get("ShopItems", new List<ShopItemModel>());
         Aliens = dataProvider.Get("Aliens", new List<AlienInfo>());
+        Levels = dataProvider.Get("Levels", new List<LevelInfo>());
 
         InitialCurrencies = dataProvider.Get("InitialCurrencies", new List<InGameCurrency>());
         InitialActiveBoosters = dataProvider.Get("InitialActiveBoosters", new List<ActiveBoosterItemModel>());

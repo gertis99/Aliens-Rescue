@@ -12,40 +12,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"21111150-d31e-4e11-8858-0c2e0c552420\"\r\n   
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"02dbc969-01ad-46f2-a261-58dbf708e743\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialGold\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 200\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"2f37027d-722e-42f1-828d-778e6ea73907\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8b15e0f9-6a59-48d6-90df-55fcb68ff871\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0ac932ea-85ad-4f90-9872-b83992df3f36\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d25e7d23-160a-4b06-bde1-815bb62122ca\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialVerticalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"427cd49d-ea0b-4417-b4c5-4a8887610dc1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"a68fde9e-1670-420a-a589-024963733ba3\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialBombBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"13ed0c33-3f98-4d11-bcc7-59a0a5e77839\"\r\n   
+    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7b5a888e-fb86-42d8-8eff-c9fcc5b68bb4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialColorBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"cac20cd4-1fc3-46e5-909f-87d3aa63cb6f\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"0c0ac73e-607c-422f-bc1f-a07a46f465bb\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"PriceHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"4673f706-782c-4182-9ade-2d76879b0d9f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"cb9514f9-dd0e-412f-b360-f8c4c0760f38\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PriceVericalLineBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3da15742-2c69-404e-b16c-3bc48a262ec8\"\r\n   
+    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ca1205c0-0e6e-4377-8901-4e6f2132f842\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 20\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"ab6dea33-cbc3-4888-a4aa-b4cadd387128\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"6562bd44-db22-41f3-9fd4-1fcd11155e2b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PriceColorBombBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 40\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"96edde2c-b15d-43cd-8baf-dc16e663f531\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"3bd7bc01-4609-4563-998f-5cdf14ed806d\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"GoldPerAd\",\r\n      \"type\": \"int\",\r\n      \"value\": 50\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"618afada-7b4d-43e7-a43b-e501ee67ceb7\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"83b6c160-cac7-4ffe-b3fb-7b2cde63041e\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceHUDColors\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"e057b75f-c8ce-417b-8837-425a30d08cda\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"3e13f2d9-bd21-426b-aa84-56c6d468d419\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"GoldPerBuy\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 500\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"12f40560-b941-4458-b2d5-7068459eaf3d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8d7c7063-2e55-48c9-a06d-d52ee9c43453\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ActiveBoosters\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"BoosterName\": \"HorizontalLineBooster\",\r\n           
@@ -56,7 +56,7 @@ MonoBehaviour:
     \"Icon_Booster_Bomb\"\r\n          },\r\n          {\r\n            \"Id\": 3,\r\n           
     \"BoosterName\": \"ColorBombBooster\",\r\n            \"Image\": \"Icon_Booster_ColorBomb\"\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"878afa9d-5f34-4ae2-8ac2-808aa3ef0064\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"a5c1a7d9-12b3-4266-afc7-911ba03b58fc\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"HudColors\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"ColorHudName\": \"Orange\",\r\n            \"Image\":
@@ -71,7 +71,7 @@ MonoBehaviour:
     \"Purple\",\r\n            \"Image\": \"Icon_HudColor_Purple\",\r\n           
     \"ConsoleImage\": \"Icon_Console_Purple\",\r\n            \"Default\": false\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"a2977eda-3300-41f0-b67f-a4322e88e925\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"21bae477-5368-4c00-b201-f0ca42388159\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"Cosmetics\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"CosmeticName\": \"Bowtie\",\r\n            \"Image\":
@@ -84,7 +84,7 @@ MonoBehaviour:
     },\r\n          {\r\n            \"Id\": 4,\r\n            \"CosmeticName\":
     \"TopHat\",\r\n            \"Image\": \"Icon_Cosmetic_TopHat\"\r\n          }\r\n       
     ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"209fd2af-b3a1-4cf5-ba87-51c2a328c5d6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"78e5598e-0373-426e-9378-47cb74cf9ce4\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ShopItems\",\r\n      \"type\": \"json\",\r\n      \"schemaId\": null,\r\n     
     \"value\": {\r\n        \"data\": [\r\n          {\r\n            \"Id\": 0,\r\n           
     \"ItemName\": \"HorizontalLineBooster\",\r\n            \"Type\": \"ActiveBooster\",\r\n           
@@ -146,12 +146,12 @@ MonoBehaviour:
     \"Image\": \"Icon_HudColor_Purple\",\r\n            \"Price\": {\r\n             
     \"Name\": \"Gold\",\r\n              \"Amount\": 10\r\n            }\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"6d97cabd-4b7c-4c82-94ee-a5635ee22576\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"3c3adf8a-6ae1-42b8-91d6-ad80f9578d72\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"InitialCurrencies\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Name\": \"Gold\",\r\n            \"Amount\": 500\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"46f8cb8e-7885-4282-ac4e-21e3cafedf07\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"131ecfea-0d83-4c8b-bb92-a601b7a58363\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"InitialActiveBoosters\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Name\": \"HorizontalLineBooster\",\r\n            \"Amount\":
@@ -159,7 +159,7 @@ MonoBehaviour:
     \"Amount\": 5\r\n          },\r\n          {\r\n            \"Name\": \"BombBooster\",\r\n           
     \"Amount\": 5\r\n          },\r\n          {\r\n            \"Name\": \"ColorBombBooster\",\r\n           
     \"Amount\": 5\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"fc9e48dd-99e7-4087-a02d-4703213fd0c2\"\r\n   
+    \"metadata\": {\r\n      \"entityId\": \"5b20eb44-3431-4c56-809d-49ec06220625\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"Aliens\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Id\": 0,\r\n            \"Name\": \"Red\",\r\n           
@@ -171,41 +171,51 @@ MonoBehaviour:
     },\r\n          {\r\n            \"Id\": 4,\r\n            \"Name\": \"Purple\",\r\n           
     \"Image\": \"Icon_Alien_Purple\"\r\n          },\r\n          {\r\n           
     \"Id\": 5,\r\n            \"Name\": \"Yellow\",\r\n            \"Image\": \"Icon_Alien_Yellow\"\r\n         
-    }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"21111150-d31e-4e11-8858-0c2e0c552420\"\r\n   
+    }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"e5786b18-fbd2-4ac5-82b1-a64386502ece\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"Levels\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
+    null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
+    \"Id\": 1,\r\n            \"Movements\": 10,\r\n            \"Goal\": 2\r\n         
+    },\r\n          {\r\n            \"Id\": 2,\r\n            \"Movements\": 10,\r\n           
+    \"Goal\": 15\r\n          },\r\n          {\r\n            \"Id\": 3,\r\n           
+    \"Movements\": 5,\r\n            \"Goal\": 10\r\n          },\r\n          {\r\n           
+    \"Id\": 4,\r\n            \"Movements\": 15,\r\n            \"Goal\": 25\r\n         
+    },\r\n          {\r\n            \"Id\": 5,\r\n            \"Movements\": 25,\r\n           
+    \"Goal\": 40\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"02dbc969-01ad-46f2-a261-58dbf708e743\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialGold\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 200\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"2f37027d-722e-42f1-828d-778e6ea73907\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8b15e0f9-6a59-48d6-90df-55fcb68ff871\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"0ac932ea-85ad-4f90-9872-b83992df3f36\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"d25e7d23-160a-4b06-bde1-815bb62122ca\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialVerticalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"427cd49d-ea0b-4417-b4c5-4a8887610dc1\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"a68fde9e-1670-420a-a589-024963733ba3\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"InitialBombBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"13ed0c33-3f98-4d11-bcc7-59a0a5e77839\"\r\n   
+    5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"7b5a888e-fb86-42d8-8eff-c9fcc5b68bb4\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"InitialColorBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 5\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"cac20cd4-1fc3-46e5-909f-87d3aa63cb6f\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"0c0ac73e-607c-422f-bc1f-a07a46f465bb\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"PriceHorizontalLineBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"4673f706-782c-4182-9ade-2d76879b0d9f\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"cb9514f9-dd0e-412f-b360-f8c4c0760f38\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"PriceVericalLineBooster\",\r\n      \"type\": \"int\",\r\n      \"value\":
-    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"3da15742-2c69-404e-b16c-3bc48a262ec8\"\r\n   
+    10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"ca1205c0-0e6e-4377-8901-4e6f2132f842\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceBombBooster\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 20\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"ab6dea33-cbc3-4888-a4aa-b4cadd387128\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"6562bd44-db22-41f3-9fd4-1fcd11155e2b\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"PriceColorBombBooster\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 40\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"96edde2c-b15d-43cd-8baf-dc16e663f531\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"3bd7bc01-4609-4563-998f-5cdf14ed806d\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"GoldPerAd\",\r\n      \"type\": \"int\",\r\n      \"value\": 50\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"618afada-7b4d-43e7-a43b-e501ee67ceb7\"\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"83b6c160-cac7-4ffe-b3fb-7b2cde63041e\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"PriceHUDColors\",\r\n      \"type\":
     \"int\",\r\n      \"value\": 10\r\n    }\r\n  },\r\n  {\r\n    \"metadata\":
-    {\r\n      \"entityId\": \"e057b75f-c8ce-417b-8837-425a30d08cda\"\r\n    },\r\n   
+    {\r\n      \"entityId\": \"3e13f2d9-bd21-426b-aa84-56c6d468d419\"\r\n    },\r\n   
     \"rs\": {\r\n      \"key\": \"GoldPerBuy\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 500\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"12f40560-b941-4458-b2d5-7068459eaf3d\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"8d7c7063-2e55-48c9-a06d-d52ee9c43453\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ActiveBoosters\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"BoosterName\": \"HorizontalLineBooster\",\r\n           
@@ -216,7 +226,7 @@ MonoBehaviour:
     \"Icon_Booster_Bomb\"\r\n          },\r\n          {\r\n            \"Id\": 3,\r\n           
     \"BoosterName\": \"ColorBombBooster\",\r\n            \"Image\": \"Icon_Booster_ColorBomb\"\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"878afa9d-5f34-4ae2-8ac2-808aa3ef0064\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"a5c1a7d9-12b3-4266-afc7-911ba03b58fc\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"HudColors\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"ColorHudName\": \"Orange\",\r\n            \"Image\":
@@ -231,7 +241,7 @@ MonoBehaviour:
     \"Purple\",\r\n            \"Image\": \"Icon_HudColor_Purple\",\r\n           
     \"ConsoleImage\": \"Icon_Console_Purple\",\r\n            \"Default\": false\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"a2977eda-3300-41f0-b67f-a4322e88e925\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"21bae477-5368-4c00-b201-f0ca42388159\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"Cosmetics\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
     null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
     \"Id\": 0,\r\n            \"CosmeticName\": \"Bowtie\",\r\n            \"Image\":
@@ -244,7 +254,7 @@ MonoBehaviour:
     },\r\n          {\r\n            \"Id\": 4,\r\n            \"CosmeticName\":
     \"TopHat\",\r\n            \"Image\": \"Icon_Cosmetic_TopHat\"\r\n          }\r\n       
     ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"209fd2af-b3a1-4cf5-ba87-51c2a328c5d6\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"78e5598e-0373-426e-9378-47cb74cf9ce4\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"ShopItems\",\r\n      \"type\": \"json\",\r\n      \"schemaId\": null,\r\n     
     \"value\": {\r\n        \"data\": [\r\n          {\r\n            \"Id\": 0,\r\n           
     \"ItemName\": \"HorizontalLineBooster\",\r\n            \"Type\": \"ActiveBooster\",\r\n           
@@ -306,12 +316,12 @@ MonoBehaviour:
     \"Image\": \"Icon_HudColor_Purple\",\r\n            \"Price\": {\r\n             
     \"Name\": \"Gold\",\r\n              \"Amount\": 10\r\n            }\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"6d97cabd-4b7c-4c82-94ee-a5635ee22576\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"3c3adf8a-6ae1-42b8-91d6-ad80f9578d72\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"InitialCurrencies\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Name\": \"Gold\",\r\n            \"Amount\": 500\r\n         
     }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
-    \"entityId\": \"46f8cb8e-7885-4282-ac4e-21e3cafedf07\"\r\n    },\r\n    \"rs\":
+    \"entityId\": \"131ecfea-0d83-4c8b-bb92-a601b7a58363\"\r\n    },\r\n    \"rs\":
     {\r\n      \"key\": \"InitialActiveBoosters\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Name\": \"HorizontalLineBooster\",\r\n            \"Amount\":
@@ -319,7 +329,7 @@ MonoBehaviour:
     \"Amount\": 5\r\n          },\r\n          {\r\n            \"Name\": \"BombBooster\",\r\n           
     \"Amount\": 5\r\n          },\r\n          {\r\n            \"Name\": \"ColorBombBooster\",\r\n           
     \"Amount\": 5\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n   
-    \"metadata\": {\r\n      \"entityId\": \"fc9e48dd-99e7-4087-a02d-4703213fd0c2\"\r\n   
+    \"metadata\": {\r\n      \"entityId\": \"5b20eb44-3431-4c56-809d-49ec06220625\"\r\n   
     },\r\n    \"rs\": {\r\n      \"key\": \"Aliens\",\r\n      \"type\": \"json\",\r\n     
     \"schemaId\": null,\r\n      \"value\": {\r\n        \"data\": [\r\n         
     {\r\n            \"Id\": 0,\r\n            \"Name\": \"Red\",\r\n           
@@ -331,7 +341,17 @@ MonoBehaviour:
     },\r\n          {\r\n            \"Id\": 4,\r\n            \"Name\": \"Purple\",\r\n           
     \"Image\": \"Icon_Alien_Purple\"\r\n          },\r\n          {\r\n           
     \"Id\": 5,\r\n            \"Name\": \"Yellow\",\r\n            \"Image\": \"Icon_Alien_Yellow\"\r\n         
-    }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
+    }\r\n        ]\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n     
+    \"entityId\": \"e5786b18-fbd2-4ac5-82b1-a64386502ece\"\r\n    },\r\n    \"rs\":
+    {\r\n      \"key\": \"Levels\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
+    null,\r\n      \"value\": {\r\n        \"data\": [\r\n          {\r\n           
+    \"Id\": 1,\r\n            \"Movements\": 10,\r\n            \"Goal\": 2\r\n         
+    },\r\n          {\r\n            \"Id\": 2,\r\n            \"Movements\": 10,\r\n           
+    \"Goal\": 15\r\n          },\r\n          {\r\n            \"Id\": 3,\r\n           
+    \"Movements\": 5,\r\n            \"Goal\": 10\r\n          },\r\n          {\r\n           
+    \"Id\": 4,\r\n            \"Movements\": 15,\r\n            \"Goal\": 25\r\n         
+    },\r\n          {\r\n            \"Id\": 5,\r\n            \"Movements\": 25,\r\n           
+    \"Goal\": 40\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"2b7410d4-0aeb-448f-989b-67f88a9b3b6b\",\r\n   
     \"name\": \"development\",\r\n    \"id\": \"6e42cc1f-c84e-4c08-8c68-36097290b548\",\r\n   
     \"isDefault\": false,\r\n    \"createdAt\": \"2022-09-17T02:38:31Z\",\r\n   
