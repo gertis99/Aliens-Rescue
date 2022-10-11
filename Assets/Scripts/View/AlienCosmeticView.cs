@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AlienCosmeticView : MonoBehaviour
 {
     public Image currentAlienImage;
-    public static int currentAlienId;
+    public int currentAlienId;
     public Cosmetic[] cosmetics;
     public Transform panel;
     public CosmeticPrefab cosmeticPrefab;
@@ -26,6 +26,8 @@ public class AlienCosmeticView : MonoBehaviour
 
     private void Start()
     {
+        currentAlienId = PlayerPrefs.GetInt("AlienToLoad", 1);
+
         controller = new AlienCosmeticController();
 
         foreach(CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
