@@ -34,11 +34,15 @@ public class LevelController
     private WinController winController;
     private LoseController loseController;
 
+    private AnalyticsGameService analytics;
+
     public void DestroyCell(Element el) => OnCellDestroyed(el);
     public void CreateCell(Element el) => OnCellCreated(el);
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
+
         this.width = width;
         this.height = height;
         this.colorTypes = colorTypes;
@@ -48,6 +52,7 @@ public class LevelController
 
         winController = new WinController(this);
         loseController = new LoseController(this);
+        analytics.SendEvent("startLevel", new Dictionary<string, object> { ["levelId"] = PlayerPrefs.GetInt("LevelToLoad", -1) });
 
         WinController.OnWinChecked += IsPossibleToSwap;
         LoseController.OnLoseChecked += IsPossibleToSwap;

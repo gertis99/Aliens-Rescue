@@ -17,6 +17,7 @@ public class WinController
 
     private GameProgressionService gameProgression;
     private GameConfigService gameConfig;
+    private AnalyticsGameService analytics;
 
     private LevelController levelController;
 
@@ -24,6 +25,7 @@ public class WinController
     {
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
         gameConfig = ServiceLocator.GetService<GameConfigService>();
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
         levelController = controller;
         levelController.OnCheckedMatch += AddPoints;
         
@@ -72,6 +74,7 @@ public class WinController
                 coinsGained += colorPoints[i] - condition;
         }
         win = true;
+        analytics.SendEvent("finishLevel", new Dictionary<string, object> { ["levelId"] = PlayerPrefs.GetInt("LevelToLoad", -1) });
         OnWinChecked();
         if (gameProgression.CurrentLevel == PlayerPrefs.GetInt("LevelToLoad", 1))
             gameProgression.UpdateCurrentLevel(1);
