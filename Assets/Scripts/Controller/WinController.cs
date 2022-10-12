@@ -39,6 +39,9 @@ public class WinController
 
     public void AddPoints(Alien element)
     {
+        if (element == null)
+            return;
+
         colorPoints[(int)element.GetElementType()]++;
         OnPointsChanged(colorPoints[(int)element.GetElementType()], (int)element.GetElementType());
         if(!win)

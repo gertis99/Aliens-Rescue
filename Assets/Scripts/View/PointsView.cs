@@ -14,7 +14,8 @@ public class PointsView : MonoBehaviour
     public TMP_Text goldGainedText;
     public GameObject win;
     public TMPro.TextMeshProUGUI lose, movementsText;
-    public int winCondition = 1, movements = 1, maxMovements = 1;
+    private int winCondition = 1, movements = 1, maxMovements = 1;
+    public Button nextLevelButton;
 
     private GameConfigService gameConfig;
     private GameProgressionService gameProgression;
@@ -76,6 +77,15 @@ public class PointsView : MonoBehaviour
             goldGained += points[i] - winCondition;
         }
 
+        if(gameConfig.ExistLevel(PlayerPrefs.GetInt("LevelToLoad", 1) + 1))
+        {
+            nextLevelButton.interactable = true;
+        }
+        else
+        {
+            nextLevelButton.interactable = false;
+        }
+
         goldGainedText.text = goldGained.ToString();
         win.gameObject.SetActive(true);
     }
@@ -93,6 +103,13 @@ public class PointsView : MonoBehaviour
             pointsTextFinish[i].text = (points[i] - winCondition).ToString();
             gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
         }
+
+        nextLevelButton.interactable = false;
         win.gameObject.SetActive(true);
+    }
+
+    public void LoadNextLevel()
+    {
+        nextLevelButton.GetComponent<ButtonLoadLevel>().LoadLevelScene(PlayerPrefs.GetInt("LevelToLoad", 1) + 1);
     }
 }

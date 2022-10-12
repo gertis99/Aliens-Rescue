@@ -61,6 +61,16 @@ public class GameConfigService : IService
         return null;
     }
 
+    public bool ExistLevel(int id)
+    {
+        foreach(LevelInfo level in Levels)
+        {
+            if (level.Id == id)
+                return true;
+        }
+
+        return false;
+    }
     public void Clear()
     {
     }
