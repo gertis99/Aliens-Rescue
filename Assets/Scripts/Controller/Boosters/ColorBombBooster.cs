@@ -6,11 +6,6 @@ public class ColorBombBooster : ABooster
 {
     private AlienType alienType;
 
-    public override bool CheckCondition(int nHorizontal, int nVertical)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void Execute(Vector2 pos, Grid model)
     {
         gridModel = model;
@@ -26,11 +21,11 @@ public class ColorBombBooster : ABooster
                 if (gridModel.GridLevel[i, j] != null && ((Alien)gridModel.GridLevel[i, j]).GetElementType() == alienType)
                 {
                     elements.Add(gridModel.GridLevel[i, j]);
-                    LevelController.levelControllerInstance.DestroyCell(i, j, false);
+                    levelController.DestroyCell(i, j, false);
                 }
             }
         }
 
-        LevelController.levelControllerInstance.AddPoints(elements);
+        levelController.AddPoints(elements);
     }
 }

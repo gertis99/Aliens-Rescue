@@ -5,14 +5,18 @@ using UnityEngine;
 public class ShopController
 {
     private GameProgressionService gameProgression;
+    private AnalyticsGameService analytics;
 
     public ShopController(GameProgressionService gameProgr)
     {
         gameProgression = gameProgr;
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
     }
 
     public void PurchaseItem(ShopItemModel item)
     {
+        analytics.SendEvent("buyShopItem", new Dictionary<string, object> { ["shopItemName"] = item.ItemName});
+
         if(item.Type == "Cosmetic")
         {
             gameProgression.UpdateCosmetic(item.ItemName, item.Amount, item.Amount);

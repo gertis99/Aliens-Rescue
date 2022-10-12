@@ -26,8 +26,6 @@ public class LevelController
     private Element elementSelected;
     private bool gridCreated = false, isPossibleSwap = true;
 
-    public static LevelController levelControllerInstance;
-
     public event Action<Element> OnCellCreated = delegate (Element element) { };
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
@@ -47,8 +45,6 @@ public class LevelController
 
         gridModel = new Grid(width, height, colorTypes);
         boosterController = new BoosterController(gridModel, this);
-
-        levelControllerInstance = this;
 
         winController = new WinController(this);
         loseController = new LoseController(this);

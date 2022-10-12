@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class HorizontalLineBooster : ABooster
 {
-    public override bool CheckCondition(int nHorizontal, int nVertical)
-    {
-        throw new System.NotImplementedException();
-    }
-
     public override void Execute(Vector2 pos, Grid model)
     {
         gridModel = model;
@@ -20,10 +15,10 @@ public class HorizontalLineBooster : ABooster
             if (gridModel.GridLevel[i, (int)pos.y] != null)
             {
                 elements.Add(gridModel.GridLevel[i, (int)pos.y]);
-                LevelController.levelControllerInstance.DestroyCell(i, (int)pos.y, false);
+                levelController.DestroyCell(i, (int)pos.y, false);
             }
         }
 
-        LevelController.levelControllerInstance.AddPoints(elements);
+        levelController.AddPoints(elements);
     }
 }

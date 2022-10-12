@@ -9,11 +9,13 @@ public class BoosterController
     private ABooster currentBooster;
     private Grid gridModel;
     private LevelController levelController;
+    //private Action<int, int, bool> onCellDestroyed;
+    //private Action<Element> onCellCreated;
 
-    public BoosterController(Grid model, LevelController levelCtrl)
+    public BoosterController(Grid model, LevelController levelController)
     {
         gridModel = model;
-        levelController = levelCtrl;
+        this.levelController = levelController;
 
         ActiveBoosterController.OnBoosterActived += FireBooster;
     }
@@ -62,6 +64,7 @@ public class BoosterController
     {
         currentBooster = new HorizontalLineBooster();
         levelController.DestroyCell(gridModel.GridLevel[(int)pos.x, (int)pos.y]);
+        currentBooster.Initialize(levelController);
         gridModel.GridLevel[(int)pos.x, (int)pos.y] = null;
         currentBooster.Execute(pos, gridModel);
         currentBooster = null;
@@ -73,6 +76,7 @@ public class BoosterController
     {
         currentBooster = new VerticalLineBooster();
         levelController.DestroyCell(gridModel.GridLevel[(int)pos.x, (int)pos.y]);
+        currentBooster.Initialize(levelController);
         gridModel.GridLevel[(int)pos.x, (int)pos.y] = null;
         currentBooster.Execute(pos, gridModel);
         currentBooster = null;
@@ -84,6 +88,7 @@ public class BoosterController
     {
         currentBooster = new BombBooster();
         levelController.DestroyCell(gridModel.GridLevel[(int)pos.x, (int)pos.y]);
+        currentBooster.Initialize(levelController);
         gridModel.GridLevel[(int)pos.x, (int)pos.y] = null;
         currentBooster.Execute(pos, gridModel);
         currentBooster = null;
@@ -94,7 +99,8 @@ public class BoosterController
     public void FireColorBombBooster(Element booster, Vector2 pos, bool moveDown)
     {
         currentBooster = new ColorBombBooster();
-        levelController.DestroyCell(booster);
+        levelController.DestroyCell(gridModel.GridLevel[(int)pos.x, (int)pos.y]);
+        currentBooster.Initialize(levelController);
         gridModel.GridLevel[booster.GetPosX(), booster.GetPosY()] = null;
         currentBooster.Execute(pos, gridModel);
         currentBooster = null;
@@ -104,6 +110,7 @@ public class BoosterController
 
     public void FireBooster(ABooster booster, Vector2 pos)
     {
+        booster.Initialize(levelController);
         booster.Execute(pos, gridModel);
         levelController.MoveDownPieces();
     }
