@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PointsView : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI[] pointsText = new TMPro.TextMeshProUGUI[6];
     public TMPro.TextMeshProUGUI[] pointsTextFinish = new TMPro.TextMeshProUGUI[6];
     private int[] points = new int[6];
+    private int goldGained = 0;
+    public TMP_Text goldGainedText;
     public GameObject win;
     public TMPro.TextMeshProUGUI lose, movementsText;
     public int winCondition = 1, movements = 1, maxMovements = 1;
@@ -70,7 +73,10 @@ public class PointsView : MonoBehaviour
         {
             pointsTextFinish[i].text = (points[i] - winCondition).ToString();
             gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
+            goldGained += points[i] - winCondition;
         }
+
+        goldGainedText.text = goldGained.ToString();
         win.gameObject.SetActive(true);
     }
 
@@ -82,6 +88,11 @@ public class PointsView : MonoBehaviour
 
     private void ActiveLose()
     {
-        lose.gameObject.SetActive(true);
+        for (int i = 0; i < pointsText.Length; i++)
+        {
+            pointsTextFinish[i].text = (points[i] - winCondition).ToString();
+            gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
+        }
+        win.gameObject.SetActive(true);
     }
 }
