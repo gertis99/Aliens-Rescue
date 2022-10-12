@@ -7,11 +7,12 @@ using UnityEngine;
 public class GameProgressionService : IService
 {
     public int CurrentLevel;
-    public List<ActiveBoosterItemModel> ActiveBoosters;
-    public List<CosmeticItemModel> Cosmetics;
-    public List<ColorHudItemModel> HudColors;
+    public List<ActiveBoosterItemModel> ActiveBoosters = new List<ActiveBoosterItemModel>();
+    public List<CosmeticItemModel> Cosmetics = new List<CosmeticItemModel>();
+    public List<ColorHudItemModel> HudColors = new List<ColorHudItemModel>();
     public string currentHudColor;
-    public List<InGameCurrency> Currencies;
+    public List<InGameCurrency> Currencies = new List<InGameCurrency>();
+    public List<AlienModel> AliensRescued = new List<AlienModel>();
 
     private IGameProgressionProvider progressionProvider;
 
@@ -86,6 +87,22 @@ public class GameProgressionService : IService
             }
         }
 
+        Save();
+    }
+
+    public void UpdateAliensRescued(int alienId, int amount)
+    {
+        foreach(AlienModel alien in AliensRescued)
+        {
+            if(alien.Id == alienId)
+            {
+                alien.Amount += amount;
+                Save();
+                return;
+            }
+        }
+
+        AliensRescued.Add(new AlienModel { Id = alienId, Amount = amount });
         Save();
     }
 

@@ -8,19 +8,23 @@ public class PointsView : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI[] pointsText = new TMPro.TextMeshProUGUI[6];
     public TMPro.TextMeshProUGUI[] pointsTextFinish = new TMPro.TextMeshProUGUI[6];
+    private int[] points = new int[6];
     public GameObject win;
     public TMPro.TextMeshProUGUI lose, movementsText;
     public int winCondition = 1, movements = 1, maxMovements = 1;
 
     private GameConfigService gameConfig;
+    private GameProgressionService gameProgression;
 
     private void Awake()
     {
         gameConfig = ServiceLocator.GetService<GameConfigService>();
+        gameProgression = ServiceLocator.GetService<GameProgressionService>();
     }
 
     private void Start()
     {
+
         foreach (LevelInfo level in gameConfig.Levels)
         {
             if (level.Id == PlayerPrefs.GetInt("LevelToLoad", 1))
@@ -57,13 +61,15 @@ public class PointsView : MonoBehaviour
     private void AddPoint(int number, int color)
     {
         pointsText[color].text = number + "/" + winCondition;
+        points[color] = number;
     }
 
     private void ActiveWin()
     {
         for(int i = 0; i < pointsText.Length; i++)
         {
-            pointsTextFinish[i].text = pointsText[i].text;
+            pointsTextFinish[i].text = (points[i] - winCondition).ToString();
+            gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
         }
         win.gameObject.SetActive(true);
     }

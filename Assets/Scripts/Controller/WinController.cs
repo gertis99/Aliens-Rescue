@@ -13,6 +13,7 @@ public class WinController
 
     private int condition = 1;
     public int[] colorPoints = new int[6];
+    private bool win = false;
 
     private GameProgressionService gameProgression;
     private GameConfigService gameConfig;
@@ -40,7 +41,8 @@ public class WinController
     {
         colorPoints[(int)element.GetElementType()]++;
         OnPointsChanged(colorPoints[(int)element.GetElementType()], (int)element.GetElementType());
-        CheckWin();
+        if(!win)
+            CheckWin();
     }
 
     public void AddPoints(List<Alien> elements)
@@ -51,7 +53,8 @@ public class WinController
             OnPointsChanged(colorPoints[(int)elements[i].GetElementType()], (int)elements[i].GetElementType());
         }
 
-        CheckWin();
+        if(!win)
+            CheckWin();
     }
 
     private void CheckWin()
@@ -65,6 +68,7 @@ public class WinController
             else
                 coinsGained += colorPoints[i] - condition;
         }
+        win = true;
         OnWinChecked();
         if (gameProgression.CurrentLevel == PlayerPrefs.GetInt("LevelToLoad", 1))
             gameProgression.UpdateCurrentLevel(1);
