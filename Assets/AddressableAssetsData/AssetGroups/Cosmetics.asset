@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Cosmetics
+  m_EditorClassIdentifier: 
+  m_GroupName: Cosmetics
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6e4917aa7f6adf74587b082aa2de41bc
+  m_SerializeEntries:
+  - m_GUID: 1df1fcfb09b2cf34e93da44b84888915
+    m_Address: Icon_Cosmetic_LogoPin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8979032a14adf054da785eafa4a9c325
+    m_Address: Icon_Cosmetic_FrogHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 42dcdaf2710404c4cb3d2161114430e3
+    m_Address: Icon_Cosmetic_LogoHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 26b5f9f55b316b44e9a3e9a68ded0df8
+    m_Address: Icon_Cosmetic_BowTie
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ca80168e6bc287241b73fbe50c8c2f7d
+    m_Address: Icon_Cosmetic_TopHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2b7fca925652c284dbf768e9a7bc7e1b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1a331ded5c6440b428cde43e910041c4, type: 2}
+    - {fileID: 11400000, guid: d4a8fe9db5c4a694a9ba82eb00dd7eb1, type: 2}

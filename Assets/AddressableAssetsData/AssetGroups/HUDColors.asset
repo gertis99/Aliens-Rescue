@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: HUDColors
+  m_EditorClassIdentifier: 
+  m_GroupName: HUDColors
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2726478f955597844b01ab0f0157a9f0
+  m_SerializeEntries:
+  - m_GUID: bd95723b45d3e9b4787d557bcf4bc432
+    m_Address: Icon_Console_Orange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cbeeda8fdc55a09479e5ebba44cd0b6b
+    m_Address: Icon_HudColor_Green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0a946664624bf024aa3d772f83b6ab90
+    m_Address: Icon_Console_Purple
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae41ec4fb6c5eed4095debf8311e8949
+    m_Address: Icon_HudColor_Blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e8c0a3e9cf2f44d44a8b30e38ae0873e
+    m_Address: Icon_HudColor_Purple
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 236fb86bffdb3f34d9572955a7cb37ac
+    m_Address: Icon_Console_Blue
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b86244937d7aee542a1aed783616db97
+    m_Address: Icon_HudColor_Orange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 72b2a4adac922774ea7f6b181d21ac83
+    m_Address: Icon_Console_Green
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2b7fca925652c284dbf768e9a7bc7e1b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6547f749fa12a6e47bc841d72fd34985, type: 2}
+    - {fileID: 11400000, guid: eb750649f5d2c9a47b655053324c8ec8, type: 2}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class AlienCosmeticView : MonoBehaviour
@@ -40,7 +41,12 @@ public class AlienCosmeticView : MonoBehaviour
         foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
         {
             if (cosmetic.SelectedAliensIds.Contains(currentAlienId)){
-                currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
+                Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name).Completed += handler =>
+                {
+                    currentAlienImage.sprite = handler.Result;
+                };
+
+                //currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
                 return;
             }
         }
@@ -49,7 +55,12 @@ public class AlienCosmeticView : MonoBehaviour
         {
             if (alienInfo.Id == currentAlienId)
             {
-                currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
+                Addressables.LoadAssetAsync<Sprite>(alienInfo.Image).Completed += handler =>
+                {
+                    currentAlienImage.sprite = handler.Result;
+                };
+
+                //currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
                 break;
             }
         }
@@ -68,7 +79,12 @@ public class AlienCosmeticView : MonoBehaviour
         {
             if (cosmetic.SelectedAliensIds.Contains(currentAlienId))
             {
-                currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
+                Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name).Completed += handler =>
+                {
+                    currentAlienImage.sprite = handler.Result;
+                };
+
+                //currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
                 return;
             }
         }
@@ -77,7 +93,12 @@ public class AlienCosmeticView : MonoBehaviour
         {
             if (alienInfo.Id == currentAlienId)
             {
-                currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
+                Addressables.LoadAssetAsync<Sprite>(alienInfo.Image).Completed += handler =>
+                {
+                    currentAlienImage.sprite = handler.Result;
+                };
+
+                //currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
                 break;
             }
         }

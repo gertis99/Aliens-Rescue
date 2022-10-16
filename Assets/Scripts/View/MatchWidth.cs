@@ -5,10 +5,10 @@ using UnityEngine;
 public class MatchWidth : MonoBehaviour
 {
     [SerializeField]
-    float _sceneWidth = 10;
+    private float _sceneWidth = 10;
     [SerializeField]
-    Vector2 _sizeLimits = new Vector2(5, 20);
-    Camera _camera;
+    private Vector2 _sizeLimits = new Vector2(5, 20);
+    private Camera _camera;
 
     void Start()
     {

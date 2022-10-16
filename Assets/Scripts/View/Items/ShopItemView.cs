@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class ShopItemView : MonoBehaviour
@@ -37,7 +38,12 @@ public class ShopItemView : MonoBehaviour
         if (model == null)
             return;
 
-        image.sprite = Resources.Load<Sprite>(model.Image);
+        Addressables.LoadAssetAsync<Sprite>(model.Image).Completed += handler =>
+        {
+            image.sprite = handler.Result;
+        };
+
+        //image.sprite = Resources.Load<Sprite>(model.Image);
         description.text = model.Description;
         cost.text = model.Price.Amount.ToString();
         

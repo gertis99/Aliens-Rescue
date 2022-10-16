@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class LevelView : MonoBehaviour
@@ -30,7 +31,12 @@ public class LevelView : MonoBehaviour
         {
             if(colorHud.ColorHudName == currentHUDColor)
             {
-                HUD.sprite = Resources.Load<Sprite>(colorHud.ConsoleImage);
+                Addressables.LoadAssetAsync<Sprite>(colorHud.ConsoleImage).Completed += handler =>
+                {
+                    HUD.sprite = handler.Result;
+                };
+
+                //HUD.sprite = Resources.Load<Sprite>(colorHud.ConsoleImage);
                 break;
             }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 /*
  * Show the grid to the player
@@ -206,7 +207,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.BlueAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.BlueAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.BlueAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.BlueAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -217,7 +223,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.RedAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.RedAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.RedAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.RedAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -228,7 +239,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.GreenAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.GreenAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.GreenAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.GreenAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -239,7 +255,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.PurpleAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.PurpleAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.PurpleAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.PurpleAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -250,7 +271,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.YellowAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.YellowAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.YellowAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.YellowAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -261,7 +287,12 @@ public class GridView : MonoBehaviour
                     {
                         if (cosmetic.SelectedAliensIds.Contains((int)AlienType.OrangeAlien))
                         {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.OrangeAlien).Image + "_" + cosmetic.Name);
+                            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.OrangeAlien).Image + "_" + cosmetic.Name).Completed += handler =>
+                            {
+                                gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
+                            };
+
+                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.OrangeAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }

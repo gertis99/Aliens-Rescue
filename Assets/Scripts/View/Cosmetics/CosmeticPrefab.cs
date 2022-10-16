@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class CosmeticPrefab : MonoBehaviour
@@ -29,7 +30,12 @@ public class CosmeticPrefab : MonoBehaviour
         {
             if(cosmetic.CosmeticName == model.Name)
             {
-                image.sprite = Resources.Load<Sprite>(cosmetic.Image);
+                Addressables.LoadAssetAsync<Sprite>(cosmetic.Image).Completed += handler =>
+                {
+                    image.sprite = handler.Result;
+                };
+
+                //image.sprite = Resources.Load<Sprite>(cosmetic.Image);
             }
         }
 

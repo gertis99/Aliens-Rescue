@@ -26,4 +26,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlienCosmeticScene.unity
     guid: 38a739b74d4182842bd356e8a8824b6c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: fc1bc3f3c2a328748ac1cc81f700c4d7, type: 2}
