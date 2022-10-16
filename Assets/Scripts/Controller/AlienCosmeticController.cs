@@ -41,5 +41,7 @@ public class AlienCosmeticController
                 cosmetic.SelectedAliensIds.Add(alienId);
             }
         }
+
+        gameProgression.Save();
     }
 }

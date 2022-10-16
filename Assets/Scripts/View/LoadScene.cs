@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class LoadScene : MonoBehaviour
 {
-    public CanvasGroup canvas;
-    public Camera camera;
+    [SerializeField]
+    private CanvasGroup canvas;
+    [SerializeField]
+    private Camera camera;
     private Scene currentScene;
 
     private void Start()

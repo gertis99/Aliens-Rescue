@@ -7,15 +7,21 @@ using TMPro;
 
 public class PointsView : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI[] pointsText = new TMPro.TextMeshProUGUI[6];
-    public TMPro.TextMeshProUGUI[] pointsTextFinish = new TMPro.TextMeshProUGUI[6];
+    [SerializeField]
+    private TMPro.TextMeshProUGUI[] pointsText = new TMPro.TextMeshProUGUI[6];
+    [SerializeField]
+    private TMPro.TextMeshProUGUI[] pointsTextFinish = new TMPro.TextMeshProUGUI[6];
     private int[] points = new int[6];
     private int goldGained = 0;
-    public TMP_Text goldGainedText;
-    public GameObject win;
-    public TMPro.TextMeshProUGUI lose, movementsText;
+    [SerializeField]
+    private TMP_Text goldGainedText;
+    [SerializeField]
+    private GameObject win;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI lose, movementsText;
     private int winCondition = 1, movements = 1, maxMovements = 1;
-    public Button nextLevelButton;
+    [SerializeField]
+    private Button nextLevelButton;
 
     private GameConfigService gameConfig;
     private GameProgressionService gameProgression;

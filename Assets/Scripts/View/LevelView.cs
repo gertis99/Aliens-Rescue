@@ -6,16 +6,21 @@ using UnityEngine.UI;
 
 public class LevelView : MonoBehaviour
 {
-    public ActiveBoosterHorizontalLineView horizotntalBooster;
-    public ActiveBoosterVerticalLineView verticalBooster;
-    public ActiveBoosterBombView bombBooster;
-    public ActiveBoosterColorBombView colorBombBooster;
+    [SerializeField]
+    private ActiveBoosterHorizontalLineView horizotntalBooster;
+    [SerializeField]
+    private ActiveBoosterVerticalLineView verticalBooster;
+    [SerializeField]
+    private ActiveBoosterBombView bombBooster;
+    [SerializeField]
+    private ActiveBoosterColorBombView colorBombBooster;
 
     private GameProgressionService gameProgression;
     private GameConfigService gameConfig;
 
     private string currentHUDColor;
-    public Image HUD;
+    [SerializeField]
+    private Image HUD;
 
     private void Awake()
     {
@@ -36,7 +41,6 @@ public class LevelView : MonoBehaviour
                     HUD.sprite = handler.Result;
                 };
 
-                //HUD.sprite = Resources.Load<Sprite>(colorHud.ConsoleImage);
                 break;
             }
         }

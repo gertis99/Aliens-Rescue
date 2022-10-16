@@ -8,11 +8,12 @@ using UnityEngine.UI;
 
 public class ShopItemView : MonoBehaviour
 {
-    public Image image;
-    public TMP_Text description;
-    public TMP_Text cost;
-    public TMP_Text amount;
-    public GameObject selected;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    private TMP_Text description, cost, amount;
+    [SerializeField]
+    private GameObject selected;
 
     private ShopItemModel model;
     private Action<ShopItemModel> onClickedEvent;
@@ -43,7 +44,6 @@ public class ShopItemView : MonoBehaviour
             image.sprite = handler.Result;
         };
 
-        //image.sprite = Resources.Load<Sprite>(model.Image);
         description.text = model.Description;
         cost.text = model.Price.Amount.ToString();
         

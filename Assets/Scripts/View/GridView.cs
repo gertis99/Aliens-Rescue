@@ -9,11 +9,12 @@ using UnityEngine.AddressableAssets;
  */
 public class GridView : MonoBehaviour
 {
-    public int width = 9, height = 9, colorTypes = 6;
-
-    public GameObject blueAlienPrefab, redAlienPrefab, yellowAlienPrefab, purpleAlienPrefab, greenAlienPrefab, orangeAlienPrefab;
-    public GameObject horizontalLineBoosterPrefab, verticalLineBoosterPrefab, bombPrefab, colorBombPrefab;
-    public Sprite[] sprites;
+    [SerializeField]
+    private int width = 9, height = 9, colorTypes = 6;
+    [SerializeField]
+    private GameObject blueAlienPrefab, redAlienPrefab, yellowAlienPrefab, purpleAlienPrefab, greenAlienPrefab, orangeAlienPrefab;
+    [SerializeField]
+    private GameObject horizontalLineBoosterPrefab, verticalLineBoosterPrefab, bombPrefab, colorBombPrefab;
     private GameObject[,] gridLevel;
     private LevelController levelController;
     private GameObject elementSelected = null;
@@ -212,7 +213,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.BlueAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -228,7 +228,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.RedAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -244,7 +243,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.GreenAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -260,7 +258,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.PurpleAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -276,7 +273,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.YellowAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }
@@ -292,7 +288,6 @@ public class GridView : MonoBehaviour
                                 gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = handler.Result;
                             };
 
-                            //gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.OrangeAlien).Image + "_" + cosmetic.Name);
                             return;
                         }
                     }

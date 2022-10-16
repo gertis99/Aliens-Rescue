@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class AlienCosmeticView : MonoBehaviour
 {
-    public Image currentAlienImage;
-    public int currentAlienId;
-    public Cosmetic[] cosmetics;
-    public Transform panel;
-    public CosmeticPrefab cosmeticPrefab;
+    [SerializeField]
+    private Image currentAlienImage;
+    [SerializeField]
+    private int currentAlienId;
+    [SerializeField]
+    private Cosmetic[] cosmetics;
+    [SerializeField]
+    private Transform panel;
+    [SerializeField]
+    private CosmeticPrefab cosmeticPrefab;
 
     private AlienCosmeticController controller;
 
@@ -46,7 +51,6 @@ public class AlienCosmeticView : MonoBehaviour
                     currentAlienImage.sprite = handler.Result;
                 };
 
-                //currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
                 return;
             }
         }
@@ -60,7 +64,6 @@ public class AlienCosmeticView : MonoBehaviour
                     currentAlienImage.sprite = handler.Result;
                 };
 
-                //currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
                 break;
             }
         }
@@ -84,7 +87,6 @@ public class AlienCosmeticView : MonoBehaviour
                     currentAlienImage.sprite = handler.Result;
                 };
 
-                //currentAlienImage.sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo(currentAlienId).Image + "_" + cosmetic.Name);
                 return;
             }
         }
@@ -98,7 +100,6 @@ public class AlienCosmeticView : MonoBehaviour
                     currentAlienImage.sprite = handler.Result;
                 };
 
-                //currentAlienImage.sprite = Resources.Load<Sprite>(alienInfo.Image);
                 break;
             }
         }

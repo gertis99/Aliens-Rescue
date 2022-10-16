@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class MainMenuInfo : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI currentLevel;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI currentLevel;
     private GameProgressionService gameProgression;
 
     private void Awake()

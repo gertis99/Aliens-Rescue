@@ -31,7 +31,6 @@ public class AlienSelectorView : MonoBehaviour
             image.sprite = handler.Result;
         };
 
-        //image.sprite = Resources.Load<Sprite>(model.Image);
         this.onClickedEvent = onClickedEvent;
 
         foreach(AlienModel alien in gameProgression.AliensRescued)

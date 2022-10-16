@@ -7,10 +7,13 @@ using UnityEngine.UI;
 
 public class CosmeticPrefab : MonoBehaviour
 {
-    public Image image;
-    public GameObject selected;
-    public bool isSelected;
-    public string cosmeticName;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    private GameObject selected;
+    private bool isSelected;
+    [SerializeField]
+    private string cosmeticName;
     private CosmeticItemModel model;
     private int alienId;
     private Action<string, int> onClickedEvent;
@@ -35,7 +38,6 @@ public class CosmeticPrefab : MonoBehaviour
                     image.sprite = handler.Result;
                 };
 
-                //image.sprite = Resources.Load<Sprite>(cosmetic.Image);
             }
         }
 
