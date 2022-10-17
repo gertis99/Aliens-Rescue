@@ -9,23 +9,16 @@ using UnityEngine;
 
 public class LevelController
 {
-    public delegate void GridCreated(Element[,] grid);
-    public static event GridCreated OnGridCreated;
-    public static event GridCreated OnGridChanged;
-
     public int width = 9, height = 9, colorTypes = 6;
     private Grid gridModel;
     private BoosterController boosterController;
 
-    public delegate void SwapDone(Element[,] grid);
-    public delegate void CheckedMatch(Alien element);
-    public static event SwapDone OnSwapDone = Grid => { };
-    public event Action<Alien> OnCheckedMatch;
-    public event Action OnMoveDone;
-
     private Element elementSelected;
     private bool gridCreated = false, isPossibleSwap = true;
 
+    public event Action OnMoveDone;
+    public event Action<Alien> OnCheckedMatch;
+    public event Action<Element[,]> OnGridCreated;
     public event Action<Element> OnCellCreated = delegate (Element element) { };
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
@@ -295,8 +288,6 @@ public class LevelController
                     gridModel.GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
             }
         }
-
-        OnGridChanged(gridModel.GridLevel);
     }
 
     public void SetElementSelected(GameObject element)

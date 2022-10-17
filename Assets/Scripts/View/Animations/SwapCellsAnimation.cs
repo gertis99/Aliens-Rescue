@@ -20,8 +20,8 @@ public class SwapCellsAnimation : IAnimation
 
     private IEnumerator AnimationCoroutine(GridView board)
     {
-        object1.transform.DOMove(new Vector3(object2.transform.position.x, object2.transform.position.y, 0), 0.5f).SetEase(Ease.InOutQuad);
-        object2.transform.DOMove(new Vector3(object1.transform.position.x, object1.transform.position.y, 0), 0.5f).SetEase(Ease.InOutQuad);
+        object1.transform.DOMove(new Vector3(object2.transform.position.x, object2.transform.position.y, 0), 0.5f).SetEase(Ease.OutBack);
+        object2.transform.DOMove(new Vector3(object1.transform.position.x, object1.transform.position.y, 0), 0.5f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(0.5f);
     }
 }

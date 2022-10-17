@@ -13,11 +13,15 @@ public class ShopView : MonoBehaviour
     private IIAPGameService iapService;
     private ShopController controller;
 
-    public ShopItemView shopItemPrefab;
-    public Transform panel;
+    [SerializeField]
+    private ShopItemView shopItemPrefab;
+    [SerializeField]
+    private Transform panel;
 
-    public TMP_Text gold;
-    public TMP_Text goldPerAd, goldPerBuy, priceGold;
+    [SerializeField]
+    private TMP_Text gold;
+    [SerializeField]
+    private TMP_Text goldPerAd, goldPerBuy, priceGold;
 
     private void Awake()
     {

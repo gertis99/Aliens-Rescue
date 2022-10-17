@@ -25,7 +25,7 @@ public class GameProgressionProvider : IGameProgressionProvider
         string localData = _local.Load();
         string remoteData = _remote.Load();
 
-        /*if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
+        if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
         {
             return remoteData;
         }
@@ -88,7 +88,7 @@ public class GameProgressionProvider : IGameProgressionProvider
             return localData;
 
         if (fileSave.Currencies[0].Amount < remoteSave.Currencies[0].Amount)
-            return remoteData;*/
+            return remoteData;
 
         // If it is the same
         return localData;

@@ -26,7 +26,7 @@ public class GridView : MonoBehaviour
     private void Awake()
     {
         levelController = new LevelController(width, height, colorTypes);
-        LevelController.OnGridCreated += CreateLevel;
+        levelController.OnGridCreated += CreateLevel;
         //LevelController.OnGridChanged += UpdateLevel;
         levelController.OnCellCreated += CreateCellView;
         levelController.OnCellMoved += MoveCellView;
@@ -44,7 +44,7 @@ public class GridView : MonoBehaviour
 
     private void OnDisable()
     {
-        LevelController.OnGridCreated -= CreateLevel;
+        levelController.OnGridCreated -= CreateLevel;
         //LevelController.OnGridChanged -= UpdateLevel;
         levelController.OnCellCreated -= CreateCellView;
         levelController.OnCellMoved -= MoveCellView;
