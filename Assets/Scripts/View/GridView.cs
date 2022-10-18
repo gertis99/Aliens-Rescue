@@ -25,27 +25,25 @@ public class GridView : MonoBehaviour
 
     private void Awake()
     {
-        levelController = new LevelController(width, height, colorTypes);
+        gameProgressionService = ServiceLocator.GetService<GameProgressionService>();
+        gameConfigService = ServiceLocator.GetService<GameConfigService>();
+    }
+
+    public void Initialize(LevelController controller)
+    {
+        levelController = controller;
         levelController.OnGridCreated += CreateLevel;
-        //LevelController.OnGridChanged += UpdateLevel;
         levelController.OnCellCreated += CreateCellView;
         levelController.OnCellMoved += MoveCellView;
         levelController.OnCellDestroyed += DestroyCellView;
         levelController.OnCellsSwapped += SwapCellsView;
 
-        gameProgressionService = ServiceLocator.GetService<GameProgressionService>();
-        gameConfigService = ServiceLocator.GetService<GameConfigService>();
-    }
-
-    private void Start()
-    {
         levelController.CreateGrid();
     }
 
     private void OnDisable()
     {
         levelController.OnGridCreated -= CreateLevel;
-        //LevelController.OnGridChanged -= UpdateLevel;
         levelController.OnCellCreated -= CreateCellView;
         levelController.OnCellMoved -= MoveCellView;
         levelController.OnCellDestroyed -= DestroyCellView;

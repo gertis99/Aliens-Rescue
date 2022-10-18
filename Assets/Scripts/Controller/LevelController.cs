@@ -14,7 +14,8 @@ public class LevelController
     private BoosterController boosterController;
 
     private Element elementSelected;
-    private bool gridCreated = false, isPossibleSwap = true;
+    private bool gridCreated = false;
+    public bool IsPossibleSwap { get; set; }
 
     public event Action OnMoveDone;
     public event Action<Alien> OnCheckedMatch;
@@ -23,9 +24,6 @@ public class LevelController
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
     public event Action<Element, Element> OnCellsSwapped = delegate (Element el1, Element el2) { };
-
-    private WinController winController;
-    private LoseController loseController;
 
     private AnalyticsGameService analytics;
 
@@ -43,13 +41,9 @@ public class LevelController
         gridModel = new Grid(width, height, colorTypes);
         boosterController = new BoosterController(gridModel, this);
 
-        winController = new WinController(this);
-        loseController = new LoseController(this);
         analytics.SendEvent("startLevel", new Dictionary<string, object> { ["levelId"] = PlayerPrefs.GetInt("LevelToLoad", -1) });
 
-        WinController.OnWinChecked += IsPossibleToSwap;
-        LoseController.OnLoseChecked += IsPossibleToSwap;
-
+        IsPossibleSwap = true;
     }
 
     public void CreateGrid()
@@ -375,7 +369,7 @@ public class LevelController
     // Check if the movement done by the player is resolving a match
     public void CheckTryToMove(Vector2 pos)
     {
-        if (isPossibleSwap)
+        if (IsPossibleSwap)
         {
             if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {
@@ -776,10 +770,5 @@ public class LevelController
             boosterController.TryCreateBooster(sameColorHorizontal.Count, sameColorVertical.Count, row, col);
         
         return res;
-    }
-
-    private void IsPossibleToSwap()
-    {
-        isPossibleSwap = false;
     }
 }

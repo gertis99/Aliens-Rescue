@@ -38,7 +38,7 @@ public class GameProgressionProvider : IGameProgressionProvider
         FileSaveComparator fileSave = new FileSaveComparator();
         RemoteSaveComparator remoteSave = new RemoteSaveComparator();
         JsonUtility.FromJsonOverwrite(localData, fileSave);
-        JsonUtility.FromJsonOverwrite(localData, remoteSave);
+        JsonUtility.FromJsonOverwrite(remoteData, remoteSave);
 
         //decide which one to keep
         // Cosmetics

@@ -25,6 +25,7 @@ public class PointsView : MonoBehaviour
 
     private GameConfigService gameConfig;
     private GameProgressionService gameProgression;
+    private PointsController pointsController;
 
     private void Awake()
     {
@@ -32,8 +33,9 @@ public class PointsView : MonoBehaviour
         gameProgression = ServiceLocator.GetService<GameProgressionService>();
     }
 
-    private void Start()
+    public void Initialize(PointsController controller)
     {
+        pointsController = controller;
 
         foreach (LevelInfo level in gameConfig.Levels)
         {
@@ -52,20 +54,20 @@ public class PointsView : MonoBehaviour
 
         movements = maxMovements;
 
-        movementsText.text = movements.ToString(); 
+        movementsText.text = movements.ToString();
 
-        WinController.OnPointsChanged += AddPoint;
-        WinController.OnWinChecked += ActiveWin;
-        LoseController.OnMoveDone += MoveDone;
-        LoseController.OnLoseChecked += ActiveLose;
+        pointsController.OnPointsChanged += AddPoint;
+        pointsController.OnWinChecked += ActiveWin;
+        pointsController.OnMoveDone += MoveDone;
+        pointsController.OnLoseChecked += ActiveLose;
     }
 
     private void OnDisable()
     {
-        WinController.OnPointsChanged -= AddPoint;
-        WinController.OnWinChecked -= ActiveWin;
-        LoseController.OnMoveDone -= MoveDone;
-        LoseController.OnLoseChecked -= ActiveLose;
+        pointsController.OnPointsChanged -= AddPoint;
+        pointsController.OnWinChecked -= ActiveWin;
+        pointsController.OnMoveDone -= MoveDone;
+        pointsController.OnLoseChecked -= ActiveLose;
     }
 
     private void AddPoint(int number, int color)
@@ -107,7 +109,8 @@ public class PointsView : MonoBehaviour
         for (int i = 0; i < pointsText.Length; i++)
         {
             pointsTextFinish[i].text = (points[i] - winCondition).ToString();
-            gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
+            if(points[i] - winCondition > 0)
+                gameProgression.UpdateAliensRescued(i, points[i] - winCondition);
         }
 
         nextLevelButton.interactable = false;
