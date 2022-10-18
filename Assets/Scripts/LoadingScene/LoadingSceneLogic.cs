@@ -49,29 +49,44 @@ public class LoadingSceneLogic : MonoBehaviour
         IGameProgressionProvider gameProgressionProvider = new GameProgressionProvider();
 
         //register services
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(gameConfig);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(gameProgression);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(remoteConfig);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(loginService);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(adsService);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService(analyticsService);
+        //Debug.Log("Z");
         ServiceLocator.RegisterService<IIAPGameService>(iapService);
 
         //initialize services
+        Debug.Log("A");
         await servicesInitializer.Initialize();
+        Debug.Log("B");
         await loginService.Initialize();
+        Debug.Log("C");
         await remoteConfig.Initialize();
+        Debug.Log("D");
         await analyticsService.Initialize();
+        Debug.Log("E");
         await iapService.Initialize(new Dictionary<string, string>
         {
             ["test1"] = "es.gmangames.alienrescue.test1"
         });
 
-
+        Debug.Log("F");
         await gameProgressionProvider.Initialize();
+        Debug.Log("G");
         gameConfig.Initialize(remoteConfig);
+        Debug.Log("H");
         gameProgression.Initialize(gameConfig, gameProgressionProvider);
 
+        Debug.Log("I");
         bool adsInitialized = await adsService.Initialize(Application.isEditor);
             
         Debug.Log("AdsInitialized: " + adsInitialized);

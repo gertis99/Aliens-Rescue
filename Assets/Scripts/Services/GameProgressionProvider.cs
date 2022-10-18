@@ -22,24 +22,26 @@ public class GameProgressionProvider : IGameProgressionProvider
 
     public string Load()
     {
+        Debug.Log("AA");
         string localData = _local.Load();
+        Debug.Log("BB");
         string remoteData = _remote.Load();
-
-        if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
+        Debug.Log("CC");
+        /*if (string.IsNullOrEmpty(localData) && !string.IsNullOrEmpty(remoteData))
         {
             return remoteData;
-        }
-
+        }*/
+        Debug.Log("DD");
         if (!string.IsNullOrEmpty(localData) && string.IsNullOrEmpty(remoteData))
         {
             return localData;
         }
-
-        FileSaveComparator fileSave = new FileSaveComparator();
+        Debug.Log("EE");
+        /*FileSaveComparator fileSave = new FileSaveComparator();
         RemoteSaveComparator remoteSave = new RemoteSaveComparator();
         JsonUtility.FromJsonOverwrite(localData, fileSave);
         JsonUtility.FromJsonOverwrite(remoteData, remoteSave);
-
+        Debug.Log("FF");
         //decide which one to keep
         // Cosmetics
         int cosmeticsFile = 0, cosmeticsRemote = 0;
@@ -88,8 +90,8 @@ public class GameProgressionProvider : IGameProgressionProvider
             return localData;
 
         if (fileSave.Currencies[0].Amount < remoteSave.Currencies[0].Amount)
-            return remoteData;
-
+            return remoteData;*/
+        Debug.Log("GG");
         // If it is the same
         return localData;
     }

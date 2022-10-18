@@ -19,6 +19,7 @@ public class GameProgressionService : IService
     public void Initialize(GameConfigService gameConfig, IGameProgressionProvider progressionProvider)
     {
         this.progressionProvider = progressionProvider;
+        Debug.Log("1");
         Load(gameConfig);
     }
 
@@ -51,12 +52,14 @@ public class GameProgressionService : IService
             if (colorHudItem.Name == name)
             {
                 colorHudItem.Selected = selected;
+                currentHudColor = colorHudItem.Name;
                 Save();
                 return;
             }
         }
 
         HudColors.Add(new ColorHudItemModel { Name = name, Selected = selected });
+        currentHudColor = name;
         Save();
     }
 
@@ -114,6 +117,7 @@ public class GameProgressionService : IService
     public void Load(GameConfigService config)
     {
         string data = progressionProvider.Load();
+        Debug.Log("2");
         if (string.IsNullOrEmpty(data))
         {
             Currencies = config.InitialCurrencies;
