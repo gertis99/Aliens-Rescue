@@ -7,7 +7,9 @@ public class MainMenuInfo : MonoBehaviour
 {
     [SerializeField]
     private TMPro.TextMeshProUGUI currentLevel;
+    [SerializeField] private GameObject termPanelPrefab;
     private GameProgressionService gameProgression;
+    private bool termsReaded => PlayerPrefs.GetInt("termsAccepted", 0) == 1;
 
     private void Awake()
     {
@@ -18,6 +20,8 @@ public class MainMenuInfo : MonoBehaviour
     void Start()
     {
         currentLevel.text = gameProgression.CurrentLevel.ToString();
+        if (!termsReaded)
+            Instantiate(termPanelPrefab, this.gameObject.transform);
     }
 
     // Update is called once per frame
