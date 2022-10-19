@@ -48,8 +48,8 @@ public class PointsController
         if (element == null)
             return;
 
-        colorPoints[(int)element.GetElementType()]++;
-        OnPointsChanged(colorPoints[(int)element.GetElementType()], (int)element.GetElementType());
+        colorPoints[element.AlienId]++;
+        OnPointsChanged(colorPoints[element.AlienId], element.AlienId);
         if (!win)
             CheckWin();
     }
@@ -58,8 +58,8 @@ public class PointsController
     {
         for (int i = 0; i < elements.Count; i++)
         {
-            colorPoints[(int)elements[i].GetElementType()]++;
-            OnPointsChanged(colorPoints[(int)elements[i].GetElementType()], (int)elements[i].GetElementType());
+            colorPoints[(int)elements[i].AlienId]++;
+            OnPointsChanged(colorPoints[(int)elements[i].AlienId], (int)elements[i].AlienId);
         }
 
         if (!win)

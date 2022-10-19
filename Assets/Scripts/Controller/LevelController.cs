@@ -107,8 +107,8 @@ public class LevelController
             {
                 if (gridModel.GridLevel[x, y] == null)
                 {
-                    gridModel.GridLevel[x, y] = new Alien(x, y, (AlienType)UnityEngine.Random.Range(0, colorTypes));
-                    if (gridCreated)
+                    gridModel.GridLevel[x, y] = new Alien(x, y, UnityEngine.Random.Range(0, colorTypes));
+                    if (gridCreated && gridModel.GridLevel[x, y] != null && gridModel.GridLevel[x, y] is Alien)
                     {
                         OnCellCreated(gridModel.GridLevel[x, y]);
                     }
@@ -279,7 +279,7 @@ public class LevelController
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
                 if (gridModel.GridLevel[i, j]is Alien)
-                    gridModel.GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
+                    gridModel.GridLevel[i, j] = new Alien(i, j, UnityEngine.Random.Range(0, colorTypes));
             }
         }
     }
@@ -478,14 +478,14 @@ public class LevelController
 
         bool sameColor = true;
         int pos = 1, nSameColor = 1;
-        AlienType elementColor = element.GetElementType();
+        int alienId = element.AlienId;
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX() && gridModel.GridLevel[row - pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -512,7 +512,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX() && gridModel.GridLevel[row + pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -540,7 +540,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY() && gridModel.GridLevel[row, col - pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -566,7 +566,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY() && gridModel.GridLevel[row, col + pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -621,14 +621,14 @@ public class LevelController
 
         bool sameColor = true;
         int pos = 1;
-        AlienType elementColor = element.GetElementType();
+        int alienId = element.AlienId;
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col) && gridModel.GridLevel[row - pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row - pos, col]);
                     pos++;
@@ -652,7 +652,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col) && gridModel.GridLevel[row + pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row + pos, col]);
                     pos++;
@@ -676,7 +676,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos) && gridModel.GridLevel[row, col - pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col - pos]);
                     pos++;
@@ -699,7 +699,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos) && gridModel.GridLevel[row, col + pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col + pos]);
                     pos++;

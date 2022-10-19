@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CellView : MonoBehaviour
 {
-    public Vector2Int position;
-    public int colorType;
+    [SerializeField] private Vector2Int position;
+    [SerializeField] private int colorType;
 
     public void Initialize(Vector2Int pos, int color)
     {

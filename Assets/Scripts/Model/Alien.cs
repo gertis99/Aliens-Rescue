@@ -5,17 +5,18 @@ using UnityEngine;
 public class Alien : Element
 {
 
-    private AlienType alienType;
+    //private AlienType alienType;
+    public int AlienId { get; private set; }
 
-    public Alien(int x, int y, AlienType aType) 
+    public Alien(int x, int y, int alienId) 
     {
         posX = x;
         posY = y;
-        alienType = aType;
+        AlienId = alienId;
     }
 
-    public AlienType GetElementType()
+    /*public AlienType GetElementType()
     {
         return alienType;
-    }
+    }*/
 }
