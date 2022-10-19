@@ -34,7 +34,7 @@ public class ShopItemView : MonoBehaviour
         return gameProgression.GetCurrency(model.Price.Name) >= model.Price.Amount;
     }
 
-    private void UpdateVisuals()
+    public void UpdateVisuals()
     {
         if (model == null)
             return;
