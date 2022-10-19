@@ -13,9 +13,14 @@ public class LevelInitialize : MonoBehaviour
     private LevelController levelController;
     private PointsController pointsController;
 
+    // Services
+    private GameConfigService gameConfig;
+
     private void Awake()
     {
-        levelController = new LevelController(8, 8, 6);
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
+
+        levelController = new LevelController(gameConfig.BoardWidth, gameConfig.BoardHeight, gameConfig.BoardColors);
         pointsController = new PointsController(levelController);
     }
 
