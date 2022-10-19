@@ -1025,6 +1025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAlienImage: {fileID: 358509835}
+  currentAlienId: 0
   cosmetics:
   - {fileID: 11400000, guid: a9f7934022f79d74e8a6ba69303ec750, type: 2}
   - {fileID: 11400000, guid: 7b0d72474770adc48b223bfaa4e9cc65, type: 2}

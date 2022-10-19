@@ -21,7 +21,7 @@ public class MoveCellAnimation : IAnimation
 
     private IEnumerator AnimationCoroutine(GridView board)
     {
-        objectAnimated.transform.DOMove(new Vector3(position.x, position.y, 0), 0.05f).SetEase(Ease.InOutQuad);
+        objectAnimated.transform.DOMove(new Vector3(position.x, position.y, 0), 0.05f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(0.05f);
     }
 }

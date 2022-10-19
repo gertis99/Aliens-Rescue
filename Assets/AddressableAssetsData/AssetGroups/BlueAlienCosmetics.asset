@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: BlueAlienCosmetics
+  m_EditorClassIdentifier: 
+  m_GroupName: BlueAlienCosmetics
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8faeb5eeaacfc1445b5ae6f3d31b9819
+  m_SerializeEntries:
+  - m_GUID: aecbac92265db8f419460b37ec246d8b
+    m_Address: Icon_Alien_Blue_BowTie
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 62340f7b7d96206428ab10c862edf502
+    m_Address: Icon_Alien_Blue_FrogHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 95f12a809b666c1499e4a2eb86be3771
+    m_Address: Icon_Alien_Blue_LogoHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4041712b877fcd046aef7c5f6e24a676
+    m_Address: Icon_Alien_Blue_LogoPin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff587070c29b1be40b01b7bb2761af95
+    m_Address: Icon_Alien_Blue_TopHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2b7fca925652c284dbf768e9a7bc7e1b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 589d5e02f4d7a8f42a483a4871743fb2, type: 2}
+    - {fileID: 11400000, guid: 1612868454255924d8c52a36a69b1361, type: 2}

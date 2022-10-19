@@ -33,6 +33,6 @@ public class AliensSceneView : MonoBehaviour
 
     private void OnClickedAlien(int id)
     {
-        AlienCosmeticView.currentAlienId = id;
+        PlayerPrefs.SetInt("AlienToLoad", id);
     }
 }

@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class ShopItemView : MonoBehaviour
 {
-    public Image image;
-    public TMP_Text description;
-    public TMP_Text cost;
-    public TMP_Text amount;
-    public GameObject selected;
+    [SerializeField]
+    private Image image;
+    [SerializeField]
+    private TMP_Text description, cost, amount;
+    [SerializeField]
+    private GameObject selected;
 
     private ShopItemModel model;
     private Action<ShopItemModel> onClickedEvent;
@@ -32,12 +34,16 @@ public class ShopItemView : MonoBehaviour
         return gameProgression.GetCurrency(model.Price.Name) >= model.Price.Amount;
     }
 
-    private void UpdateVisuals()
+    public void UpdateVisuals()
     {
         if (model == null)
             return;
 
-        image.sprite = Resources.Load<Sprite>(model.Image);
+        Addressables.LoadAssetAsync<Sprite>(model.Image).Completed += handler =>
+        {
+            image.sprite = handler.Result;
+        };
+
         description.text = model.Description;
         cost.text = model.Price.Amount.ToString();
         

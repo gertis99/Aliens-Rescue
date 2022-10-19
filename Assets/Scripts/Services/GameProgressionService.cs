@@ -7,17 +7,19 @@ using UnityEngine;
 public class GameProgressionService : IService
 {
     public int CurrentLevel;
-    public List<ActiveBoosterItemModel> ActiveBoosters;
-    public List<CosmeticItemModel> Cosmetics;
-    public List<ColorHudItemModel> HudColors;
+    public List<ActiveBoosterItemModel> ActiveBoosters = new List<ActiveBoosterItemModel>();
+    public List<CosmeticItemModel> Cosmetics = new List<CosmeticItemModel>();
+    public List<ColorHudItemModel> HudColors = new List<ColorHudItemModel>();
     public string currentHudColor;
-    public List<InGameCurrency> Currencies;
+    public List<InGameCurrency> Currencies = new List<InGameCurrency>();
+    public List<AlienModel> AliensRescued = new List<AlienModel>();
 
     private IGameProgressionProvider progressionProvider;
 
     public void Initialize(GameConfigService gameConfig, IGameProgressionProvider progressionProvider)
     {
         this.progressionProvider = progressionProvider;
+        Debug.Log("1");
         Load(gameConfig);
     }
 
@@ -50,12 +52,14 @@ public class GameProgressionService : IService
             if (colorHudItem.Name == name)
             {
                 colorHudItem.Selected = selected;
+                currentHudColor = colorHudItem.Name;
                 Save();
                 return;
             }
         }
 
         HudColors.Add(new ColorHudItemModel { Name = name, Selected = selected });
+        currentHudColor = name;
         Save();
     }
 
@@ -89,6 +93,22 @@ public class GameProgressionService : IService
         Save();
     }
 
+    public void UpdateAliensRescued(int alienId, int amount)
+    {
+        foreach(AlienModel alien in AliensRescued)
+        {
+            if(alien.Id == alienId)
+            {
+                alien.Amount += amount;
+                Save();
+                return;
+            }
+        }
+
+        AliensRescued.Add(new AlienModel { Id = alienId, Amount = amount });
+        Save();
+    }
+
     public void Save()
     {
         progressionProvider.Save(JsonUtility.ToJson(this));
@@ -97,6 +117,7 @@ public class GameProgressionService : IService
     public void Load(GameConfigService config)
     {
         string data = progressionProvider.Load();
+        Debug.Log("2");
         if (string.IsNullOrEmpty(data))
         {
             Currencies = config.InitialCurrencies;

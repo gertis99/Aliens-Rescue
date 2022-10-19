@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Boosters
+  m_EditorClassIdentifier: 
+  m_GroupName: Boosters
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 09a8413494f7d7e468d5917f9d0f2910
+  m_SerializeEntries:
+  - m_GUID: 0283203df0bc3b646a5f36c8b306efe4
+    m_Address: Icon_Booster_ColorBomb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5981a9d3823cea34aae003823fe19cac
+    m_Address: Icon_Booster_VerticalLine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3573bc20784cfff4a95d0239ee97e78f
+    m_Address: Icon_Booster_Bomb
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 991742231aeef2c459d6881d2d2a8d76
+    m_Address: Icon_Booster_HorizontalLine
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2b7fca925652c284dbf768e9a7bc7e1b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: f826f857e09b1ac469cf52249602f5c3, type: 2}
+    - {fileID: 11400000, guid: 7aa900d8dc9653246947e2b24b128937, type: 2}

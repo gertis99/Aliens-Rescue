@@ -9,36 +9,31 @@ using UnityEngine;
 
 public class LevelController
 {
-    public delegate void GridCreated(Element[,] grid);
-    public static event GridCreated OnGridCreated;
-    public static event GridCreated OnGridChanged;
-
     public int width = 9, height = 9, colorTypes = 6;
     private Grid gridModel;
     private BoosterController boosterController;
 
-    public delegate void SwapDone(Element[,] grid);
-    public delegate void CheckedMatch(Alien element);
-    public delegate void MoveDone();
-    public static event SwapDone OnSwapDone = Grid => { };
-    public static event CheckedMatch OnCheckedMatch;
-    public static event MoveDone OnMoveDone;
-
     private Element elementSelected;
-    private bool gridCreated = false, isPossibleSwap = true;
+    private bool gridCreated = false;
+    public bool IsPossibleSwap { get; set; }
 
-    public static LevelController levelControllerInstance;
-
+    public event Action OnMoveDone;
+    public event Action<Alien> OnCheckedMatch;
+    public event Action<Element[,]> OnGridCreated;
     public event Action<Element> OnCellCreated = delegate (Element element) { };
     public event Action<Element> OnCellDestroyed = delegate (Element element) { };
     public event Action<Element, Vector2Int> OnCellMoved = delegate (Element el, Vector2Int pos) { };
     public event Action<Element, Element> OnCellsSwapped = delegate (Element el1, Element el2) { };
+
+    private AnalyticsGameService analytics;
 
     public void DestroyCell(Element el) => OnCellDestroyed(el);
     public void CreateCell(Element el) => OnCellCreated(el);
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
+        analytics = ServiceLocator.GetService<AnalyticsGameService>();
+
         this.width = width;
         this.height = height;
         this.colorTypes = colorTypes;
@@ -46,11 +41,9 @@ public class LevelController
         gridModel = new Grid(width, height, colorTypes);
         boosterController = new BoosterController(gridModel, this);
 
-        levelControllerInstance = this;
+        analytics.SendEvent("startLevel", new Dictionary<string, object> { ["levelId"] = PlayerPrefs.GetInt("LevelToLoad", -1) });
 
-        WinController.OnWinChecked += IsPossibleToSwap;
-        LoseController.OnLoseChecked += IsPossibleToSwap;
-
+        IsPossibleSwap = true;
     }
 
     public void CreateGrid()
@@ -114,8 +107,8 @@ public class LevelController
             {
                 if (gridModel.GridLevel[x, y] == null)
                 {
-                    gridModel.GridLevel[x, y] = new Alien(x, y, (AlienType)UnityEngine.Random.Range(0, colorTypes));
-                    if (gridCreated)
+                    gridModel.GridLevel[x, y] = new Alien(x, y, UnityEngine.Random.Range(0, colorTypes));
+                    if (gridCreated && gridModel.GridLevel[x, y] != null && gridModel.GridLevel[x, y] is Alien)
                     {
                         OnCellCreated(gridModel.GridLevel[x, y]);
                     }
@@ -286,11 +279,9 @@ public class LevelController
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
                 if (gridModel.GridLevel[i, j]is Alien)
-                    gridModel.GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
+                    gridModel.GridLevel[i, j] = new Alien(i, j, UnityEngine.Random.Range(0, colorTypes));
             }
         }
-
-        OnGridChanged(gridModel.GridLevel);
     }
 
     public void SetElementSelected(GameObject element)
@@ -378,7 +369,7 @@ public class LevelController
     // Check if the movement done by the player is resolving a match
     public void CheckTryToMove(Vector2 pos)
     {
-        if (isPossibleSwap)
+        if (IsPossibleSwap)
         {
             if (pos.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x <= -0.5) // Derecha
             {
@@ -487,14 +478,14 @@ public class LevelController
 
         bool sameColor = true;
         int pos = 1, nSameColor = 1;
-        AlienType elementColor = element.GetElementType();
+        int alienId = element.AlienId;
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX() && gridModel.GridLevel[row - pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -521,7 +512,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX() && gridModel.GridLevel[row + pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -549,7 +540,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY() && gridModel.GridLevel[row, col - pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -575,7 +566,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY() && gridModel.GridLevel[row, col + pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
                 {
                     pos++;
                     nSameColor++;
@@ -630,14 +621,14 @@ public class LevelController
 
         bool sameColor = true;
         int pos = 1;
-        AlienType elementColor = element.GetElementType();
+        int alienId = element.AlienId;
 
         // Check horizontal
         while (sameColor)
         {
             if (gridModel.IsOnGrid(row - pos, col) && gridModel.GridLevel[row - pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row - pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row - pos, col]);
                     pos++;
@@ -661,7 +652,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row + pos, col) && gridModel.GridLevel[row + pos, col] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row + pos, col]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row + pos, col]);
                     pos++;
@@ -685,7 +676,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col - pos) && gridModel.GridLevel[row, col - pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col - pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col - pos]);
                     pos++;
@@ -708,7 +699,7 @@ public class LevelController
         {
             if (gridModel.IsOnGrid(row, col + pos) && gridModel.GridLevel[row, col + pos] is Alien)
             {
-                if (elementColor == ((Alien)gridModel.GridLevel[row, col + pos]).GetElementType())
+                if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col + pos]);
                     pos++;
@@ -779,10 +770,5 @@ public class LevelController
             boosterController.TryCreateBooster(sameColorHorizontal.Count, sameColorVertical.Count, row, col);
         
         return res;
-    }
-
-    private void IsPossibleToSwap()
-    {
-        isPossibleSwap = false;
     }
 }

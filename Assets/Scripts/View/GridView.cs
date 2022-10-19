@@ -2,17 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 /*
  * Show the grid to the player
  */
 public class GridView : MonoBehaviour
 {
-    public int width = 9, height = 9, colorTypes = 6;
+    [SerializeField]
+    private int width = 9, height = 9, colorTypes = 6;
+    [SerializeField]
+    private GameObject blueAlienPrefab, redAlienPrefab, yellowAlienPrefab, purpleAlienPrefab, greenAlienPrefab, orangeAlienPrefab, genericAlienPrefab;
 
-    public GameObject blueAlienPrefab, redAlienPrefab, yellowAlienPrefab, purpleAlienPrefab, greenAlienPrefab, orangeAlienPrefab;
-    public GameObject horizontalLineBoosterPrefab, verticalLineBoosterPrefab, bombPrefab, colorBombPrefab;
-    public Sprite[] sprites;
+    public Sprite gold;
+
+    [SerializeField]
+    private GameObject horizontalLineBoosterPrefab, verticalLineBoosterPrefab, bombPrefab, colorBombPrefab;
     private GameObject[,] gridLevel;
     private LevelController levelController;
     private GameObject elementSelected = null;
@@ -23,27 +29,25 @@ public class GridView : MonoBehaviour
 
     private void Awake()
     {
-        levelController = new LevelController(width, height, colorTypes);
-        LevelController.OnGridCreated += CreateLevel;
-        //LevelController.OnGridChanged += UpdateLevel;
+        gameProgressionService = ServiceLocator.GetService<GameProgressionService>();
+        gameConfigService = ServiceLocator.GetService<GameConfigService>();
+    }
+
+    public void Initialize(LevelController controller)
+    {
+        levelController = controller;
+        levelController.OnGridCreated += CreateLevel;
         levelController.OnCellCreated += CreateCellView;
         levelController.OnCellMoved += MoveCellView;
         levelController.OnCellDestroyed += DestroyCellView;
         levelController.OnCellsSwapped += SwapCellsView;
 
-        gameProgressionService = ServiceLocator.GetService<GameProgressionService>();
-        gameConfigService = ServiceLocator.GetService<GameConfigService>();
-    }
-
-    private void Start()
-    {
         levelController.CreateGrid();
     }
 
     private void OnDisable()
     {
-        LevelController.OnGridCreated -= CreateLevel;
-        //LevelController.OnGridChanged -= UpdateLevel;
+        levelController.OnGridCreated -= CreateLevel;
         levelController.OnCellCreated -= CreateCellView;
         levelController.OnCellMoved -= MoveCellView;
         levelController.OnCellDestroyed -= DestroyCellView;
@@ -103,11 +107,14 @@ public class GridView : MonoBehaviour
 
     private void CreateCellView(Element el)
     {
+        if (el == null)
+            return;
+
         if (el is Alien)
-            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), gridLevel.GetLength(1) + 10));
+            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), gridLevel.GetLength(1) + 10), ((Alien)el).AlienId);
         //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(alienElemnts[(int)((Alien)el).GetElementType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
-        else
-            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), el.GetPosY()));
+        else if(el is Booster)
+            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), el.GetPosY()), (int)((Booster)el).GetElementType());
             //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(boosterElemnts[(int)((Booster)el).GetElementType()], new Vector2(el.GetPosX(), el.GetPosY()), Quaternion.identity, this.transform);
 
         gridLevel[el.GetPosX(), el.GetPosY()].SetActive(false);
@@ -186,89 +193,49 @@ public class GridView : MonoBehaviour
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
-                InstantiateElement(grid[i, j], i, j, new Vector2(i, j));
+                InstantiateElement(grid[i, j], i, j, new Vector2(i, j), ((Alien)grid[i, j]).AlienId);
                 //gridLevel[i,j] = Instantiate(alienElemnts[(int)((Alien)grid[i,j]).GetElementType()], new Vector2(i, j), Quaternion.identity, this.transform);
-                gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), (int)((Alien)grid[i, j]).GetElementType());
+                //gridLevel[i, j].GetComponent<CellView>().Initialize(new Vector2Int(i, j), ((Alien)grid[i, j]).AlienId);
             }
         }
     }
 
-    private void InstantiateElement(Element element, int row, int col, Vector2 pos)
+    private void InstantiateElement(Element element, int row, int col, Vector2 pos, int id)
     {
         // This is going to be implemented without a switch in the near future
         if(element is Alien)
         {
-            switch (((Alien)element).GetElementType())
+            Alien currentAlien = (Alien)element;
+            
+            gridLevel[row, col] = Instantiate(genericAlienPrefab, pos, Quaternion.identity, this.transform);
+            SpriteRenderer currentSprite = gridLevel[row, col].GetComponent<SpriteRenderer>();
+
+            gridLevel[row, col].GetComponent<CellView>().Initialize(new Vector2Int(row, col), id);
+
+            // Get cosmetic
+            foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
             {
-                case AlienType.BlueAlien:
-                    gridLevel[row, col] = Instantiate(blueAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
+                if (cosmetic.SelectedAliensIds.Contains(id))
+                {
+                    Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo(id).Image + "_" + cosmetic.Name).Completed += handler =>
                     {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.BlueAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.BlueAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
-                case AlienType.RedAlien:
-                    gridLevel[row, col] = Instantiate(redAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
-                    {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.RedAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.RedAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
-                case AlienType.GreenAlien:
-                    gridLevel[row, col] = Instantiate(greenAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
-                    {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.GreenAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.GreenAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
-                case AlienType.PurpleAlien:
-                    gridLevel[row, col] = Instantiate(purpleAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
-                    {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.PurpleAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.PurpleAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
-                case AlienType.YellowAlien:
-                    gridLevel[row, col] = Instantiate(yellowAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
-                    {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.YellowAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.YellowAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
-                case AlienType.OrangeAlien:
-                    gridLevel[row, col] = Instantiate(orangeAlienPrefab, pos, Quaternion.identity, this.transform);
-                    foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
-                    {
-                        if (cosmetic.SelectedAliensIds.Contains((int)AlienType.OrangeAlien))
-                        {
-                            gridLevel[row, col].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(gameConfigService.GetAlienInfo((int)AlienType.OrangeAlien).Image + "_" + cosmetic.Name);
-                            return;
-                        }
-                    }
-                    break;
+                        currentSprite.GetComponent<SpriteRenderer>().sprite = handler.Result;
+                        Debug.Log(row + " " + col);
+                    };
+                    return;
+                }
             }
+
+            // Get default
+            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetAlienInfo(id).Image).Completed += handler =>
+            {
+                currentSprite.GetComponent<SpriteRenderer>().sprite = handler.Result;
+                Debug.Log(row + " " + col);
+            };
+
+            return;
         }
-        else
+        else if(element is Booster)
         {
             switch (((Booster)element).GetElementType())
             {

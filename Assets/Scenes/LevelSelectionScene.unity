@@ -255,8 +255,8 @@ GameObject:
   - component: {fileID: 95677783}
   - component: {fileID: 95677785}
   - component: {fileID: 95677784}
-  - component: {fileID: 95677786}
   - component: {fileID: 95677787}
+  - component: {fileID: 95677788}
   m_Layer: 5
   m_Name: Planet03
   m_TagString: Untagged
@@ -281,7 +281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6638519, y: 0.748}
   m_AnchorMax: {x: 0.813, y: 0.8255642}
-  m_AnchoredPosition: {x: -0.0000047683716, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.000009536743, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &95677784
@@ -322,18 +322,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95677782}
   m_CullTransparentMesh: 1
---- !u!114 &95677786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95677782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b1ecdb01e5a744cb516999b049090b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &95677787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,18 +366,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 95677786}
-        m_TargetAssemblyTypeName: ButtonLoadScene, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 95677788}
+        m_TargetAssemblyTypeName: ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevelScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &95677788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95677782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a090565f8535264498ac76c3bf92781a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &282315218
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,13 +994,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 488961871}
-        m_TargetAssemblyTypeName: ButtonLoadScene, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_TargetAssemblyTypeName: ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevelScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 488961866}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b1ecdb01e5a744cb516999b049090b, type: 3}
+  m_Script: {fileID: 11500000, guid: a090565f8535264498ac76c3bf92781a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &542949728
@@ -1776,8 +1776,8 @@ GameObject:
   - component: {fileID: 1186059862}
   - component: {fileID: 1186059864}
   - component: {fileID: 1186059863}
-  - component: {fileID: 1186059865}
   - component: {fileID: 1186059866}
+  - component: {fileID: 1186059867}
   m_Layer: 5
   m_Name: Planet02
   m_TagString: Untagged
@@ -1843,18 +1843,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186059861}
   m_CullTransparentMesh: 1
---- !u!114 &1186059865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186059861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b1ecdb01e5a744cb516999b049090b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1186059866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,18 +1887,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1186059865}
-        m_TargetAssemblyTypeName: ButtonLoadScene, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 95677788}
+        m_TargetAssemblyTypeName: ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevelScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1186059867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186059861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a090565f8535264498ac76c3bf92781a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1317167979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,8 +2213,8 @@ GameObject:
   - component: {fileID: 1412686178}
   - component: {fileID: 1412686180}
   - component: {fileID: 1412686179}
-  - component: {fileID: 1412686181}
   - component: {fileID: 1412686182}
+  - component: {fileID: 1412686183}
   m_Layer: 5
   m_Name: Planet03
   m_TagString: Untagged
@@ -2280,18 +2280,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1412686177}
   m_CullTransparentMesh: 1
---- !u!114 &1412686181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412686177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b1ecdb01e5a744cb516999b049090b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1412686182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2336,18 +2324,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 95677786}
-        m_TargetAssemblyTypeName: ButtonLoadScene, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 95677788}
+        m_TargetAssemblyTypeName: ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevelScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1412686183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412686177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a090565f8535264498ac76c3bf92781a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1433373125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,7 +2525,7 @@ GameObject:
   - component: {fileID: 1456946203}
   - component: {fileID: 1456946202}
   - component: {fileID: 1456946205}
-  - component: {fileID: 1456946204}
+  - component: {fileID: 1456946206}
   m_Layer: 5
   m_Name: Planet03
   m_TagString: Untagged
@@ -2550,7 +2550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.813, y: 0.56753856}
   m_AnchorMax: {x: 0.9584074, y: 0.64170957}
-  m_AnchoredPosition: {x: -0.0000019073486, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.0000038146973, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456946202
@@ -2591,18 +2591,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456946200}
   m_CullTransparentMesh: 1
---- !u!114 &1456946204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456946200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b1ecdb01e5a744cb516999b049090b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1456946205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2647,18 +2635,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1456946204}
-        m_TargetAssemblyTypeName: ButtonLoadScene, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 95677788}
+        m_TargetAssemblyTypeName: ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevelScene
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1456946206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456946200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a090565f8535264498ac76c3bf92781a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1617454009
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class Grid
         {
             for (int j = 0; j < GridLevel.GetLength(1); j++)
             {
-                GridLevel[i, j] = new Alien(i, j, (AlienType)UnityEngine.Random.Range(0, colorTypes));
+                GridLevel[i, j] = new Alien(i, j, UnityEngine.Random.Range(0, colorTypes));
             }
         }
     }

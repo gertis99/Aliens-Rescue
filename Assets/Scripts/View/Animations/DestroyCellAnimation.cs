@@ -19,8 +19,11 @@ public class DestroyCellAnimation : IAnimation
 
     private IEnumerator AnimationCoroutine(GridView board)
     {
-        DOTween.Sequence(objectAnimated.transform.DOScale(0f, 0.25f).OnComplete(() => DestroyObject(board)));
+        if (objectAnimated != null)
+            DOTween.Sequence(objectAnimated.transform.DOScale(0f, 0.25f));
+        
         yield return new WaitForSeconds(0.25f);
+        DestroyObject(board);
     }
 
     private void DestroyObject(GridView board)

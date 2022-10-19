@@ -12,12 +12,17 @@ public class ShopView : MonoBehaviour
     private AnalyticsGameService analytics;
     private IIAPGameService iapService;
     private ShopController controller;
+    private List<ShopItemView> items = new List<ShopItemView>();
 
-    public ShopItemView shopItemPrefab;
-    public Transform panel;
+    [SerializeField]
+    private ShopItemView shopItemPrefab;
+    [SerializeField]
+    private Transform panel;
 
-    public TMP_Text gold;
-    public TMP_Text goldPerAd, goldPerBuy, priceGold;
+    [SerializeField]
+    private TMP_Text gold;
+    [SerializeField]
+    private TMP_Text goldPerAd, goldPerBuy, priceGold;
 
     private void Awake()
     {
@@ -42,7 +47,8 @@ public class ShopView : MonoBehaviour
 
         foreach (ShopItemModel shopItemModel in gameConfig.ShopItems)
         {
-            Instantiate(shopItemPrefab, panel).SetData(shopItemModel, OnPurchaseItem);
+            items.Add(Instantiate(shopItemPrefab, panel));
+            items[items.Count - 1].SetData(shopItemModel, OnPurchaseItem);
         }
 
         goldPerAd.text = gameConfig.GoldPerAd.ToString();
@@ -54,6 +60,10 @@ public class ShopView : MonoBehaviour
     private void UpdateInfo()
     {
         gold.text = gameProgression.GetCurrency("Gold").ToString();
+        foreach(ShopItemView item in items)
+        {
+            item.UpdateVisuals();
+        }
     }
 
     private void OnPurchaseItem(ShopItemModel model)

@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 public class LevelView : MonoBehaviour
 {
-    public ActiveBoosterHorizontalLineView horizotntalBooster;
-    public ActiveBoosterVerticalLineView verticalBooster;
-    public ActiveBoosterBombView bombBooster;
-    public ActiveBoosterColorBombView colorBombBooster;
+    [SerializeField]
+    private ActiveBoosterHorizontalLineView horizotntalBooster;
+    [SerializeField]
+    private ActiveBoosterVerticalLineView verticalBooster;
+    [SerializeField]
+    private ActiveBoosterBombView bombBooster;
+    [SerializeField]
+    private ActiveBoosterColorBombView colorBombBooster;
 
     private GameProgressionService gameProgression;
     private GameConfigService gameConfig;
 
     private string currentHUDColor;
-    public Image HUD;
+    [SerializeField]
+    private Image HUD;
 
     private void Awake()
     {
@@ -30,7 +36,11 @@ public class LevelView : MonoBehaviour
         {
             if(colorHud.ColorHudName == currentHUDColor)
             {
-                HUD.sprite = Resources.Load<Sprite>(colorHud.ConsoleImage);
+                Addressables.LoadAssetAsync<Sprite>(colorHud.ConsoleImage).Completed += handler =>
+                {
+                    HUD.sprite = handler.Result;
+                };
+
                 break;
             }
         }
