@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class Booster : Element
 {
-    private BoosterType boosterType;
+    public int BoosterId { get; private set; }
 
-    public Booster(int x, int y, BoosterType bType)
+    public Booster(int x, int y, int bType)
     {
         posX = x;
         posY = y;
-        boosterType = bType;
-    }
-
-    public BoosterType GetElementType()
-    {
-        return boosterType;
+        BoosterId = bType;
     }
 }

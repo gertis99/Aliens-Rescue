@@ -114,7 +114,7 @@ public class GridView : MonoBehaviour
             InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), gridLevel.GetLength(1) + 10), ((Alien)el).AlienId);
         //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(alienElemnts[(int)((Alien)el).GetElementType()], new Vector2(el.GetPosX(), gridLevel.GetLength(1)+10), Quaternion.identity, this.transform);
         else if(el is Booster)
-            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), el.GetPosY()), (int)((Booster)el).GetElementType());
+            InstantiateElement(el, el.GetPosX(), el.GetPosY(), new Vector2(el.GetPosX(), el.GetPosY()), (int)((Booster)el).BoosterId);
             //gridLevel[el.GetPosX(), el.GetPosY()] = Instantiate(boosterElemnts[(int)((Booster)el).GetElementType()], new Vector2(el.GetPosX(), el.GetPosY()), Quaternion.identity, this.transform);
 
         gridLevel[el.GetPosX(), el.GetPosY()].SetActive(false);
@@ -202,16 +202,14 @@ public class GridView : MonoBehaviour
 
     private void InstantiateElement(Element element, int row, int col, Vector2 pos, int id)
     {
+        gridLevel[row, col] = Instantiate(genericAlienPrefab, pos, Quaternion.identity, this.transform);
+        SpriteRenderer currentSprite = gridLevel[row, col].GetComponent<SpriteRenderer>();
+
+        gridLevel[row, col].GetComponent<CellView>().Initialize(new Vector2Int(row, col), id);
+
         // This is going to be implemented without a switch in the near future
-        if(element is Alien)
-        {
-            Alien currentAlien = (Alien)element;
-            
-            gridLevel[row, col] = Instantiate(genericAlienPrefab, pos, Quaternion.identity, this.transform);
-            SpriteRenderer currentSprite = gridLevel[row, col].GetComponent<SpriteRenderer>();
-
-            gridLevel[row, col].GetComponent<CellView>().Initialize(new Vector2Int(row, col), id);
-
+        if (element is Alien)
+        {   
             // Get cosmetic
             foreach (CosmeticItemModel cosmetic in gameProgressionService.Cosmetics)
             {
@@ -237,21 +235,13 @@ public class GridView : MonoBehaviour
         }
         else if(element is Booster)
         {
-            switch (((Booster)element).GetElementType())
+            Addressables.LoadAssetAsync<Sprite>(gameConfigService.GetBoardBoosterInfo(id).Image).Completed += handler =>
             {
-                case BoosterType.HorizontalLineBooster:
-                    gridLevel[row, col] = Instantiate(horizontalLineBoosterPrefab, pos, Quaternion.identity, this.transform);
-                    break;
-                case BoosterType.VerticalLineBooster:
-                    gridLevel[row, col] = Instantiate(verticalLineBoosterPrefab, pos, Quaternion.identity, this.transform);
-                    break;
-                case BoosterType.BombBooster:
-                    gridLevel[row, col] = Instantiate(bombPrefab, pos, Quaternion.identity, this.transform);
-                    break;
-                case BoosterType.ColorBombBooster:
-                    gridLevel[row, col] = Instantiate(colorBombPrefab, pos, Quaternion.identity, this.transform);
-                    break;
-            }
+                currentSprite.GetComponent<SpriteRenderer>().sprite = handler.Result;
+                Debug.Log(row + " " + col);
+            };
+
+            return;
         }
     }
 }

@@ -26,6 +26,7 @@ public class LevelController
     public event Action<Element, Element> OnCellsSwapped = delegate (Element el1, Element el2) { };
 
     private AnalyticsGameService analytics;
+    private GameConfigService gameConfig;
 
     public void DestroyCell(Element el) => OnCellDestroyed(el);
     public void CreateCell(Element el) => OnCellCreated(el);
@@ -33,6 +34,7 @@ public class LevelController
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {
         analytics = ServiceLocator.GetService<AnalyticsGameService>();
+        gameConfig = ServiceLocator.GetService<GameConfigService>();
 
         this.width = width;
         this.height = height;
@@ -130,7 +132,7 @@ public class LevelController
         {
             if(gridModel.GridLevel[row, col] is Booster)
             {
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.VerticalLineBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("VerticalLineBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -139,7 +141,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.HorizontalLineBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("HorizontalLineBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -148,7 +150,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.BombBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("BombBooster"))
                 {
                     OnCellDestroyed(gridModel.GridLevel[row, col]);
                     boosterController.FireBombBooster(new Vector2(row, col), moveBooster);
@@ -156,7 +158,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.ColorBombBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("ColorBombBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -186,7 +188,7 @@ public class LevelController
         {
             if(gridModel.GridLevel[row, col] is Booster)
             {
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.VerticalLineBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("VerticalLineBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -195,7 +197,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.HorizontalLineBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("HorizontalLineBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -204,7 +206,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.BombBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("BombBooster"))
                 {
                     OnCellDestroyed(gridModel.GridLevel[row, col]);
                     boosterController.FireBombBooster(new Vector2(row, col), true);
@@ -212,7 +214,7 @@ public class LevelController
                     return;
                 }
 
-                if (((Booster)gridModel.GridLevel[row, col]).GetElementType() == BoosterType.ColorBombBooster)
+                if (((Booster)gridModel.GridLevel[row, col]).BoosterId == gameConfig.GetBoosterId("ColorBombBooster"))
                 {
                     if (gridCreated)
                         OnCellDestroyed(gridModel.GridLevel[row, col]);
@@ -294,7 +296,7 @@ public class LevelController
 
         if (elementSelected != null && elementSelected is Booster)
         {
-            if (((Booster)elementSelected).GetElementType() == BoosterType.VerticalLineBooster)
+            if (((Booster)elementSelected).BoosterId == gameConfig.GetBoosterId("VerticalLineBooster"))
             {
                 boosterController.FireVerticalLineBooster(element.transform.position, true);
                 if (gridCreated)
@@ -304,7 +306,7 @@ public class LevelController
                 return;
             }
 
-            if (((Booster)elementSelected).GetElementType() == BoosterType.BombBooster)
+            if (((Booster)elementSelected).BoosterId == gameConfig.GetBoosterId("BombBooster"))
             {
                 boosterController.FireBombBooster(element.transform.position, true);
                 if (gridCreated)
@@ -314,7 +316,7 @@ public class LevelController
                 return;
             }
 
-            if (((Booster)elementSelected).GetElementType() == BoosterType.HorizontalLineBooster)
+            if (((Booster)elementSelected).BoosterId == gameConfig.GetBoosterId("HorizontalLineBooster"))
             {
                 boosterController.FireHorizontalLineBooster(element.transform.position, true);
                 if (gridCreated)
@@ -423,7 +425,7 @@ public class LevelController
     {
         if(gridModel.GridLevel[row1, col1] is Booster)
         {
-            if (((Booster)gridModel.GridLevel[row1, col1]).GetElementType() == BoosterType.ColorBombBooster)
+            if (((Booster)gridModel.GridLevel[row1, col1]).BoosterId == gameConfig.GetBoosterId("ColorBombBooster"))
             {
                 boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row2, col2), true);
                 if (gridCreated)
@@ -435,7 +437,7 @@ public class LevelController
                 return;
             }
 
-            if (((Booster)gridModel.GridLevel[row2, col2]).GetElementType() == BoosterType.ColorBombBooster)
+            if (((Booster)gridModel.GridLevel[row2, col2]).BoosterId == gameConfig.GetBoosterId("ColorBombBooster"))
             {
                 boosterController.FireColorBombBooster(gridModel.GridLevel[row1, col1], new Vector2(row1, col1), true);
                 if (gridCreated)

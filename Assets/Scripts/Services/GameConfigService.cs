@@ -8,6 +8,7 @@ public class GameConfigService : IService
     public int BoardHeight { get; private set; }
     public int BoardColors { get; private set; }
     public List<ActiveBoosterItemInfo> ActiveBoosters { get; private set; }
+    public List<BoardBoosterInfo> BoardBoosters { get; private set; }
     public List<CosmeticItemInfo> Cosmetics { get; private set; }
     public List<ColorHudItemInfo> HudColors { get; private set; }
     public List<ShopItemModel> ShopItems { get; private set; }
@@ -26,6 +27,7 @@ public class GameConfigService : IService
         BoardColors = dataProvider.Get("InitialBoardColors", 6);
 
         ActiveBoosters = dataProvider.Get("ActiveBoosters", new List<ActiveBoosterItemInfo>());
+        BoardBoosters = dataProvider.Get("BoardBoosters", new List<BoardBoosterInfo>());
         Cosmetics = dataProvider.Get("Cosmetics", new List<CosmeticItemInfo>());
         HudColors = dataProvider.Get("HudColors", new List<ColorHudItemInfo>());
         ShopItems = dataProvider.Get("ShopItems", new List<ShopItemModel>());
@@ -45,6 +47,28 @@ public class GameConfigService : IService
         }
 
         return null;
+    }
+
+    public BoardBoosterInfo GetBoardBoosterInfo(int id)
+    {
+        foreach (BoardBoosterInfo booster in BoardBoosters)
+        {
+            if (booster.Id == id)
+                return booster;
+        }
+
+        return null;
+    }
+
+    public int GetBoosterId(string boosterName)
+    {
+        foreach (BoardBoosterInfo booster in BoardBoosters)
+        {
+            if (booster.BoosterName == boosterName)
+                return booster.Id;
+        }
+
+        return -1;
     }
 
     public bool ExistLevel(int id)
