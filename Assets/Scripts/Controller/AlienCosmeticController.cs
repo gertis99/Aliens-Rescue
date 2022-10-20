@@ -5,7 +5,6 @@ using UnityEngine;
 public class AlienCosmeticController
 {
     private GameProgressionService gameProgression;
-    private GameConfigService gameConfig;
 
     public AlienCosmeticController()
     {

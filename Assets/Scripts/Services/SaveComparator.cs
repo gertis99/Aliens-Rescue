@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RemoteSaveComparator
+public class SaveComparator
 {
     public int CurrentLevel;
     public List<ActiveBoosterItemModel> ActiveBoosters;
