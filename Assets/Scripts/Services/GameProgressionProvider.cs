@@ -37,8 +37,8 @@ public class GameProgressionProvider : IGameProgressionProvider
             return localData;
         }
         Debug.Log("EE");
-        /*FileSaveComparator fileSave = new FileSaveComparator();
-        RemoteSaveComparator remoteSave = new RemoteSaveComparator();
+        SaveComparator fileSave = new SaveComparator();
+        SaveComparator remoteSave = new SaveComparator();
         JsonUtility.FromJsonOverwrite(localData, fileSave);
         JsonUtility.FromJsonOverwrite(remoteData, remoteSave);
         Debug.Log("FF");
@@ -90,7 +90,7 @@ public class GameProgressionProvider : IGameProgressionProvider
             return localData;
 
         if (fileSave.Currencies[0].Amount < remoteSave.Currencies[0].Amount)
-            return remoteData;*/
+            return remoteData;
         Debug.Log("GG");
         // If it is the same
         return localData;

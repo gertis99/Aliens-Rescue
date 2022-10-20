@@ -11,8 +11,6 @@ public class AlienCosmeticView : MonoBehaviour
     [SerializeField]
     private int currentAlienId;
     [SerializeField]
-    private Cosmetic[] cosmetics;
-    [SerializeField]
     private Transform panel;
     [SerializeField]
     private CosmeticPrefab cosmeticPrefab;
