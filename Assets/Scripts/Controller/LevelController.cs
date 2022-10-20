@@ -248,9 +248,9 @@ public class LevelController
         {
             for (int j = 0; j < gridModel.GridLevel.GetLength(1); j++)
             {
-                while (gridModel.GridLevel[i, j] != null && gridModel.GridLevel[i, j] is Alien && IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j))
+                while (gridModel.GridLevel[i, j] != null && gridModel.GridLevel[i, j] is Alien && CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j, false))
                 {
-                    CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j);
+                    CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j, true);
                     existMatch = true;
                 }
             }
@@ -341,25 +341,25 @@ public class LevelController
 
                 if (gridModel.IsOnGrid(i + 1, j))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i + 1, j))
+                    if (CheckMatch(gridModel.GridLevel[i, j] as Alien, i + 1, j, false))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i - 1, j))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i - 1, j))
+                    if (CheckMatch(gridModel.GridLevel[i, j] as Alien, i - 1, j, false))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i, j + 1))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j + 1))
+                    if (CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j + 1, false))
                         return true;
                 }
 
                 if (gridModel.IsOnGrid(i, j - 1))
                 {
-                    if (IsAMatch(gridModel.GridLevel[i, j] as Alien, i, j - 1))
+                    if (CheckMatch(gridModel.GridLevel[i, j] as Alien, i, j - 1, false))
                         return true;
                 }
             }
@@ -448,7 +448,7 @@ public class LevelController
                 MoveDownPieces();
                 return;
             }
-        }else if (IsAMatch(gridModel.GridLevel[row1, col1] as Alien, row2, col2) || IsAMatch(gridModel.GridLevel[row2, col2] as Alien, row1, col1))
+        }else if (CheckMatch(gridModel.GridLevel[row1, col1] as Alien, row2, col2, false) || CheckMatch(gridModel.GridLevel[row2, col2] as Alien, row1, col1, false))
         {
             OnCellsSwapped(gridModel.GridLevel[row1, col1], gridModel.GridLevel[row2, col2]);
 
@@ -459,8 +459,8 @@ public class LevelController
             gridModel.GridLevel[row1, col1].SetPos(row1, col1);
             gridModel.GridLevel[row2, col2].SetPos(row2, col2);
 
-            CheckMatch(gridModel.GridLevel[row1, col1] as Alien, row1, col1);
-            CheckMatch(gridModel.GridLevel[row2, col2] as Alien, row2, col2);
+            CheckMatch(gridModel.GridLevel[row1, col1] as Alien, row1, col1, true);
+            CheckMatch(gridModel.GridLevel[row2, col2] as Alien, row2, col2, true);
             MoveDownPieces();
             if (gridCreated)
             {
@@ -469,127 +469,6 @@ public class LevelController
         }
 
     }
-
-    // Check if there is a match with the element in the position row col
-    public bool IsAMatch(Alien element, int row, int col)
-    {
-        if (element == null || element is not Alien)
-            return false;
-
-        bool res = false;
-
-        bool sameColor = true;
-        int pos = 1, nSameColor = 1;
-        int alienId = element.AlienId;
-
-        // Check horizontal
-        while (sameColor)
-        {
-            if (gridModel.IsOnGrid(row - pos, col) && row - pos != element.GetPosX() && gridModel.GridLevel[row - pos, col] is Alien)
-            {
-                if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
-                {
-                    pos++;
-                    nSameColor++;
-                }
-                else
-                {
-                    sameColor = false;
-                }
-            }
-            else
-            {
-                sameColor = false;
-            }
-
-            if (nSameColor >= 3)
-                return true;
-
-        }
-
-        sameColor = true;
-        pos = 1;
-
-        while (sameColor)
-        {
-            if (gridModel.IsOnGrid(row + pos, col) && row + pos != element.GetPosX() && gridModel.GridLevel[row + pos, col] is Alien)
-            {
-                if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
-                {
-                    pos++;
-                    nSameColor++;
-                }
-                else
-                {
-                    sameColor = false;
-                }
-            }
-            else
-            {
-                sameColor = false;
-            }
-
-            if (nSameColor >= 3)
-                return true;
-        }
-
-        sameColor = true;
-        pos = 1;
-        nSameColor = 1;
-
-        // Check vertical
-        while (sameColor)
-        {
-            if (gridModel.IsOnGrid(row, col - pos) && col - pos != element.GetPosY() && gridModel.GridLevel[row, col - pos] is Alien)
-            {
-                if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
-                {
-                    pos++;
-                    nSameColor++;
-                }
-                else
-                {
-                    sameColor = false;
-                }
-            }
-            else
-            {
-                sameColor = false;
-            }
-
-            if (nSameColor >= 3)
-                return true;
-        }
-
-        sameColor = true;
-        pos = 1;
-
-        while (sameColor)
-        {
-            if (gridModel.IsOnGrid(row, col + pos) && col + pos != element.GetPosY() && gridModel.GridLevel[row, col + pos] is Alien)
-            {
-                if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
-                {
-                    pos++;
-                    nSameColor++;
-                }
-                else
-                {
-                    sameColor = false;
-                }
-            }
-            else
-            {
-                sameColor = false;
-            }
-
-            if (nSameColor >= 3)
-                return true;
-        }
-
-        return res;
-    }
-
 
     //enum CheckDirection
     //{
@@ -607,8 +486,8 @@ public class LevelController
     //    new Vector2Int { 0, 1 },
     //};
 
-    // Check the match of the element given and make it
-    private bool CheckMatch(Alien element, int row, int col)
+    // Check the match of the element given and make it if makeMatch is true
+    private bool CheckMatch(Alien element, int row, int col, bool makeMatch)
     {
         if (element == null || element is not Alien)
             return false;
@@ -622,7 +501,7 @@ public class LevelController
         sameColorHorizontal.Add(element);
 
         bool sameColor = true;
-        int pos = 1;
+        int pos = 1, nSameColor = 1;
         int alienId = element.AlienId;
 
         // Check horizontal
@@ -633,6 +512,7 @@ public class LevelController
                 if (alienId == ((Alien)gridModel.GridLevel[row - pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row - pos, col]);
+                    nSameColor++;
                     pos++;
                 }
                 else
@@ -644,6 +524,9 @@ public class LevelController
             {
                 sameColor = false;
             }
+
+            if (!makeMatch && nSameColor >= 3)
+                return true;
 
         }
 
@@ -657,6 +540,7 @@ public class LevelController
                 if (alienId == ((Alien)gridModel.GridLevel[row + pos, col]).AlienId)
                 {
                     sameColorHorizontal.Add(gridModel.GridLevel[row + pos, col]);
+                    nSameColor++;
                     pos++;
                 }
                 else
@@ -668,10 +552,14 @@ public class LevelController
             {
                 sameColor = false;
             }
+
+            if (!makeMatch && nSameColor >= 3)
+                return true;
         }
 
         sameColor = true;
         pos = 1;
+        nSameColor = 1;
 
         // Check vertical
         while (sameColor)
@@ -681,6 +569,7 @@ public class LevelController
                 if (alienId == ((Alien)gridModel.GridLevel[row, col - pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col - pos]);
+                    nSameColor++;
                     pos++;
                 }
                 else
@@ -692,6 +581,9 @@ public class LevelController
             {
                 sameColor = false;
             }
+
+            if (!makeMatch && nSameColor >= 3)
+                return true;
         }
 
         sameColor = true;
@@ -704,6 +596,7 @@ public class LevelController
                 if (alienId == ((Alien)gridModel.GridLevel[row, col + pos]).AlienId)
                 {
                     sameColorVertical.Add(gridModel.GridLevel[row, col + pos]);
+                    nSameColor++;
                     pos++;
                 }
                 else
@@ -715,7 +608,15 @@ public class LevelController
             {
                 sameColor = false;
             }
+
+            if (!makeMatch && nSameColor >= 3)
+                return true;
         }
+
+        if (!makeMatch)
+            return false;
+
+
 
         if (sameColorHorizontal.Count >= 3 && sameColorVertical.Count >= 3)
         {
