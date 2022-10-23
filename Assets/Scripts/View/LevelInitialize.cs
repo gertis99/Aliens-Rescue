@@ -20,12 +20,14 @@ public class LevelInitialize : MonoBehaviour
     {
         gameConfig = ServiceLocator.GetService<GameConfigService>();
 
+        // Create controllers
         levelController = new LevelController(gameConfig.BoardWidth, gameConfig.BoardHeight, gameConfig.BoardColors);
         pointsController = new PointsController(levelController);
     }
 
     private void Start()
     {
+        // Initialize views
         gridView.Initialize(levelController);
         pointsView.Initialize(pointsController);
     }

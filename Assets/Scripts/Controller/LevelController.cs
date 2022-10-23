@@ -28,8 +28,8 @@ public class LevelController
     private AnalyticsGameService analytics;
     private GameConfigService gameConfig;
 
-    public void DestroyCell(Element el) => OnCellDestroyed(el);
-    public void CreateCell(Element el) => OnCellCreated(el);
+    public void OnDestroyCell(Element el) => OnCellDestroyed(el);
+    public void OnCreateCell(Element el) => OnCellCreated(el);
 
     public LevelController(int width = 9, int height = 9, int colorTypes = 6)
     {

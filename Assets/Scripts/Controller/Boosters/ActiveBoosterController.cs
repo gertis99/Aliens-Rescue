@@ -1,36 +1,36 @@
+using System;
 using UnityEngine;
 
 public class ActiveBoosterController
 {
-    public delegate void ActiveBooster(ABooster booster, Vector2 pos);
-    public static event ActiveBooster OnBoosterActived;
-    private ABooster actualBooster;
+    public static Action<ABooster, Vector2> OnBoosterActived;
+    private ABooster currentBooster;
 
     public void ActiveBoosterLineVertical(Vector2 pos)
     {
-        actualBooster = new VerticalLineBooster();
-        OnBoosterActived(actualBooster, pos);
-        actualBooster = null;
+        currentBooster = new VerticalLineBooster();
+        OnBoosterActived(currentBooster, pos);
+        currentBooster = null;
     }
 
     public void ActiveBoosterLineHorizontal(Vector2 pos)
     {
-        actualBooster = new HorizontalLineBooster();
-        OnBoosterActived(actualBooster, pos);
-        actualBooster = null;
+        currentBooster = new HorizontalLineBooster();
+        OnBoosterActived(currentBooster, pos);
+        currentBooster = null;
     }
 
     public void ActiveBoosterBomb(Vector2 pos)
     {
-        actualBooster = new BombBooster();
-        OnBoosterActived(actualBooster, pos);
-        actualBooster = null;
+        currentBooster = new BombBooster();
+        OnBoosterActived(currentBooster, pos);
+        currentBooster = null;
     }
 
     public void ActiveBoosterColorBomb(Vector2 pos)
     {
-        actualBooster = new ColorBombBooster();
-        OnBoosterActived(actualBooster, pos);
-        actualBooster = null;
+        currentBooster = new ColorBombBooster();
+        OnBoosterActived(currentBooster, pos);
+        currentBooster = null;
     }
 }
