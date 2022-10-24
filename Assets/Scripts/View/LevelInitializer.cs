@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelInitialize : MonoBehaviour
+public class LevelInitializer : MonoBehaviour
 {
     // Views
     [SerializeField] private LevelView levelView;

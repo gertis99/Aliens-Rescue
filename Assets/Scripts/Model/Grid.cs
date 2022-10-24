@@ -22,11 +22,6 @@ public class Grid
         GenerateLevel();
     }
 
-    /*private void Awake()
-    {
-        GenerateLevel();
-    }*/
-
     private void GenerateLevel()
     {
         
