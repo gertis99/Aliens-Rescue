@@ -216,7 +216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &734236833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,11 +1026,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAlienImage: {fileID: 358509835}
   currentAlienId: 0
-  cosmetics:
-  - {fileID: 11400000, guid: a9f7934022f79d74e8a6ba69303ec750, type: 2}
-  - {fileID: 11400000, guid: 7b0d72474770adc48b223bfaa4e9cc65, type: 2}
-  - {fileID: 11400000, guid: 28bdbd4496af7c646b5bac89b4c39290, type: 2}
-  - {fileID: 11400000, guid: ef588e6a690079e40b6a17743d760ea3, type: 2}
-  - {fileID: 11400000, guid: 59b3a7e04a2817f47877c18f4829b00d, type: 2}
   panel: {fileID: 1527137576}
   cosmeticPrefab: {fileID: -5283291348667710773, guid: 40470edd6a1382b45bfabb7565bda84f, type: 3}

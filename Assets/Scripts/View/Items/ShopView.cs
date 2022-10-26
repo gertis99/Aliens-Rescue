@@ -81,7 +81,7 @@ public class ShopView : MonoBehaviour
         }
     }
 
-    public async void PurchaseIAPGems()
+    public async void PurchaseIAPGold()
     {
         if (await iapService.StartPurchase("test1"))
         {
@@ -97,13 +97,11 @@ public class ShopView : MonoBehaviour
     IEnumerator WaitForIAPReady()
     {
         priceGold.text = "Loading...";
-        //_buyIAPGemsButton.interactable = false;
         while (!iapService.IsReady())
         {
             yield return new WaitForSeconds(0.5f);
         }
 
-        //_buyIAPGemsButton.interactable = true;
         priceGold.text = iapService.GetLocalizedPrice("test1");
     }
 }
